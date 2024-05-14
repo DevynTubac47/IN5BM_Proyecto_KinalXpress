@@ -19,6 +19,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.devyntubac.bean.Productos;
+import org.devyntubac.bean.Proveedores;
+import org.devyntubac.bean.TipoProducto;
 import org.devyntubac.db.Conexion;
 import org.devyntubac.system.Main;
 
@@ -32,35 +34,35 @@ public class MenuProductosController implements Initializable {
     private Main escenarioPrincipal;
     @FXML
     private Button btnRegresar;
-        @FXML
-    private TableView<?> tblProductos;
+    @FXML
+    private TableView tblProductos;
 
     @FXML
-    private TableColumn<?, ?> colCodigo;
+    private TableColumn colCodigo;
 
     @FXML
-    private TableColumn<?, ?> colDescripcion;
+    private TableColumn colDescripcion;
 
     @FXML
-    private TableColumn<?, ?> colPrecioUnitario;
+    private TableColumn colPrecioUnitario;
 
     @FXML
-    private TableColumn<?, ?> colPrecioDocena;
+    private TableColumn colPrecioDocena;
 
     @FXML
-    private TableColumn<?, ?> colPrecioMayor;
+    private TableColumn colPrecioMayor;
 
     @FXML
-    private TableColumn<?, ?> colImagen;
+    private TableColumn colImagen;
 
     @FXML
-    private TableColumn<?, ?> colExistencia;
+    private TableColumn colExistencia;
+ 
+    @FXML
+    private TableColumn colCodTipoProducto;
 
     @FXML
-    private TableColumn<?, ?> colCodTipoProducto;
-
-    @FXML
-    private TableColumn<?, ?> colCodProveedor;
+    private TableColumn colCodProveedor;
 
     @FXML
     private TextField txtCodigoProducto;
@@ -108,12 +110,14 @@ public class MenuProductosController implements Initializable {
     private TextField txtExistencia;
 
     @FXML
-    private ComboBox<?> cmbCodTipoProducto;
+    private ComboBox cmbCodTipoProducto;
 
     @FXML
-    private ComboBox<?> cmbCodProveedor;
+    private ComboBox cmbCodProveedor;
 
     private ObservableList<Productos> listarProductos;
+    private ObservableList<TipoProducto> listarTipoProducto;
+    private ObservableList<Proveedores> listarProveedores;
 
     public Main getEscenarioPrincipal() {
         return escenarioPrincipal;
@@ -145,6 +149,52 @@ public class MenuProductosController implements Initializable {
             e.printStackTrace();
         }
         return listarProductos = FXCollections.observableList(lista);
+
+    }
+
+    public ObservableList<TipoProducto> getTipoProducto() {
+        ArrayList<TipoProducto> lista = new ArrayList<>();
+        ResultSet resultado = null;
+        try {
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_listarTipoProducto();");
+            resultado = procedimiento.executeQuery();
+            /**
+             * El bucle while agrega los datos a la lista.
+             */
+            while (resultado.next()) {
+                lista.add(new TipoProducto(resultado.getInt("codigoTipoProducto"),
+                        resultado.getString("descripcion")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listarTipoProducto = FXCollections.observableList(lista);
+    }
+
+    public ObservableList<Proveedores> getProveedores() {
+        ArrayList<Proveedores> lista = new ArrayList<>();
+        ResultSet resultado = null;
+        try {
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_listarProveedores();");
+            resultado = procedimiento.executeQuery();
+            /**
+             * El bucle while agrega los datos a la lista.
+             */
+            while (resultado.next()) {
+                lista.add(new Proveedores(resultado.getInt("codigoProveedor"),
+                        resultado.getString("NITProvedor"),
+                        resultado.getString("nombresProveedor"),
+                        resultado.getString("apellidosProveedor"),
+                        resultado.getString("direccionProveedor"),
+                        resultado.getString("razonSocial"),
+                        resultado.getString("contactoPrincipal"),
+                        resultado.getString("paginaWeb")
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listarProveedores = FXCollections.observableList(lista);
     }
 
     public void cargarDatos() {
@@ -167,12 +217,48 @@ public class MenuProductosController implements Initializable {
         }
     }
 
-    /**
-     * Initializes the controller class.
-     */
+    public void desactivarControles() {
+        txtCodigoProducto.setEditable(false);
+        txtDescripcion.setEditable(false);
+        txtPrecioUnitario.setEditable(false);
+        txtPrecioDocena.setEditable(false);
+        txtPrecioMayor.setEditable(false);
+        txtImagen.setEditable(false);
+        txtExistencia.setEditable(false);
+        cmbCodTipoProducto.setDisable(true);
+        cmbCodProveedor.setDisable(true);
+    }
+
+    public void activarControles() {
+        txtCodigoProducto.setEditable(true);
+        txtDescripcion.setEditable(true);
+        txtPrecioUnitario.setEditable(true);
+        txtPrecioDocena.setEditable(true);
+        txtPrecioMayor.setEditable(true);
+        txtImagen.setEditable(true);
+        txtExistencia.setEditable(true);
+        cmbCodTipoProducto.setDisable(false);
+        cmbCodProveedor.setDisable(false);
+    }
+
+    public void limpiarControles() {
+        txtCodigoProducto.clear();
+        txtDescripcion.clear();
+        txtPrecioUnitario.clear();
+        txtPrecioDocena.clear();
+        txtPrecioMayor.clear();
+        txtImagen.clear();
+        txtExistencia.clear();
+        tblProductos.getSelectionModel().getSelectedItem();
+        cmbCodTipoProducto.getSelectionModel().getSelectedItem();
+        cmbCodProveedor.getSelectionModel().getSelectedItem();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
+        cmbCodTipoProducto.setItems(getTipoProducto());
+        cmbCodProveedor.setItems(getProveedores());
     }
 
 }

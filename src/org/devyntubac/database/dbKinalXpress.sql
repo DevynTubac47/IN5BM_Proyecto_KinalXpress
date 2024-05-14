@@ -90,7 +90,7 @@ create table Productos(
     precioUnitario decimal(10,2) default 0.0,
     precioDocena decimal(10,2) default 0.0,
     precioMayor decimal(10,2) default 0.0,
-    imagenProducto blob,
+    imagenProducto varchar(2),
     existencia int,
     codigoTipoProducto int,
     codigoProveedor int,
@@ -571,15 +571,15 @@ delimiter ;
 call sp_eliminarTelefonoProveedor(1);
 
 delimiter $$
-create procedure sp_agregarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto blob, in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
+create procedure sp_agregarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(2), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
 begin
 	insert into Productos(codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor)
     values (codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor);
 end $$
 delimiter ;
 
-call sp_agregarProductos('es','Alta Calidad',12.00,13.00,54.00,LOAD_FILE('/descargas/coca.png'),11,2,2);
-call sp_agregarProductos('jjjj','Alta Calidad',12.00,13.00,54.00,'PNG',11,2,2);
+call sp_agregarProductos('es','Alta Calidad',12.00,13.00,54.00,'PN',11,2,2);
+call sp_agregarProductos('jjjj','Alta Calidad',12.00,13.00,54.00,'PN',11,2,2);
 
 delimiter $$
 create procedure sp_listarProductos()
@@ -600,7 +600,7 @@ delimiter ;
 call sp_buscarProductos('jjjj');
 
 delimiter $$
-create procedure sp_actualizarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(45), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
+create procedure sp_actualizarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(2), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
 begin
 	update productos
     set
@@ -617,7 +617,7 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarProductos('jjjj','Alta',14.00,15.00,50.00,'JPG',10,2,2);
+call sp_actualizarProductos('jjjj','Alta',14.00,15.00,50.00,'JP',10,2,2);
 
 delimiter $$
 create procedure sp_eliminarProductos(in codigoProducto varchar(45))
