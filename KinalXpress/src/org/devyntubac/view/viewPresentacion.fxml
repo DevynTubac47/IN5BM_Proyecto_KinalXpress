@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.CubicCurve?>
+<?import javafx.scene.shape.QuadCurve?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="566.0" style="-fx-background-color: #ffff51;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devyntubac.controller.MenuProgramadorController">
+   <children>
+      <CubicCurve controlX1="247.86175537109375" controlX2="506.79656982421875" controlY1="-191.84463500976562" controlY2="-123.42527770996094" endX="-229.1696319580078" endY="-123.42527770996094" fill="#fcb508" layoutX="212.0" layoutY="119.0" startX="-224.5502166748047" startY="30.063186645507812" stroke="BLACK" />
+      <QuadCurve controlX="-50.34416198730469" controlY="-147.14288330078125" endX="253.65582275390625" endY="-160.14288330078125" fill="#ffff51" layoutX="175.0" layoutY="160.0" startX="-193.3441619873047" startY="17.08404541015625" stroke="#ffff51" strokeType="INSIDE" />
+      <CubicCurve controlX1="389.65582275390625" controlX2="324.0" controlY1="-443.14288330078125" controlY2="-211.14288330078125" endX="327.0" endY="84.0" fill="#fcb508" layoutX="238.0" layoutY="452.0" startX="-86.34416198730469" startY="81.0" stroke="#ffff51" />
+      <QuadCurve controlX="374.65582275390625" controlY="221.85711669921875" endX="340.0" endY="-72.14288330078125" fill="#ffff51" layoutX="226.0" layoutY="331.0" startX="-229.65582275390625" startY="156.85711669921875" stroke="#ffff51" strokeType="INSIDE" />
+      <ImageView fitHeight="122.0" fitWidth="124.0" layoutX="211.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 0;" translateX="6.0" AnchorPane.rightAnchor="246.34860229492188" AnchorPane.topAnchor="110.0">
+         <rotationAxis>
+            <Point3D x="1.0" z="1.0" />
+         </rotationAxis>
+         <image>
+            <Image url="@../images/fotoPresentacion.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffff51" height="105.0" layoutX="151.0" layoutY="214.0" stroke="#ffff51" strokeType="INSIDE" width="417.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffff51" height="159.0" layoutX="248.0" layoutY="232.0" stroke="#ffff51" strokeType="INSIDE" width="226.0" />
+      <ImageView fitHeight="74.0" fitWidth="380.0" layoutX="99.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/iconosView.png" />
+         </image>
+      </ImageView>
+      <Text fill="#e1a00a" layoutX="146.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Devyn Orlando Tubac Gomez" wrappingWidth="273.13670349121094">
+         <font>
+            <Font name="Arial Black" size="17.0" />
+         </font>
+      </Text>
+      <Text fill="#006414" layoutX="201.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Programador" wrappingWidth="165.0">
+         <font>
+            <Font name="Arial Black" size="21.0" />
+         </font>
+      </Text>
+      <Text fill="#7d5c0c" layoutX="99.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1234-5678" wrappingWidth="71.13671875">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#7d5c0c" layoutX="186.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="dtubac-2020247@kinal.edu.gt" wrappingWidth="97.13673400878906">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#7d5c0c" layoutX="310.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2020247" wrappingWidth="57.13671875">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#7d5c0c" layoutX="415.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IN5BM" wrappingWidth="57.13671875">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#fcb508" layoutX="76.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Porque me gusta la programación?" wrappingWidth="273.13670349121094">
+         <font>
+            <Font name="Arial Black" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#fcb508" layoutX="79.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La programación me empezo a gustar desde que estuve en tercero básico, me gusto como se puede usar la imaginación para crear programas, porque cada programa es un reto, y tambien me gusta la programación porque va de la mano con el diseño, colores etc." wrappingWidth="338.0">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Text>
+      <CubicCurve controlX1="-50.0" controlX2="336.65582275390625" controlY1="-100.0" controlY2="-226.04193115234375" endX="399.0" endY="-128.0" fill="#d09109" layoutX="156.0" layoutY="117.0" startX="-167.3441619873047" startY="30.85711669921875" stroke="#fbc508" />
+      <Text fill="#fcb508" layoutX="212.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20 de Febrero 2024" wrappingWidth="140.0">
+         <font>
+            <Font name="Arial Black" size="13.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d09109" height="36.0" layoutX="-1.0" layoutY="500.0" stroke="#d09109" strokeType="INSIDE" width="200.0" />
+      <Button fx:id="btnRegresarP" layoutX="435.0" layoutY="482.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="36.0" prefWidth="113.0" style="-fx-background-color: d09109;" text="Regresar" textFill="#654609">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/regresar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
