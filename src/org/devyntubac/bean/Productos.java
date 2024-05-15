@@ -123,5 +123,4 @@ public class Productos {
         this.codigoProveedor = codigoProveedor;
     }
     
-    
 }

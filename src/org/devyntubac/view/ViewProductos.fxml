@@ -105,7 +105,7 @@
             <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnAgregar" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Agregar" textFill="#006414">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregar" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Agregar" textFill="#006414">
                <GridPane.margin>
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>

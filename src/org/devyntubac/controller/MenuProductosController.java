@@ -57,7 +57,7 @@ public class MenuProductosController implements Initializable {
 
     @FXML
     private TableColumn colExistencia;
- 
+
     @FXML
     private TableColumn colCodTipoProducto;
 
@@ -118,6 +118,17 @@ public class MenuProductosController implements Initializable {
     private ObservableList<Productos> listarProductos;
     private ObservableList<TipoProducto> listarTipoProducto;
     private ObservableList<Proveedores> listarProveedores;
+
+    /**
+     * Enumeradores para las operaciones que se utilizaran en el programa.
+     */
+    private enum operaciones {
+        ELIMINAR, EDITAR, CANCELAR, ACTUALIZAR, NINGUNO
+    }
+    /**
+     * Variable que indica el tipo de operación actual.
+     */
+    private operaciones tipoDeOperaciones = operaciones.NINGUNO;
 
     public Main getEscenarioPrincipal() {
         return escenarioPrincipal;
@@ -210,6 +221,67 @@ public class MenuProductosController implements Initializable {
         colCodProveedor.setCellValueFactory(new PropertyValueFactory<>("codigoProveedor"));
     }
 
+    public void agregar() {
+        switch (tipoDeOperaciones) {
+            case NINGUNO:
+                activarControles();
+                btnEliminar.setText("Cancelar");
+                btnEditar.setDisable(true);
+                btnReporte.setDisable(true);
+                imgAgregar.setImage(new Image("/org/devyntubac/images/guardarIcono.png"));
+                imgEliminar.setImage(new Image("/org/devyntubac/images/cancelarIcono.png"));
+                tipoDeOperaciones = operaciones.ACTUALIZAR;
+                break;
+            /**
+             * Si el tipo de Operaciones es ACTUALIZAR, se llama al metodo
+             * guardar para realizar su respectiva función y desactiva y limpia
+             * los textField, y a su vez los botones vuelven a su apariencia
+             * normal.
+             */
+            case ACTUALIZAR:
+                guardar();
+                desactivarControles();
+                limpiarControles();
+                btnAgregar.setText("Agregar");
+                btnEliminar.setText("Eliminar");
+                btnEditar.setDisable(false);
+                btnReporte.setDisable(false);
+                imgAgregar.setImage(new Image("/org/devyntubac/images/agregarCliente.png"));
+                imgEliminar.setImage(new Image("/org/devyntubac/images/eliminarCliente.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
+        }
+    }
+
+    public void guardar(){
+        Productos registro = new Productos();
+        registro.setCodigoProducto(txtCodigoProducto.getText());
+        registro.setDescripcionProducto(txtDescripcion.getText());
+        registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
+        registro.setPrecioDocena(Double.parseDouble(txtPrecioDocena.getText()));
+        registro.setPrecioMayor(Double.parseDouble(txtPrecioMayor.getText()));
+        registro.setImagenProducto(txtImagen.getText());
+        registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
+        registro.setCodigoTipoProducto(((TipoProducto)cmbCodTipoProducto.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
+        registro.setCodigoProveedor(((Proveedores)cmbCodProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
+        try{
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarProductos(?,?,?,?,?,?,?,?,?);");
+            procedimiento.setString(1, registro.getCodigoProducto());
+            procedimiento.setString(2, registro.getDescripcionProducto());
+            procedimiento.setDouble(3, registro.getPrecioUnitario());
+            procedimiento.setDouble(4, registro.getPrecioDocena());
+            procedimiento.setDouble(5, registro.getPrecioMayor());
+            procedimiento.setString(6, registro.getImagenProducto());
+            procedimiento.setInt(7, registro.getExistencia());
+            procedimiento.setInt(8, registro.getCodigoTipoProducto());
+            procedimiento.setInt(9, registro.getCodigoProveedor());
+            procedimiento.execute();
+            listarProductos.add(registro);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     @FXML
     public void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnRegresar) {
