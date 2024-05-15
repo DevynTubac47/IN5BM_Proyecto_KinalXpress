@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javax.swing.JOptionPane;
 import org.devyntubac.bean.Productos;
 import org.devyntubac.bean.Proveedores;
 import org.devyntubac.bean.TipoProducto;
@@ -57,7 +58,7 @@ public class MenuProductosController implements Initializable {
 
     @FXML
     private TableColumn colExistencia;
- 
+
     @FXML
     private TableColumn colCodTipoProducto;
 
@@ -118,6 +119,17 @@ public class MenuProductosController implements Initializable {
     private ObservableList<Productos> listarProductos;
     private ObservableList<TipoProducto> listarTipoProducto;
     private ObservableList<Proveedores> listarProveedores;
+
+    /**
+     * Enumeradores para las operaciones que se utilizaran en el programa.
+     */
+    private enum operaciones {
+        ELIMINAR, EDITAR, CANCELAR, ACTUALIZAR, NINGUNO
+    }
+    /**
+     * Variable que indica el tipo de operación actual.
+     */
+    private operaciones tipoDeOperaciones = operaciones.NINGUNO;
 
     public Main getEscenarioPrincipal() {
         return escenarioPrincipal;
@@ -208,6 +220,233 @@ public class MenuProductosController implements Initializable {
         colExistencia.setCellValueFactory(new PropertyValueFactory<>("Existencia"));
         colCodTipoProducto.setCellValueFactory(new PropertyValueFactory<>("codigoTipoProducto"));
         colCodProveedor.setCellValueFactory(new PropertyValueFactory<>("codigoProveedor"));
+    }
+
+    public void agregar() {
+        switch (tipoDeOperaciones) {
+            case NINGUNO:
+                activarControles();
+                btnEliminar.setText("Cancelar");
+                btnEditar.setDisable(true);
+                btnReporte.setDisable(true);
+                imgAgregar.setImage(new Image("/org/devyntubac/images/guardarIcono.png"));
+                imgEliminar.setImage(new Image("/org/devyntubac/images/cancelarIcono.png"));
+                tipoDeOperaciones = operaciones.ACTUALIZAR;
+                break;
+            /**
+             * Si el tipo de Operaciones es ACTUALIZAR, se llama al metodo
+             * guardar para realizar su respectiva función y desactiva y limpia
+             * los textField, y a su vez los botones vuelven a su apariencia
+             * normal.
+             */
+            case ACTUALIZAR:
+                guardar();
+                desactivarControles();
+                limpiarControles();
+                btnAgregar.setText("Agregar");
+                btnEliminar.setText("Eliminar");
+                btnEditar.setDisable(false);
+                btnReporte.setDisable(false);
+                imgAgregar.setImage(new Image("/org/devyntubac/images/agregarCliente.png"));
+                imgEliminar.setImage(new Image("/org/devyntubac/images/eliminarCliente.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
+        }
+    }
+
+    public void guardar() {
+        Productos registro = new Productos();
+        registro.setCodigoProducto(txtCodigoProducto.getText());
+        registro.setDescripcionProducto(txtDescripcion.getText());
+        registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
+        registro.setPrecioDocena(Double.parseDouble(txtPrecioDocena.getText()));
+        registro.setPrecioMayor(Double.parseDouble(txtPrecioMayor.getText()));
+        registro.setImagenProducto(txtImagen.getText());
+        registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
+        registro.setCodigoTipoProducto(((TipoProducto) cmbCodTipoProducto.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
+        registro.setCodigoProveedor(((Proveedores) cmbCodProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
+        try {
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarProductos(?,?,?,?,?,?,?,?,?);");
+            procedimiento.setString(1, registro.getCodigoProducto());
+            procedimiento.setString(2, registro.getDescripcionProducto());
+            procedimiento.setDouble(3, registro.getPrecioUnitario());
+            procedimiento.setDouble(4, registro.getPrecioDocena());
+            procedimiento.setDouble(5, registro.getPrecioMayor());
+            procedimiento.setString(6, registro.getImagenProducto());
+            procedimiento.setInt(7, registro.getExistencia());
+            procedimiento.setInt(8, registro.getCodigoTipoProducto());
+            procedimiento.setInt(9, registro.getCodigoProveedor());
+            procedimiento.execute();
+            listarProductos.add(registro);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void seleccionarElementos() {
+        txtCodigoProducto.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoProducto());
+        txtDescripcion.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getDescripcionProducto());
+        txtPrecioUnitario.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getPrecioUnitario()));
+        txtPrecioDocena.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getPrecioDocena()));
+        txtPrecioMayor.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getPrecioMayor()));
+        txtImagen.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getImagenProducto());
+        txtExistencia.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getExistencia()));;
+        cmbCodTipoProducto.getSelectionModel().select(buscarTipoProducto(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoTipoProducto()));
+        cmbCodProveedor.getSelectionModel().select(buscarProveedores(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
+    }
+
+    public TipoProducto buscarTipoProducto(int codigoTipoProducto) {
+        TipoProducto resultado = null;
+        try {
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_buscarTipoProducto(?);");
+            procedimiento.setInt(1, codigoTipoProducto);
+            ResultSet registro = procedimiento.executeQuery();
+            while (registro.next()) {
+                resultado = new TipoProducto(registro.getInt("codigoTipoProducto"),
+                        registro.getString("descripcion"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultado;
+    }
+
+    public Proveedores buscarProveedores(int codigoProveedor) {
+        Proveedores resultado = null;
+        try {
+            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_buscarProveedores(?);");
+            procedimiento.setInt(1, codigoProveedor);
+            ResultSet registro = procedimiento.executeQuery();
+            while (registro.next()) {
+                resultado = new Proveedores(registro.getInt("codigoProveedor"),
+                        registro.getString("NITProvedor"),
+                        registro.getString("nombresProveedor"),
+                        registro.getString("apellidosProveedor"),
+                        registro.getString("direccionProveedor"),
+                        registro.getString("razonSocial"),
+                        registro.getString("contactoPrincipal"),
+                        registro.getString("paginaWeb"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultado;
+    }
+
+    public void eliminar() {
+        switch (tipoDeOperaciones) {
+            /**
+             * Si el tipo de Operaciones es ACTUALIZAR, se llama al metodo
+             * guardar para realizar su respectiva función y desactiva y limpia
+             * los textField, y a su vez los botones vuelven a su apariencia
+             * normal.
+             */
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnAgregar.setText("Agregar");
+                btnEliminar.setText("Eliminar");
+                btnEditar.setDisable(false);
+                btnReporte.setDisable(false);
+                imgAgregar.setImage(new Image("/org/devyntubac/images/agregarCliente.png"));
+                imgEliminar.setImage(new Image("/org/devyntubac/images/eliminarCliente.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                break;
+            /**
+             * Si no procede a mostrar un cuadro de dialogo para confirmar la
+             * eliminación, prepara y ejecuta el procedimiento eliminar de la
+             * base de datos.
+             */
+            default:
+                if (tblProductos.getSelectionModel().getSelectedItem() != null) {
+                    int respuesta = JOptionPane.showConfirmDialog(null, "Confirmas la eliminación del registro", "Eliminar Clientes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (respuesta == JOptionPane.YES_NO_OPTION) {
+                        try {
+                            PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_eliminarProductos(?);");
+                            procedimiento.setString(1, ((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoProducto());
+                            procedimiento.execute();
+                            listarProductos.remove(tblProductos.getSelectionModel().getSelectedItem());
+                            limpiarControles();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debe de Seleccionar un Cliente para Eliminar");
+                }
+                break;
+        }
+    }
+
+    public void actualizar() {
+        try {
+            PreparedStatement p = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarProductos(?,?,?,?,?,?,?,?,?);");
+            Productos registro = (Productos) tblProductos.getSelectionModel().getSelectedItem();
+
+            registro.setDescripcionProducto(txtDescripcion.getText());
+            registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
+            registro.setPrecioDocena(Double.parseDouble(txtPrecioDocena.getText()));
+            registro.setPrecioMayor(Double.parseDouble(txtPrecioMayor.getText()));
+            registro.setImagenProducto(txtImagen.getText());
+            registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
+            registro.setCodigoTipoProducto(((TipoProducto) cmbCodTipoProducto.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
+            registro.setCodigoProveedor(((Proveedores) cmbCodProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
+
+            p.setInt(1, registro.getCodigoProveedor());
+            p.setString(2, registro.getDescripcionProducto());
+            p.setDouble(3, registro.getPrecioUnitario());
+            p.setDouble(4, registro.getPrecioDocena());
+            p.setDouble(5, registro.getPrecioMayor());
+            p.setString(6, registro.getImagenProducto());
+            p.setInt(7, registro.getExistencia());
+            p.setInt(8, registro.getCodigoTipoProducto());
+            p.setInt(9, registro.getCodigoProveedor());
+            p.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editar() {
+        switch (tipoDeOperaciones) {
+            case NINGUNO:
+                /**
+                 * Si tipo de operaciones es NINGUNO, primero verifica si hay
+                 * registros en la tabla y si no muestra un cuadro de dialogo
+                 * para que el usuario selecciono algun registro.
+                 */
+                if (tblProductos.getSelectionModel().getSelectedItem() != null) {
+                    btnEditar.setText("Actualizar");
+                    btnReporte.setText("Cancelar");
+                    btnAgregar.setDisable(true);
+                    btnEliminar.setDisable(true);
+                    imgEditar.setImage(new Image("/org/devyntubac/images/actualizarIcono.png"));
+                    imgReporte.setImage(new Image("/org/devyntubac/images/cancelarIcono.png"));
+                    activarControles();
+                    txtCodigoProducto.setEditable(false);
+                    tipoDeOperaciones = operaciones.ACTUALIZAR;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debe de Seleccionar un Producto para Actualizar");
+                }
+                break;
+            case ACTUALIZAR:
+                /**
+                 * Si es ACTUALIZAR llama al metodo actualizar y restaura los
+                 * botones y textField.
+                 */
+                actualizar();
+                btnEditar.setText("Editar");
+                btnReporte.setText("Reporte");
+                btnAgregar.setDisable(false);
+                btnEliminar.setDisable(false);
+                imgEditar.setImage(new Image("/org/devyntubac/images/iconoEditar.png"));
+                imgReporte.setImage(new Image("/org/devyntubac/images/reportesCliente.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
+                desactivarControles();
+                limpiarControles();
+                cargarDatos();
+                break;
+        }
     }
 
     @FXML

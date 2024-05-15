@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -87,8 +88,11 @@ public class MenuComprasController implements Initializable {
     private ImageView imgReporte;
 
     @FXML
-    private Button btnRegresar;
+    private MenuItem btnDetalleCompra;
 
+    @FXML
+    private MenuItem btnRegresar;
+    
     /**
      * ObservableList para enlistar los datos.
      */
@@ -463,6 +467,9 @@ public class MenuComprasController implements Initializable {
     public void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnRegresar) {
             escenarioPrincipal.menuPrincipalView();
+        }
+        if (event.getSource() == btnDetalleCompra) {
+            escenarioPrincipal.menuDetalleCompra();
         }
     }
 

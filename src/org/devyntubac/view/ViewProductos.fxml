@@ -24,7 +24,7 @@
             <Font name="Arial Black" size="44.0" />
          </font>
       </Text>
-      <TableView fx:id="tblProductos" layoutX="232.0" layoutY="334.0" prefHeight="266.0" prefWidth="855.0" style="-fx-background-color: #fdbd20; -fx-background-image: logoKinalXpress; -fx-background-radius: 0;" stylesheets="@../resourse/KinalXpressCSS.css" AnchorPane.bottomAnchor="150.0">
+      <TableView fx:id="tblProductos" layoutX="232.0" layoutY="334.0" onMouseClicked="#seleccionarElementos" prefHeight="266.0" prefWidth="855.0" style="-fx-background-color: #fdbd20; -fx-background-image: logoKinalXpress; -fx-background-radius: 0;" stylesheets="@../resourse/KinalXpressCSS.css" AnchorPane.bottomAnchor="150.0">
          <columns>
             <TableColumn fx:id="colCodigo" prefWidth="50.0" style="-fx-background-color: fcb508;" text="Cod." />
             <TableColumn fx:id="colDescripcion" prefWidth="94.0" style="-fx-background-color: fcb508;" text="Descripción" />
@@ -105,7 +105,7 @@
             <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnAgregar" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Agregar" textFill="#006414">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregar" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Agregar" textFill="#006414">
                <GridPane.margin>
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>
@@ -124,7 +124,7 @@
                   <String fx:value="button" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Eliminar" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="1">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Eliminar" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>
@@ -143,7 +143,7 @@
                   <String fx:value="button" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Editar" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="2">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Editar" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>

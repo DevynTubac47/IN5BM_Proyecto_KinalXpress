@@ -25,6 +25,7 @@
                   <Menu mnemonicParsing="false" text="Trabajadores">
                     <items>
                       <MenuItem fx:id="btnCargoEmpleado" mnemonicParsing="false" onAction="#handleButtonAction" text="Cargos Empleado" />
+                        <MenuItem fx:id="btnEmpleado" mnemonicParsing="false" onAction="#handleButtonAction" text="Empleados" />
                     </items>
                   </Menu>
                   <MenuItem mnemonicParsing="false" text="Ofertas" />
@@ -43,6 +44,7 @@
                   <MenuItem mnemonicParsing="false" text="Venta" />
                   <MenuItem mnemonicParsing="false" text="Impuestos" />
                   <MenuItem mnemonicParsing="false" text="Salarios" />
+                  <MenuItem fx:id="btnFaactura" mnemonicParsing="false" onAction="#handleButtonAction" text="Factura" />
             </items>
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

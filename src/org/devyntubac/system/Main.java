@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 import org.devyntubac.controller.MenuCargoEmpleadoController;
 import org.devyntubac.controller.MenuClientesController;
 import org.devyntubac.controller.MenuComprasController;
+import org.devyntubac.controller.MenuDetalleCompraController;
+import org.devyntubac.controller.MenuDetalleFacturaController;
+import org.devyntubac.controller.MenuEmpleadosController;
+import org.devyntubac.controller.MenuFacturaController;
 import org.devyntubac.controller.MenuPrincipalController;
 import org.devyntubac.controller.MenuProductosController;
 import org.devyntubac.controller.MenuProgramadorController;
@@ -178,7 +182,43 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
+    
+    public void menuFactura(){
+        try{
+            MenuFacturaController menuFactura = (MenuFacturaController) cambiarEscena("ViewFactura.fxml",1032,698);
+            menuFactura.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void menuEmpleados(){
+        try{
+            MenuEmpleadosController menuEmpleado = (MenuEmpleadosController) cambiarEscena("ViewEmpleados.fxml",1120,720);
+            menuEmpleado.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void menuDetalleFactura(){
+        try{
+            MenuDetalleFacturaController menuDetalleFactura = (MenuDetalleFacturaController) cambiarEscena("ViewDetalleFactura.fxml",1032,697);
+            menuDetalleFactura.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void menuDetalleCompra(){
+        try{
+            MenuDetalleCompraController menuDetalleFactura = (MenuDetalleCompraController) cambiarEscena("ViewDetalleCompra.fxml",1032,697);
+            menuDetalleFactura.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
