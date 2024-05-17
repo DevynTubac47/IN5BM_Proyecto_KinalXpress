@@ -218,10 +218,10 @@
                   <Font name="Arial Black" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="txtImagen" style="-fx-background-color: #39A84F;" GridPane.columnIndex="1" />
             <TextField fx:id="txtExistencia" style="-fx-background-color: #39A84F;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="cmbCodTipoProducto" prefWidth="150.0" style="-fx-background-color: #39A84F;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ComboBox fx:id="cmbCodProveedor" prefWidth="150.0" style="-fx-background-color: #39A84F;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtImagen" style="-fx-background-color: #39A84F;" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <ImageView fitHeight="192.0" fitWidth="198.0" layoutX="-3.0" layoutY="526.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" rotate="78.7">

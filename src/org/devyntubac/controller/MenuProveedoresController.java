@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -36,6 +37,10 @@ public class MenuProveedoresController implements Initializable {
      */
     @FXML
     Button btnRegresar;
+    @FXML
+    MenuItem btnDetalleTelefono;
+    @FXML
+    MenuItem btnDetalleEmail;
     @FXML
     private TableView tblProveedores;
     @FXML
@@ -470,6 +475,12 @@ public class MenuProveedoresController implements Initializable {
          */
         if (event.getSource() == btnRegresar) {
             escenarioPrincipal.menuPrincipalView();
+        }
+        if (event.getSource() == btnDetalleTelefono) {
+            escenarioPrincipal.menuDetalleTelefono();
+        }
+        if (event.getSource() == btnDetalleEmail) {
+            escenarioPrincipal.menuDetalleEmail();
         }
     }
 }

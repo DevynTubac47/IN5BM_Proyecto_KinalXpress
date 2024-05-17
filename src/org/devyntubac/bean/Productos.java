@@ -1,5 +1,7 @@
 package org.devyntubac.bean;
 
+import java.sql.Blob;
+
 /**
  *
  * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
@@ -34,6 +36,7 @@ public class Productos {
      * @param codigoTipoProducto
      * @param codigoProveedor 
      */
+    
     public Productos(String codigoProducto, String descripcionProducto, Double precioUnitario, Double precioDocena, Double precioMayor, String imagenProducto, int existencia, int codigoTipoProducto, int codigoProveedor) {
         this.codigoProducto = codigoProducto;
         this.descripcionProducto = descripcionProducto;
@@ -46,11 +49,6 @@ public class Productos {
         this.codigoProveedor = codigoProveedor;
     }
 
-    /**
-     * Getters y Setters
-     * Retorna el atributo.
-     * Recibe como parametros los atributos.
-     */
     public String getCodigoProducto() {
         return codigoProducto;
     }
@@ -121,6 +119,13 @@ public class Productos {
 
     public void setCodigoProveedor(int codigoProveedor) {
         this.codigoProveedor = codigoProveedor;
+    }
+
+    
+    
+    @Override
+    public String toString() {
+        return "| " + getCodigoProducto() + " | " + getPrecioUnitario() + " | " + getImagenProducto() + " | " + getExistencia() + "|";
     }
     
 }

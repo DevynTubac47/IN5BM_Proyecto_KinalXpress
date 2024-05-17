@@ -9,6 +9,7 @@ import java.sql.Date;
  *
  */
 public class Compras {
+
     private int numeroDocumento;
     private Date fechaDocumento;
     private String descripcion;
@@ -22,10 +23,11 @@ public class Compras {
 
     /**
      * Costructor Lleno.
+     *
      * @param numeroDocumento
      * @param fechaDocumento
      * @param descripcion
-     * @param totalDocumento 
+     * @param totalDocumento
      */
     public Compras(int numeroDocumento, Date fechaDocumento, String descripcion, double totalDocumento) {
         this.numeroDocumento = numeroDocumento;
@@ -35,9 +37,8 @@ public class Compras {
     }
 
     /**
-     * Getters y Setters
-     * Retorna el atributo.
-     * Recibe como parametros los atributos.
+     * Getters y Setters Retorna el atributo. Recibe como parametros los
+     * atributos.
      */
     public int getNumeroDocumento() {
         return numeroDocumento;
@@ -70,5 +71,10 @@ public class Compras {
     public void setTotalDocumento(double totalDocumento) {
         this.totalDocumento = totalDocumento;
     }
-    
+
+    @Override
+    public String toString() {
+        return "| " + getNumeroDocumento() + " | " + getFechaDocumento() + " | " + getTotalDocumento() + " |";
+    }
+
 }

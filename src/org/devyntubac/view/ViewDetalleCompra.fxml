@@ -48,7 +48,7 @@
             <Image url="@../images/iconoDetalleCompra.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblCompras" layoutX="281.0" layoutY="326.0" prefHeight="259.0" prefWidth="600.0" style="-fx-background-color: #fcb508;">
+      <TableView fx:id="tblDetalleCompra" layoutX="281.0" layoutY="326.0" onMouseClicked="#seleccionarElementos" prefHeight="259.0" prefWidth="600.0" style="-fx-background-color: #fcb508;">
          <columns>
             <TableColumn fx:id="colCodigoDetalleC" prefWidth="88.0" style="-fx-background-color: fcb508;" text="Codigo" />
             <TableColumn fx:id="colCostoUnitario" prefWidth="147.0" style="-fx-background-color: fcb508;" text="Costo Unitario" />
@@ -68,7 +68,7 @@
             <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnAgregar" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Agregar" textFill="#006414">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregar" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Agregar" textFill="#006414">
                <GridPane.margin>
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>
@@ -87,7 +87,7 @@
                   <String fx:value="button" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Eliminar" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="1">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminar" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Eliminar" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>
@@ -106,7 +106,7 @@
                   <String fx:value="button" />
                </styleClass>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Editar" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="2">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editar" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33CC33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Editar" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>
@@ -128,7 +128,7 @@
                   <String fx:value="pulse-effect" />
                </styleClass>
             </Button>
-            <Button fx:id="btnReporte" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33cc33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Reportes" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="3">
+            <Button fx:id="btnReporte" mnemonicParsing="false" onAction="#reportes" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33cc33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Reportes" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>

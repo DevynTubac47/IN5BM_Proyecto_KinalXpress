@@ -15,7 +15,7 @@ import org.devyntubac.system.Main;
  */
 public class MenuDetalleFacturaController implements Initializable {
 
-         private Main escenarioPrincipal;
+    private Main escenarioPrincipal;
     @FXML
     Button btnRegresar;
 
@@ -33,12 +33,13 @@ public class MenuDetalleFacturaController implements Initializable {
          * Si el evento es igual al boton regresar muestra el menu principal.
          */
         if (event.getSource() == btnRegresar) {
-            escenarioPrincipal.menuPrincipalView();
+            escenarioPrincipal.menuFactura();
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

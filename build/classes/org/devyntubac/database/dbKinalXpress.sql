@@ -40,7 +40,7 @@ create table Compras(
 	numeroDocumento int not null,
     fechaDocumento date,
     descripcion varchar(60),
-    totalDocumento decimal(10,2),
+    totalDocumento decimal(10,2) default 0.00,
     primary key PK_Compras(numeroDocumento)
 );
 
@@ -60,7 +60,7 @@ create table Empleados(
     codigoCargoEmpleado int,
     primary key PK_Empleados(codigoEmpleado),
     constraint FK_Empleados_CargoEmpleado foreign key Empleados(codigoCargoEmpleado)
-		references CargoEmpleado(codigoCargoEmpleado)
+		references CargoEmpleado(codigoCargoEmpleado) on delete cascade
 );
 
 create table EmailProveedor(
@@ -70,7 +70,7 @@ create table EmailProveedor(
     codigoProveedor int,
     primary key PK_EmailProveedor(codigoEmailProveedor),
     constraint FK_EmailProveedor_Proveedores foreign key EmailProveedor(codigoProveedor)
-		references Proveedores(codigoProveedor)
+		references Proveedores(codigoProveedor) on delete cascade
 );
 
 create table TelefonoProveedor(
@@ -81,7 +81,7 @@ create table TelefonoProveedor(
     codigoProveedor int,
     primary key PK_TelefonoProveedor(codigoTelefonoProveedor),
     constraint FK_TelefonoProveedor_Proveedores foreign key TelefonoProveedor(codigoProveedor)
-		references Proveedores(codigoProveedor)
+		references Proveedores(codigoProveedor) on delete cascade
 );
 
 create table Productos(
@@ -91,14 +91,14 @@ create table Productos(
     precioDocena decimal(10,2) default 0.0,
     precioMayor decimal(10,2) default 0.0,
     imagenProducto varchar(2),
-    existencia int,
+    existencia int(11),
     codigoTipoProducto int,
     codigoProveedor int,
     primary key PK_Productos(codigoProducto),
     constraint FK_Productos_TipoProducto foreign key Productos(codigoTipoProducto)
-		references TipoProducto (codigoTipoProducto),
+		references TipoProducto (codigoTipoProducto) on delete cascade,
 	constraint FK_Productos_Proveedor foreign key Productos(codigoProveedor)
-		references Proveedores(codigoProveedor)
+		references Proveedores(codigoProveedor) on delete cascade
 );
 
 
@@ -110,23 +110,23 @@ create table DetalleCompra(
     numeroDocumento int,
     primary key PK_DetalleCompra(codigoDetalleCompra),
     constraint FK_DetalleCompra_Productos foreign key DetalleCompra(codigoProducto)
-		references Productos(codigoProducto),
+		references Productos(codigoProducto) on delete cascade,
 	constraint FK_DetalleCompra_Compras foreign key DetalleCompra(numeroDocumento)
-		references	Compras(numeroDocumento)
+		references	Compras(numeroDocumento) on delete cascade
 );
 
 create table Factura(
 	numeroFactura int not null,
     estado varchar(50),
     totalFactura decimal(10,2),
-    fechaFactura varchar(45),
+    fechaFactura date,
     clienteID int,
     codigoEmpleado int,
     primary key PK_Factura(numeroFactura),
     constraint FK_Factura_Clientes foreign key Factura(clienteID)
-		references Clientes(clienteID),
+		references Clientes(clienteID) on delete cascade,
 	constraint FK_Factura_Empleados foreign key Factura(codigoEmpleado)
-		references Empleados(codigoEmpleado)
+		references Empleados(codigoEmpleado) on delete cascade
 );
 
 create table DetalleFactura(
@@ -142,7 +142,7 @@ create table DetalleFactura(
 		references Productos(codigoProducto)
 );
 
-
+-- --------------------------- Cargo Empleado --------------------------- 
 delimiter $$
 create procedure sp_agregarCargoEmpleado(in codigoCargoEmpleado int,in nombreCargo varchar(45), in descripcionCargo varchar(45))
 begin
@@ -184,8 +184,6 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarCargoEmpleado(1,'Colocadora','Ver productos');
-
 delimiter $$
 create procedure sp_eliminarCargoEmpleado(in codigoCargoEmpleado int)
 begin
@@ -195,7 +193,7 @@ delimiter ;
 
 call sp_eliminarCargoEmpleado(1);
 
--- Clientes
+-- ---------------------------  Clientes --------------------------- 
  delimiter $$
  create procedure sp_agregarClientes(in clienteID int, in nombresCliente varchar(50), in apellidosCliente varchar(50), in NITClientes varchar(10),in direccionCliente varchar(150), in telefonoCliente varchar(8), in correoCliente varchar(45))
  begin
@@ -241,8 +239,6 @@ delimiter $$
  end $$
  delimiter ;
  
- call sp_actualizarClientes(1,'5434534','Orlando','Gomez','11 Calle y 10 Avenida','12345678','ogomez');
- 
 delimiter $$
 create procedure sp_eliminarClientes(in clienteID int)
 begin
@@ -250,7 +246,7 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarClientes(5);
+-- ---------------------------  Compras --------------------------- 
 
 delimiter $$
 create procedure sp_agregarCompras(in numeroDocumento int, in fechaDocumento date, in descripcion varchar(60), in totalDocumento decimal(10,2))
@@ -260,7 +256,7 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarCompras(1,'2024-05-07','Hola Mundo','10.00');
+call sp_agregarCompras(1,'2020-09-09','Visa',10.00);
 
 delimiter $$
 create procedure sp_listarCompras()
@@ -300,7 +296,7 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarCompras(1);
+-- --------------------------- Proveedores --------------------------- 
 
 delimiter $$
 create procedure sp_agregarProveedores(in codigoProveedor int, in NITProvedor varchar(10), in nombresProveedor varchar(60), in apellidosProveedor varchar(60), in direccionProveedor varchar(150), in razonSocial varchar(60), in contactoPrincipal varchar(100), in paginaWeb varchar(50))
@@ -310,8 +306,7 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarProveedores(1,'3254vb','Sarita','Heladeria','10 Calle y 8 Avenida','ABC','123456','www');
-call sp_agregarProveedores(2,'3254vb','Sarita','Heladeria','10 Calle y 8 Avenida','ABC','123456','www');
+call sp_agregarProveedores(1,'1234567890','Devyn','Gomez','11 Calle y 5 Avenida','Suministros Comerciales del Sur S.A. de C.V.','1234567','www.ComercioSur');
 
 delimiter $$
 create procedure sp_listarProveedores()
@@ -348,8 +343,6 @@ begin
 end $$	
 delimiter ;
 
-call sp_actualizarProveedores(1,'12345','Pollo','Campero','11 Avenida','cba','654775','org');
-
 delimiter $$
 create procedure sp_eliminarProveedores(in codigoProveedor int)
 begin
@@ -357,7 +350,7 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarProveedores(1);
+-- --------------------------- Tipo Producto --------------------------- 
 
 delimiter $$
 create procedure sp_agregarTipoProducto(in codigoTipoProducto int, in descripcion varchar(45))
@@ -367,9 +360,7 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarTipoProducto(1,'Sarita');
-call sp_agregarTipoProducto(2,'Sarita');
-
+call sp_agregarTipoProducto(1,'Gaseosas');
 delimiter $$
 create procedure sp_listarTipoProducto()
 begin 
@@ -399,8 +390,6 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarTipoProducto(1,'Pollo Frito');
-
 delimiter $$
 create procedure sp_eliminarTipoProducto(in codigoTipoProducto int)
 begin 
@@ -408,7 +397,7 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarTipoProducto(1);
+-- ---------------------------  Empleados --------------------------- 
 
 delimiter $$
 create procedure sp_agregarEmpleados(in codigoEmpleado int, in nombresEmpleado varchar(50), in apellidosEmpleado varchar(50), in sueldo decimal(10,2), in direccion varchar(150), in turno varchar(15), in codigoCargoEmpleado int)
@@ -448,13 +437,14 @@ begin
 		Empleados.apellidosEmpleado = apellidosEmpleado,
         Empleados.sueldo = sueldo,
         Empleados.direccion = direccion,
-        Empleados.turno = Empleados.turno
+        Empleados.turno = Empleados.turno,
+        Empleados.codigoCargoEmpleado = codigoCargoEmpleado
 	where
-		codigoCargoEmpleado = Empleados.codigoCargoEmpleado;
+		Empleados.codigoEmpleado = codigoEmpleado;
 end $$
 delimiter ;
 
-call sp_actualizarEmpleados(1,'Hola','Mundo','25.0','11 Calle y 11 Avenida','V',2);
+call sp_actualizarEmpleados(1,'David','G',23.0,'29 calle','M',2);
 
 delimiter $$
 create procedure sp_eliminarEmpleados(in codigoEmpleado int)
@@ -463,7 +453,7 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarEmpleados(1);
+-- ---------------------------  Email Proveedor --------------------------- 
 
 delimiter $$
 create procedure sp_agregarEmailProveedor(in codigoEmailProveedor int, in emailProveedor varchar(50), in descripcion varchar(100), in codigoProveedor int)
@@ -473,7 +463,7 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarEmailProveedor(1,'dtubac@kinal','Guatemala',2);
+call sp_agregarEmailProveedor(1,'dtubac@kinal','Guatemala',1);
 
 delimiter $$
 create procedure sp_listarEmailProveedor()
@@ -506,8 +496,6 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarEmailProveedor(1,'@gmail.com','Kinal',2);
-
 delimiter $$
 create procedure sp_eliminarEmailProveedor(in codigoEmailProveedor int)
 begin
@@ -515,7 +503,7 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarEmailProveedor(1);
+-- --------------------------- Telefono Proveedor --------------------------- 
 
 delimiter $$
 create procedure sp_agregarTelefonoProveedor(in codigoTelefonoProveedor int, in numeroPrincipal varchar(8), in numeroSecundario varchar(8), in observaciones varchar(45), in codigoProveedor int)
@@ -525,7 +513,7 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarTelefonoProveedor(1,'12345678','87654321','502',2);
+call sp_agregarTelefonoProveedor(1,'12345678','87654321','502',1);
 
 delimiter $$
 create procedure sp_listarTelefonoProveedor()
@@ -559,8 +547,6 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarTelefonoProveedor(1,'09876543','12345678','025',2);
-
 delimiter $$
 create procedure sp_eliminarTelefonoProveedor(in codigoTelefonoProveedor int)
 begin
@@ -568,7 +554,7 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarTelefonoProveedor(1);
+-- --------------------------- Productos --------------------------- 
 
 delimiter $$
 create procedure sp_agregarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(2), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
@@ -578,8 +564,7 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarProductos('es','Alta Calidad',12.00,13.00,54.00,'PN',11,2,2);
-call sp_agregarProductos('jjjj','Alta Calidad',12.00,13.00,54.00,'PN',11,2,2);
+call sp_agregarProductos('PE5DM','Coca Cola',0.00,0.00,0.00,'pn',11,1,1);
 
 delimiter $$
 create procedure sp_listarProductos()
@@ -596,8 +581,6 @@ begin
 	select * from Productos where productos.codigoProducto = codigoProducto;
 end $$
 delimiter ;
-
-call sp_buscarProductos('jjjj');
 
 delimiter $$
 create procedure sp_actualizarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(2), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
@@ -617,8 +600,6 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarProductos('jjjj','Alta',14.00,15.00,50.00,'JP',10,2,2);
-
 delimiter $$
 create procedure sp_eliminarProductos(in codigoProducto varchar(45))
 begin 
@@ -626,4 +607,190 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarProductos('es');
+-- --------------------------- Detalle Compra --------------------------- 
+
+delimiter $$
+create procedure sp_agregarDetalleCompra(in codigoDetalleCompra int, in costoUnitario decimal(10,2), in cantidad int, in codigoProducto varchar(15), in numeroDocumento int)
+begin
+	insert into DetalleCompra(codigoDetalleCompra, costoUnitario, cantidad, codigoProducto,numeroDocumento)
+    values (codigoDetalleCompra, costoUnitario, cantidad, codigoProducto, numeroDocumento);
+end $$
+delimiter ;
+
+call sp_agregarDetalleCompra(2,2.0,5,'PE5DM',1);
+
+delimiter $$
+create procedure sp_listarDetalleCompra()
+begin
+	select * from DetalleCompra;
+end $$
+delimiter ;
+
+call sp_listarDetalleCompra();
+
+delimiter $$
+create procedure sp_buscarDetalleCompra(in codigoDetalleCompra int)
+begin
+	select * from DetalleCompra where DetalleCompra.codigoDetalleCompra = codigoDetalleCompra;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_actualizarDetalleCompra(in codigoDetalleCompra int, in costoUnitario decimal(10,2), in cantidad int, in codigoProducto varchar(15), in numeroDocumento int)
+begin
+	update DetalleCompra
+    set
+		DetalleCompra.costoUnitario = costoUnitario,
+        DetalleCompra.cantidad = cantidad,
+        DetalleCompra.codigoProducto = codigoProducto,
+        DetalleCompra.numeroDocumento = numeroDocumento
+	where
+		DetalleCompra.codigoDetalleCompra = codigoDetalleCompra;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_eliminarDetalleCompra(in codigoDetalleCompra int)
+begin
+	delete from DetalleCompra where DetalleCompra.codigoDetalleCompra = codigoDetalleCompra;
+end $$
+delimiter ;
+
+-- ---------------------------  Factura --------------------------- 
+
+delimiter $$
+create procedure sp_agregarFactura(in numeroFactura int, in estado varchar(50), in totalFactura decimal(10,2), in fechaFactura date,in clienteID int, in codigoEmpleado int)
+begin
+	insert into Factura(numeroFactura,estado,totalFactura,fechaFactura,clienteID,codigoEmpleado)
+    values (numeroFactura,estado,totalFactura,fechaFactura,clienteID,codigoEmpleado);
+end $$
+delimiter ;
+
+call sp_agregarFactura(1,'Positivo',34.0,'2022-06-06',2,1);
+
+delimiter $$
+create procedure sp_listarFactura()
+begin
+	select * from Factura;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_buscarFactura(in numeroFactura int)
+begin
+	select * from Factura where Factura.numeroFactura = numeroFactura;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_actualizarFactura(in numeroFactura int, in estado varchar(50), in totalFactura decimal(10,2), in fechaFactura date,in clienteID int, in codigoEmpleado int)
+begin
+	update Factura
+    set
+		Factura.estado = estado,
+        Factura.totalFactura = totalFactura,
+        Factura.fechaFactura = fechaFactura,
+        Factura.clienteID = clienteID,
+        Factura.codigoEmpleado = codigoEmpleado
+	where
+		Factura.numeroDocumento = numeroDocumento;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_eliminarFactura(in numeroFactura int)
+begin
+	delete from Factura where Factura.numeroFactura = numeroFactura;
+end $$
+delimiter ;
+
+-- ---------------------------  Detalle Factura --------------------------- 
+
+delimiter $$
+create procedure sp_agregarDetalleFactura(in codigoDetalleFactura int, in precioUnitario decimal(10,2), in cantidad int, in numeroFactura int, in codigoProducto varchar(15))
+begin
+	insert into DetalleFactura(codigoDetalleFactura, precioUnitario, cantidad, numeroFactura, codigoProducto)
+    values (codigoDetalleFactura, precioUnitario, cantidad, numeroFactura, codigoProducto);
+end $$
+delimiter ;
+
+call sp_agregarDetalleFactura(1,0.00,3,1,'PE5DM');
+
+delimiter $$
+create trigger tr_PrecioProductos_After_Insert
+after insert on DetalleCompra
+for each row 
+begin
+	declare total decimal(10,2);
+    declare cantidad int;
+    
+    set total = new.costoUnitario * new.cantidad;
+
+	update Productos
+	set precioUnitario = total * 0.40,
+		precioDocena  = total * 0.35 * 12,
+        precioMayor = total * 0.25
+    where Productos.codigoProducto = new.codigoProducto;
+    
+	update Productos
+        set Productos.existencia = Productos.existencia - new.cantidad
+	where Productos.codigoProducto = new.codigoProducto;
+
+end $$
+delimiter ;
+
+call sp_listarProductos;
+
+call sp_listarDetalleCompra;
+
+call sp_listarCompras();
+
+delimiter $$
+create trigger tr_TotalDocumento_After_Insert
+after insert on DetalleCompra
+for each row
+begin
+    declare total decimal(10,2);
+    
+    select sum(costoUnitario * cantidad) into total from DetalleCompra 
+    where numeroDocumento = NEW.numeroDocumento;
+    
+    update Compras 
+		set totalDocumento = total 
+	where numeroDocumento = NEW.numeroDocumento;
+end $$
+delimiter ;
+
+select * from DetalleFactura;
+
+delimiter $$
+create trigger tr_PrecioUnitario_After_Insert
+after insert on DetalleCompra
+for each row
+begin
+
+	declare precioP decimal(10,2);
+    
+    set precioP = (select precioUnitario from Productos where codigoProducto = new.codigoProducto);
+    
+    update DetalleFactura
+    set precioUnitario = precioP
+    where codigoProducto = NEW.codigoProducto;
+end $$
+delimiter ;
+
+delimiter $$
+create trigger tr_TotalFactura_After_Insert
+after insert on DetalleFactura
+for each row
+begin
+	declare totalFactura decimal(10,2);
+    
+    select sum(costoUnitario * cantidad) into totalFactura from DetalleFactura
+    where numeroFactura = new.numeroFactura;
+    
+    update Factura
+		set totalFactura = total
+	where numeroFactura = new.numeroFactura;
+end $$
+delimiter ;

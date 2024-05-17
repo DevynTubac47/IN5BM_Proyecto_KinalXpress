@@ -3,10 +3,12 @@ package org.devyntubac.system;
 import java.io.IOException;
 import java.io.InputStream;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -15,12 +17,14 @@ import org.devyntubac.controller.MenuClientesController;
 import org.devyntubac.controller.MenuComprasController;
 import org.devyntubac.controller.MenuDetalleCompraController;
 import org.devyntubac.controller.MenuDetalleFacturaController;
+import org.devyntubac.controller.MenuEmailProveedorController;
 import org.devyntubac.controller.MenuEmpleadosController;
 import org.devyntubac.controller.MenuFacturaController;
 import org.devyntubac.controller.MenuPrincipalController;
 import org.devyntubac.controller.MenuProductosController;
 import org.devyntubac.controller.MenuProgramadorController;
 import org.devyntubac.controller.MenuProveedoresController;
+import org.devyntubac.controller.MenuTelefonoProveedorController;
 import org.devyntubac.controller.MenuTipoProductoController;
 
 /**
@@ -32,6 +36,8 @@ public class Main extends Application {
 
     private Stage escenarioPrincipal;
     private Scene escena;
+    @FXML
+    Button button;
 
     /**
      * Metodo que ejecuta y muestra las interfaces.
@@ -85,7 +91,7 @@ public class Main extends Application {
      */
     public void menuPrincipalView() {
         try {
-            MenuPrincipalController menuPrincipalView = (MenuPrincipalController) cambiarEscena("MenuPrincipalView.fxml", 600, 400);
+            MenuPrincipalController menuPrincipalView = (MenuPrincipalController) cambiarEscena("MenuPrincipalView.fxml", 802, 600);
             menuPrincipalView.setEscenarioPrincipal(this);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -124,7 +130,7 @@ public class Main extends Application {
      */
     public void menuProveedorView() {
         try {
-            MenuProveedoresController menuProveedor = (MenuProveedoresController) cambiarEscena("ViewProveedores.fxml", 991, 719);
+            MenuProveedoresController menuProveedor = (MenuProveedoresController) cambiarEscena("ViewProveedores.fxml", 1070, 689);
             menuProveedor.setEscenarioPrincipal(this);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -150,7 +156,7 @@ public class Main extends Application {
      */
     public void menuCompras() {
         try {
-            MenuComprasController menuCompras = (MenuComprasController) cambiarEscena("ViewCompras.fxml", 1020, 697);
+            MenuComprasController menuCompras = (MenuComprasController) cambiarEscena("ViewCompras.fxml", 952, 699);
             menuCompras.setEscenarioPrincipal(this);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -182,43 +188,61 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-    
-    public void menuFactura(){
-        try{
-            MenuFacturaController menuFactura = (MenuFacturaController) cambiarEscena("ViewFactura.fxml",1032,698);
+
+    public void menuFactura() {
+        try {
+            MenuFacturaController menuFactura = (MenuFacturaController) cambiarEscena("ViewFactura.fxml", 1032, 698);
             menuFactura.setEscenarioPrincipal(this);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void menuEmpleados(){
-        try{
-            MenuEmpleadosController menuEmpleado = (MenuEmpleadosController) cambiarEscena("ViewEmpleados.fxml",1120,720);
+
+    public void menuEmpleados() {
+        try {
+            MenuEmpleadosController menuEmpleado = (MenuEmpleadosController) cambiarEscena("ViewEmpleados.fxml", 1120, 720);
             menuEmpleado.setEscenarioPrincipal(this);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void menuDetalleFactura(){
-        try{
-            MenuDetalleFacturaController menuDetalleFactura = (MenuDetalleFacturaController) cambiarEscena("ViewDetalleFactura.fxml",1032,697);
+
+    public void menuDetalleFactura() {
+        try {
+            MenuDetalleFacturaController menuDetalleFactura = (MenuDetalleFacturaController) cambiarEscena("ViewDetalleFactura.fxml", 1032, 697);
             menuDetalleFactura.setEscenarioPrincipal(this);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void menuDetalleCompra(){
-        try{
-            MenuDetalleCompraController menuDetalleFactura = (MenuDetalleCompraController) cambiarEscena("ViewDetalleCompra.fxml",1032,697);
+
+    public void menuDetalleCompra() {
+        try {
+            MenuDetalleCompraController menuDetalleFactura = (MenuDetalleCompraController) cambiarEscena("ViewDetalleCompra.fxml", 952, 699);
             menuDetalleFactura.setEscenarioPrincipal(this);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
+    public void menuDetalleTelefono() {
+        try {
+            MenuTelefonoProveedorController menuDetalleTelefono = (MenuTelefonoProveedorController) cambiarEscena("ViewTelefonoProveedor.fxml", 1032, 697);
+            menuDetalleTelefono.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void menuDetalleEmail() {
+        try {
+            MenuEmailProveedorController menuDetalleEmail = (MenuEmailProveedorController) cambiarEscena("ViewEmailProveedor.fxml", 1032, 697);
+            menuDetalleEmail.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param args the command line arguments
      */

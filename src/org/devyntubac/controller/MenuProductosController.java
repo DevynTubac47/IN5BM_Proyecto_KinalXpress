@@ -1,6 +1,9 @@
 package org.devyntubac.controller;
 
+import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -131,6 +134,7 @@ public class MenuProductosController implements Initializable {
      */
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
 
+    //PreparedStatement preparedStatement = 
     public Main getEscenarioPrincipal() {
         return escenarioPrincipal;
     }
@@ -261,7 +265,7 @@ public class MenuProductosController implements Initializable {
         registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
         registro.setPrecioDocena(Double.parseDouble(txtPrecioDocena.getText()));
         registro.setPrecioMayor(Double.parseDouble(txtPrecioMayor.getText()));
-        registro.setImagenProducto(txtImagen.getText());
+        registro.setImagenProducto(txtImagen.getText()); 
         registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
         registro.setCodigoTipoProducto(((TipoProducto) cmbCodTipoProducto.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
         registro.setCodigoProveedor(((Proveedores) cmbCodProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
@@ -272,7 +276,7 @@ public class MenuProductosController implements Initializable {
             procedimiento.setDouble(3, registro.getPrecioUnitario());
             procedimiento.setDouble(4, registro.getPrecioDocena());
             procedimiento.setDouble(5, registro.getPrecioMayor());
-            procedimiento.setString(6, registro.getImagenProducto());
+            procedimiento.setString(6, registro.getImagenProducto());//
             procedimiento.setInt(7, registro.getExistencia());
             procedimiento.setInt(8, registro.getCodigoTipoProducto());
             procedimiento.setInt(9, registro.getCodigoProveedor());
@@ -289,7 +293,7 @@ public class MenuProductosController implements Initializable {
         txtPrecioUnitario.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getPrecioUnitario()));
         txtPrecioDocena.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getPrecioDocena()));
         txtPrecioMayor.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getPrecioMayor()));
-        txtImagen.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getImagenProducto());
+        txtImagen.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getImagenProducto()));
         txtExistencia.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getExistencia()));;
         cmbCodTipoProducto.getSelectionModel().select(buscarTipoProducto(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoTipoProducto()));
         cmbCodProveedor.getSelectionModel().select(buscarProveedores(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
@@ -359,7 +363,7 @@ public class MenuProductosController implements Initializable {
              */
             default:
                 if (tblProductos.getSelectionModel().getSelectedItem() != null) {
-                    int respuesta = JOptionPane.showConfirmDialog(null, "Confirmas la eliminación del registro", "Eliminar Clientes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    int respuesta = JOptionPane.showConfirmDialog(null, "Confirmas la eliminación del registro", "Eliminar Producto", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (respuesta == JOptionPane.YES_NO_OPTION) {
                         try {
                             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_eliminarProductos(?);");
@@ -372,7 +376,7 @@ public class MenuProductosController implements Initializable {
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Debe de Seleccionar un Cliente para Eliminar");
+                    JOptionPane.showMessageDialog(null, "Debe de Seleccionar un Producto para Eliminar");
                 }
                 break;
         }
@@ -392,7 +396,7 @@ public class MenuProductosController implements Initializable {
             registro.setCodigoTipoProducto(((TipoProducto) cmbCodTipoProducto.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
             registro.setCodigoProveedor(((Proveedores) cmbCodProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
 
-            p.setInt(1, registro.getCodigoProveedor());
+            p.setString(1, registro.getCodigoProducto());
             p.setString(2, registro.getDescripcionProducto());
             p.setDouble(3, registro.getPrecioUnitario());
             p.setDouble(4, registro.getPrecioDocena());
@@ -445,6 +449,22 @@ public class MenuProductosController implements Initializable {
                 desactivarControles();
                 limpiarControles();
                 cargarDatos();
+                break;
+        }
+    }
+
+    public void reportes() {
+        switch (tipoDeOperaciones) {
+            case ACTUALIZAR:
+                desactivarControles();
+                limpiarControles();
+                btnEditar.setText("Editar");
+                btnReporte.setText("Reporte");
+                btnAgregar.setDisable(false);
+                btnEliminar.setDisable(false);
+                imgEditar.setImage(new Image("/org/devyntubac/images/iconoEditar.png"));
+                imgReporte.setImage(new Image("/org/devyntubac/images/reportesCliente.png"));
+                tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
     }

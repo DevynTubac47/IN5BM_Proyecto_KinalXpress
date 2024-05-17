@@ -8,12 +8,19 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="428.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devyntubac.controller.MenuPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="802.0" style="-fx-background-color: ffff51;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devyntubac.controller.MenuPrincipalController">
    <children>
-      <MenuBar layoutY="-2.0" prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: #ffff48;" styleClass="menubar" stylesheets="@../resourse/KinalXpressCSS.css">
+      <ImageView fitHeight="354.0" fitWidth="802.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/imagenVistaI.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutY="-2.0" prefHeight="44.0" prefWidth="594.0" style="-fx-background-color: #ffff48;" styleClass="menubar" stylesheets="@../resourse/KinalXpressCSS.css">
         <menus>
           <Menu mnemonicParsing="false" style="color: blue; -fx-translate-y: -5.5;" text="Modulos">
             <items>
@@ -44,7 +51,7 @@
                   <MenuItem mnemonicParsing="false" text="Venta" />
                   <MenuItem mnemonicParsing="false" text="Impuestos" />
                   <MenuItem mnemonicParsing="false" text="Salarios" />
-                  <MenuItem fx:id="btnFaactura" mnemonicParsing="false" onAction="#handleButtonAction" text="Factura" />
+                  <MenuItem fx:id="btnFactura" mnemonicParsing="false" onAction="#handleButtonAction" text="Factura" />
             </items>
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -68,80 +75,112 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffff51" height="401.0" layoutY="27.0" stroke="#ffff51" strokeType="INSIDE" width="600.0" />
-      <ImageView fitHeight="258.0" fitWidth="335.0" layoutX="121.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="258.0" fitWidth="335.0" layoutX="228.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logoKinalXpress.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="263.0" fitWidth="600.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/imagenVistaI.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="114.0" layoutY="302.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: fcb508; -fx-background-radius: 16;" stylesheets="@../resourse/KinalXpressCSS.css" text="Usuarios en Linea" textFill="#006414">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/usuariosIcono.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <styleClass>
-            <String fx:value="button" />
-            <String fx:value="shadow-effect" />
-         </styleClass>
-      </Button>
-      <Button layoutX="300.0" layoutY="302.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="174.0" style="-fx-background-color: #fcb508; -fx-background-radius: 16;" stylesheets="@../resourse/KinalXpressCSS.css" text="Inventario" textFill="#006414">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/inventarioIcono.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <styleClass>
-            <String fx:value="button" />
-            <String fx:value="shadow-effect" />
-         </styleClass>
-      </Button>
-      <Button layoutX="114.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #fcb508; -fx-background-radius: 16;" stylesheets="@../resourse/KinalXpressCSS.css" text="Horario" textFill="#006414">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/horarioIcono.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <styleClass>
-            <String fx:value="button" />
-            <String fx:value="shadow-effect" />
-         </styleClass>
-      </Button>
-      <Button layoutX="300.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #fcb508; -fx-background-radius: 16;" stylesheets="@../resourse/KinalXpressCSS.css" text="Ubicaciones" textFill="#006414">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/ubicacionLogo.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <styleClass>
-            <String fx:value="button" />
-            <String fx:value="shadow-effect" />
-         </styleClass>
-      </Button>
+      <GridPane layoutX="201.0" layoutY="419.0" prefHeight="132.0" prefWidth="400.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="200.0" prefWidth="209.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="191.0" prefWidth="191.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="44.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: fcb508; -fx-background-radius: 16;" stylesheets="@../resourse/KinalXpressCSS.css" text="Usuarios en Linea" textFill="#006414">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/usuariosIcono.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="shadow-effect" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #fcb508; -fx-background-radius: 16;" stylesheets="@../resourse/KinalXpressCSS.css" text="Inventario" textFill="#006414" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/inventarioIcono.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="shadow-effect" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #fcb508; -fx-background-radius: 16;" stylesheets="@../resourse/KinalXpressCSS.css" text="Horario" textFill="#006414" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/horarioIcono.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="shadow-effect" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #fcb508; -fx-background-radius: 16;" stylesheets="@../resourse/KinalXpressCSS.css" text="Ubicaciones" textFill="#006414" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/ubicacionLogo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="shadow-effect" />
+               </styleClass>
+            </Button>
+         </children>
+      </GridPane>
+      <MenuBar layoutX="614.0" layoutY="-3.0" prefHeight="36.0" prefWidth="191.0" style="-fx-background-color: ffff51;" AnchorPane.topAnchor="5.0">
+        <menus>
+          <Menu mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/iconoCarrito.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+          </Menu>
+          <Menu mnemonicParsing="false" text="       Mi Cuenta">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Mi Cuenta" />
+                  <MenuItem mnemonicParsing="false" text="Cerrar Sesión" />
+            </items>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" style="-fx-translate-x: 20;">
+                     <image>
+                        <Image url="@../images/iconoCuenta.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>
