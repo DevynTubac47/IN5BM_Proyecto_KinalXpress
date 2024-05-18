@@ -143,14 +143,6 @@ public class MenuDetalleCompraController implements Initializable {
     public ObservableList<Compras> getCompras() {
         ArrayList<Compras> lista = new ArrayList<>();
         ResultSet resultado = null;
-        /**
-         * Esta sección del código asigna un valor a la variable fechaDocumento
-         * de tipo Date de mysql verifica si el control dtePicker llamado
-         * dateFechaDocumento tiene un valor seleccionado, Si hay un valor
-         * seleccionado, convierte ese valor a Date de mysql utilizando el
-         * método 'valueOf()' y lo asigna a la variable, De lo contrario, la
-         * variable permanece como null.
-         */
         try {
             PreparedStatement pc = Conexion.getInstance().getConexion().prepareCall("call sp_listarCompras();");
             resultado = pc.executeQuery();

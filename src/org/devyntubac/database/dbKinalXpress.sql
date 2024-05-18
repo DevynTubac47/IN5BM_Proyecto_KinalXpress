@@ -682,6 +682,8 @@ begin
 end $$
 delimiter ;
 
+call sp_buscarFactura(1);
+
 delimiter $$
 create procedure sp_actualizarFactura(in numeroFactura int, in estado varchar(50), in totalFactura decimal(10,2), in fechaFactura date,in clienteID int, in codigoEmpleado int)
 begin
@@ -693,7 +695,7 @@ begin
         Factura.clienteID = clienteID,
         Factura.codigoEmpleado = codigoEmpleado
 	where
-		Factura.numeroDocumento = numeroDocumento;
+		Factura.numeroFactura = numeroFactura;
 end $$
 delimiter ;
 
@@ -715,6 +717,45 @@ end $$
 delimiter ;
 
 call sp_agregarDetalleFactura(1,0.00,3,1,'PE5DM');
+call sp_agregarDetalleFactura(2,2.00,3,1,'PE5DM');
+
+delimiter $$
+create procedure sp_listarDetallesFacturas()
+begin
+	select * from DetalleFactura;
+end $$
+delimiter ;
+
+call sp_listarDetallesFacturas();
+
+delimiter $$
+create procedure sp_buscarDetalleFactura(in codigoDetalleFactura int)
+begin 
+	select * from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+
+
+delimiter $$
+create procedure sp_actualizarDetalleFactura(in codigoDetalleFactura int, in precioUnitario decimal(10,2), in cantidad int, in numeroFactura int, in codigoProducto varchar(15))
+begin
+	update DetalleFactura
+		set
+			DetalleFactura.precioUnitario = precioUnitario,
+            DetalleFactura.cantidad = cantidad,
+            DetalleFactura.numeroFactura = numeroFactura,
+            DetalleFactura.codigoProducto = codigoProducto
+		where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_eliminarDetalleFactura(in codigoDetalleFactura int)
+begin
+	delete from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+
 
 delimiter $$
 create trigger tr_PrecioProductos_After_Insert
@@ -786,11 +827,11 @@ for each row
 begin
 	declare totalFactura decimal(10,2);
     
-    select sum(costoUnitario * cantidad) into totalFactura from DetalleFactura
+    select sum(precioUnitario * cantidad) into totalFactura from DetalleFactura
     where numeroFactura = new.numeroFactura;
     
     update Factura
-		set totalFactura = total
+		set totalFactura = totalFactura
 	where numeroFactura = new.numeroFactura;
 end $$
 delimiter ;

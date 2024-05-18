@@ -682,6 +682,8 @@ begin
 end $$
 delimiter ;
 
+call sp_buscarFactura(1);
+
 delimiter $$
 create procedure sp_actualizarFactura(in numeroFactura int, in estado varchar(50), in totalFactura decimal(10,2), in fechaFactura date,in clienteID int, in codigoEmpleado int)
 begin
@@ -693,7 +695,7 @@ begin
         Factura.clienteID = clienteID,
         Factura.codigoEmpleado = codigoEmpleado
 	where
-		Factura.numeroDocumento = numeroDocumento;
+		Factura.numeroFactura = numeroFactura;
 end $$
 delimiter ;
 
@@ -715,6 +717,44 @@ end $$
 delimiter ;
 
 call sp_agregarDetalleFactura(1,0.00,3,1,'PE5DM');
+call sp_agregarDetalleFactura(2,2.00,3,1,'PE5DM');
+
+delimiter $$
+create procedure sp_listarDetallesFacturas()
+begin
+	select * from DetalleFactura;
+end $$
+delimiter ;
+
+call sp_listarDetallesFacturas();
+
+delimiter $$
+create procedure sp_buscarDetalleFactura(in codigoDetalleFactura int)
+begin 
+	select * from listarDetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+
+
+delimiter $$
+create procedure sp_actualizarDetalleFactura(in codigoDetalleFactura int, in precioUnitario decimal(10,2), in cantidad int, in numeroFactura int, in codigoProducto varchar(15))
+begin
+	update DetalleFactura
+		set
+			DetalleFactura.precioUnitario = precioUnitario,
+            DetalleFactura.cantidad = cantidad,
+            DetalleFactura.numeroFactura = numeroFactura,
+            DetalleFactura.codigoProducto = codigoProducto
+		where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end
+delimiter ;
+
+delimiter $$
+create procedure sp_eliminarDetalleFactura(in codigoDetalleFactura int)
+begin
+	delete from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
 
 delimiter $$
 create trigger tr_PrecioProductos_After_Insert
@@ -774,8 +814,8 @@ begin
     set precioP = (select precioUnitario from Productos where codigoProducto = new.codigoProducto);
     
     update DetalleFactura
-    set precioUnitario = precioP
-    where codigoProducto = NEW.codigoProducto;
+    set DetalleFactura.precioUnitario = precioP
+    where DetalleFactura.codigoProducto = NEW.codigoProducto;
 end $$
 delimiter ;
 

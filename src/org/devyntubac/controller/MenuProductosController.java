@@ -276,7 +276,7 @@ public class MenuProductosController implements Initializable {
             procedimiento.setDouble(3, registro.getPrecioUnitario());
             procedimiento.setDouble(4, registro.getPrecioDocena());
             procedimiento.setDouble(5, registro.getPrecioMayor());
-            procedimiento.setString(6, registro.getImagenProducto());//
+            procedimiento.setString(6, registro.getImagenProducto());
             procedimiento.setInt(7, registro.getExistencia());
             procedimiento.setInt(8, registro.getCodigoTipoProducto());
             procedimiento.setInt(9, registro.getCodigoProveedor());

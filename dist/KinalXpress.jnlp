@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="KinalXpress.jar" size="2843717" download="eager" />
+    <jar href="KinalXpress.jar" size="2851638" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.12.jar" size="2020431" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="org.devyntubac.system.Main"  name="KinalXpress" />

@@ -1,5 +1,6 @@
 package org.devyntubac.controller;
 
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +36,8 @@ public class MenuClientesController implements Initializable {
      */
     @FXML
     private TextField txtcodigoCliente;
+    @FXML
+    private TextField txtBuscar;
     @FXML
     private TextField txtNombreCliente;
     @FXML
@@ -388,7 +391,7 @@ public class MenuClientesController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    
     /**
      * Este metodo realiza la funcion de restaurar los botones a su estado original.
      */
