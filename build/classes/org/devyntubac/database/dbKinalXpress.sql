@@ -731,7 +731,7 @@ call sp_listarDetallesFacturas();
 delimiter $$
 create procedure sp_buscarDetalleFactura(in codigoDetalleFactura int)
 begin 
-	select * from listarDetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+	select * from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
 end $$
 delimiter ;
 
@@ -746,7 +746,7 @@ begin
             DetalleFactura.numeroFactura = numeroFactura,
             DetalleFactura.codigoProducto = codigoProducto
 		where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
-end
+end $$
 delimiter ;
 
 delimiter $$
@@ -755,6 +755,7 @@ begin
 	delete from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
 end $$
 delimiter ;
+
 
 delimiter $$
 create trigger tr_PrecioProductos_After_Insert
@@ -814,8 +815,8 @@ begin
     set precioP = (select precioUnitario from Productos where codigoProducto = new.codigoProducto);
     
     update DetalleFactura
-    set DetalleFactura.precioUnitario = precioP
-    where DetalleFactura.codigoProducto = NEW.codigoProducto;
+    set precioUnitario = precioP
+    where codigoProducto = NEW.codigoProducto;
 end $$
 delimiter ;
 
@@ -826,11 +827,11 @@ for each row
 begin
 	declare totalFactura decimal(10,2);
     
-    select sum(costoUnitario * cantidad) into totalFactura from DetalleFactura
+    select sum(precioUnitario * cantidad) into totalFactura from DetalleFactura
     where numeroFactura = new.numeroFactura;
     
     update Factura
-		set totalFactura = total
+		set totalFactura = totalFactura
 	where numeroFactura = new.numeroFactura;
 end $$
 delimiter ;

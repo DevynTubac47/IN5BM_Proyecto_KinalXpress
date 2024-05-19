@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import org.devyntubac.bean.Productos;
 import org.devyntubac.bean.Proveedores;
@@ -114,12 +115,16 @@ public class MenuProductosController implements Initializable {
     private TextField txtExistencia;
 
     @FXML
+    private TextField txtBuscar;
+    
+    @FXML
     private ComboBox cmbCodTipoProducto;
 
     @FXML
     private ComboBox cmbCodProveedor;
 
     private ObservableList<Productos> listarProductos;
+    private ObservableList<Productos> buscarProductos;
     private ObservableList<TipoProducto> listarTipoProducto;
     private ObservableList<Proveedores> listarProveedores;
 
@@ -513,11 +518,27 @@ public class MenuProductosController implements Initializable {
         cmbCodProveedor.getSelectionModel().getSelectedItem();
     }
 
+    public void buscarProducto(KeyEvent event){
+        String filtroProducto = txtBuscar.getText();
+        if(filtroProducto.isEmpty()){
+            tblProductos.setItems(listarProductos);
+        }else{
+            buscarProductos.clear();
+            for(Productos p : listarProductos){
+                if(p.getCodigoProducto().toLowerCase().contains(filtroProducto) || String.valueOf(p.getCodigoProveedor()).equals(filtroProducto)){
+                    buscarProductos.add(p);
+                }
+            }
+            tblProductos.setItems(buscarProductos);
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
         cmbCodTipoProducto.setItems(getTipoProducto());
         cmbCodProveedor.setItems(getProveedores());
+        buscarProductos = FXCollections.observableArrayList();
     }
 
 }

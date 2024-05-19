@@ -3,6 +3,7 @@ package org.devyntubac.controller;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import org.devyntubac.bean.Compras;
 import org.devyntubac.db.Conexion;
@@ -36,6 +38,9 @@ public class MenuComprasController implements Initializable {
     /**
      * ID de los elementos utilizados en la interfaz.
      */
+
+    @FXML
+    private TextField txtBuscar;
     @FXML
     private TextField txtNumeroDocumento;
 
@@ -88,15 +93,16 @@ public class MenuComprasController implements Initializable {
     private ImageView imgReporte;
 
     @FXML
-    private MenuItem btnDetalleCompra;
+    private Button btnDetalleCompra;
 
     @FXML
-    private MenuItem btnRegresar;
-    
+    private Button btnRegresar;
+
     /**
      * ObservableList para enlistar los datos.
      */
     private ObservableList<Compras> listarCompras;
+    private ObservableList<Compras> buscarCompras;
 
     /**
      * Enumeradores para las operaciones que se utilizaran en el programa.
@@ -339,7 +345,8 @@ public class MenuComprasController implements Initializable {
     }
 
     /**
-     * Este metodo actualiza la información en la base de datos con los nuevos valores ingresados en la interfaz.
+     * Este metodo actualiza la información en la base de datos con los nuevos
+     * valores ingresados en la interfaz.
      */
     public void actualizar() {
         /**
@@ -363,12 +370,13 @@ public class MenuComprasController implements Initializable {
 
             /**
              * Actualizar los datos del cliente con los valores ingresados.
-            */
+             */
             registro.setFechaDocumento(fechaDocumento);
             registro.setDescripcion(txtDescripcion.getText());
             registro.setTotalDocumento(Double.parseDouble(txtTotalDocumento.getText()));
             /**
-             * Establece los parámetros del procedimiento con los nuevos valores.
+             * Establece los parámetros del procedimiento con los nuevos
+             * valores.
              */
             p.setInt(1, registro.getNumeroDocumento());
             p.setDate(2, registro.getFechaDocumento());
@@ -381,16 +389,16 @@ public class MenuComprasController implements Initializable {
     }
 
     /**
-     * Este metodo realiza la funcion de actualzar algun registro,  su vez 
+     * Este metodo realiza la funcion de actualzar algun registro, su vez
      * restaura los controles y botones.
      */
     public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
                 /**
-                 * Si tipo de operaciones es NINGUNO, primero verifica si hay registros 
-                 * en la tabla y si no muestra un cuadro de dialogo para que el usuario
-                 * selecciono algun registro.
+                 * Si tipo de operaciones es NINGUNO, primero verifica si hay
+                 * registros en la tabla y si no muestra un cuadro de dialogo
+                 * para que el usuario selecciono algun registro.
                  */
                 if (tblCompras.getSelectionModel().getSelectedItem() != null) {
                     btnEditar.setText("Actualizar");
@@ -409,7 +417,8 @@ public class MenuComprasController implements Initializable {
                 break;
             case ACTUALIZAR:
                 /**
-                 * Si es ACTUALIZAR llama al metodo actualizar y restaura los botones y textField.
+                 * Si es ACTUALIZAR llama al metodo actualizar y restaura los
+                 * botones y textField.
                  */
                 actualizar();
                 btnEditar.setText("Editar");
@@ -427,7 +436,8 @@ public class MenuComprasController implements Initializable {
     }
 
     /**
-     * Este metodo realiza la funcion de restaurar los botones a su estado original.
+     * Este metodo realiza la funcion de restaurar los botones a su estado
+     * original.
      */
     public void reportes() {
         switch (tipoDeOperaciones) {
@@ -463,6 +473,21 @@ public class MenuComprasController implements Initializable {
         }
     }
 
+    public void buscarCompra(KeyEvent event) {
+        String filtroCompra = txtBuscar.getText();
+        if (filtroCompra.isEmpty()) {
+            tblCompras.setItems(listarCompras);
+        } else {
+            buscarCompras.clear();
+            for (Compras c : listarCompras) {
+                if (String.valueOf(c.getNumeroDocumento()).equals(filtroCompra)) {
+                    buscarCompras.add(c);
+                }
+            }
+            tblCompras.setItems(buscarCompras);
+        }
+    }
+
     @FXML
     public void handleButtonAction(ActionEvent event) {
         if (event.getSource() == btnRegresar) {
@@ -476,6 +501,7 @@ public class MenuComprasController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
+        buscarCompras = FXCollections.observableArrayList();
     }
 
 }

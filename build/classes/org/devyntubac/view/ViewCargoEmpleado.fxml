@@ -223,5 +223,11 @@
             <String fx:value="shadow-effect" />
          </styleClass>
       </Button>
+      <Text fill="#006414" layoutX="540.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Cargo Empleado">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtBuscar" layoutX="706.0" layoutY="178.0" onKeyReleased="#buscarCargoEmpleado" style="-fx-background-color: #39A84F;" />
    </children>
 </AnchorPane>

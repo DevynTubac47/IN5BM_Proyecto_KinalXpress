@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import org.devyntubac.bean.CargoEmpleado;
 import org.devyntubac.db.Conexion;
@@ -38,6 +39,8 @@ public class MenuCargoEmpleadoController implements Initializable {
     Button btnRegresar;
     @FXML
     private TableView tblCargoEmpleado;
+    @FXML
+    private TextField txtBuscar;
     @FXML
     private TextField txtCodigoCargoE;
     @FXML
@@ -70,6 +73,7 @@ public class MenuCargoEmpleadoController implements Initializable {
      * ObservableList para enlistar los datos.
      */
     private ObservableList<CargoEmpleado> listarCargoEmpleado;
+    private ObservableList<CargoEmpleado> buscarCargoEmpleado;
 
     /**
      * Enumeradores para las operaciones que se utilizaran en el programa.
@@ -399,12 +403,29 @@ public class MenuCargoEmpleadoController implements Initializable {
         }
     }
 
+    public void buscarCargoEmpleado(KeyEvent event){
+        String filtrarCargo = txtBuscar.getText();
+        if(filtrarCargo.isEmpty()){
+            tblCargoEmpleado.setItems(listarCargoEmpleado);
+        }else{
+            buscarCargoEmpleado.clear();
+            for(CargoEmpleado c: listarCargoEmpleado){
+                if(String.valueOf(c.getCodigoCargoEmpleado()).equals(filtrarCargo) || c.getNombreCargo().toLowerCase().contains(filtrarCargo)){
+                    buscarCargoEmpleado.add(c);
+                }
+            }
+            tblCargoEmpleado.setItems(buscarCargoEmpleado);
+            
+        }
+    }
+    
     /**
      * Inizializa la clase controller, con el metodo cargarDatos.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
+        buscarCargoEmpleado = FXCollections.observableArrayList();
     }
 
 }

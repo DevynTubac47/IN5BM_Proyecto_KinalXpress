@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import org.devyntubac.bean.Compras;
 import org.devyntubac.bean.DetalleCompra;
@@ -87,6 +88,9 @@ public class MenuDetalleCompraController implements Initializable {
     private TextField txtCodDetalleC;
 
     @FXML
+    private TextField txtBuscar;
+    
+    @FXML
     private TextField txtCostoUnitario;
 
     @FXML
@@ -95,6 +99,7 @@ public class MenuDetalleCompraController implements Initializable {
     private ObservableList<DetalleCompra> listarDetalleCompra;
     private ObservableList<Productos> listarProductos;
     private ObservableList<Compras> listarCompras;
+    private ObservableList<DetalleCompra> buscarDetalleCompra;
 
     /**
      * Enumeradores para las operaciones que se utilizaran en el programa.
@@ -446,7 +451,22 @@ public class MenuDetalleCompraController implements Initializable {
                 break;
         }
     }    
-        
+    
+    public void buscarDetalleCompra(KeyEvent event){
+        String filtrarDetalleCompra = txtBuscar.getText();
+        if(filtrarDetalleCompra.isEmpty()){
+            tblDetalleCompra.setItems(listarDetalleCompra);
+        }else{
+            buscarDetalleCompra.clear();
+            for(DetalleCompra c : listarDetalleCompra){
+                if(String.valueOf(c.getCodigoDetalleCompra()).equals(filtrarDetalleCompra)){
+                    buscarDetalleCompra.add(c);
+                }
+            }
+            tblDetalleCompra.setItems(buscarDetalleCompra);
+        }
+    }
+    
     @FXML
     public void handleButtonAction(ActionEvent event) {
         /**
@@ -462,6 +482,7 @@ public class MenuDetalleCompraController implements Initializable {
         cargarDatos();
         cmbCodigoProducto.setItems(getProductos());
         cmbNumeroDocumento.setItems(getCompras());
+        buscarDetalleCompra = FXCollections.observableArrayList();
     }
 
 }

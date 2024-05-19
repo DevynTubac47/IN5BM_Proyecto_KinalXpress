@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import org.devyntubac.bean.*;
 import org.devyntubac.db.Conexion;
@@ -30,9 +31,9 @@ public class MenuFacturaController implements Initializable {
 
     private Main escenarioPrincipal;
     @FXML
-    MenuItem btnRegresar;
+    Button btnRegresar;
     @FXML
-    MenuItem btnDetalleFactura;
+    private Button btnDetalleFactura;
     @FXML
     private TableView tblFactura;
 
@@ -88,6 +89,9 @@ public class MenuFacturaController implements Initializable {
     private TextField txtTotalFactura;
 
     @FXML
+    private TextField txtBuscar;
+    
+    @FXML
     private DatePicker dpFechaFactura;
 
     @FXML
@@ -97,6 +101,7 @@ public class MenuFacturaController implements Initializable {
     private ComboBox cmbEmpleado;
 
     private ObservableList<Factura> listarFacturas;
+    private ObservableList<Factura> buscarFacturas;
     private ObservableList<Clientes> listarClientes;
     private ObservableList<Empleados> listarEmpleados;
 
@@ -469,6 +474,21 @@ public class MenuFacturaController implements Initializable {
         }
     }
 
+    public void  buscarFactura(KeyEvent event){
+        String filtroFactura = txtBuscar.getText();
+        if(filtroFactura.isEmpty()){
+            tblFactura.setItems(listarFacturas);
+        }else{
+            buscarFacturas.clear();
+            for(Factura f : listarFacturas){
+                if(String.valueOf(f.getNumeroFactura()).equals(filtroFactura) || String.valueOf(f.getClienteID()).equals(filtroFactura)){
+                  buscarFacturas.add(f);
+                }
+            }
+            tblFactura.setItems(buscarFacturas);
+        }
+    }
+    
     @FXML
     public void handleButtonAction(ActionEvent event
     ) {
@@ -492,6 +512,7 @@ public class MenuFacturaController implements Initializable {
         cargarDatos();
         cmbCodigoCliente.setItems(getClientes());
         cmbEmpleado.setItems(getEmpleados());
+        buscarFacturas = FXCollections.observableArrayList();
     }
 
 }

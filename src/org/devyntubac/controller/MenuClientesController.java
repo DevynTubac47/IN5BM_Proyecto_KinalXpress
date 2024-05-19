@@ -1,6 +1,6 @@
 package org.devyntubac.controller;
 
-import java.awt.event.KeyEvent;
+import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -88,6 +88,7 @@ public class MenuClientesController implements Initializable {
      * ObservableList para enlistar los datos.
      */
     private ObservableList<Clientes> listarClientes;
+    private ObservableList<Clientes> buscarCliente;
     private Main escenarioPrincipal;
 
     /**
@@ -119,6 +120,7 @@ public class MenuClientesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
+        buscarCliente = FXCollections.observableArrayList();
     }
 
     /**
@@ -263,9 +265,9 @@ public class MenuClientesController implements Initializable {
     }
 
     /**
-     * 
-     * Este metodo realiza la funcion de eliminar un registro, a su vez 
-     * restaura los controles y botones.
+     *
+     * Este metodo realiza la funcion de eliminar un registro, a su vez restaura
+     * los controles y botones.
      */
     public void eliminar() {
         switch (tipoDeOperaciones) {
@@ -287,8 +289,9 @@ public class MenuClientesController implements Initializable {
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             /**
-             * Si no procede a mostrar un cuadro de dialogo para confirmar la eliminación, 
-             * prepara y ejecuta el procedimiento eliminar de la base de datos.
+             * Si no procede a mostrar un cuadro de dialogo para confirmar la
+             * eliminación, prepara y ejecuta el procedimiento eliminar de la
+             * base de datos.
              */
             default:
                 if (tblClientes.getSelectionModel().getSelectedItem() != null) {
@@ -312,16 +315,16 @@ public class MenuClientesController implements Initializable {
     }
 
     /**
-     * Este metodo realiza la funcion de actualzar algun registro,  su vez 
+     * Este metodo realiza la funcion de actualzar algun registro, su vez
      * restaura los controles y botones.
      */
     public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
                 /**
-                 * Si tipo de operaciones es NINGUNO, primero verifica si hay registros 
-                 * en la tabla y si no muestra un cuadro de dialogo para que el usuario
-                 * selecciono algun registro.
+                 * Si tipo de operaciones es NINGUNO, primero verifica si hay
+                 * registros en la tabla y si no muestra un cuadro de dialogo
+                 * para que el usuario selecciono algun registro.
                  */
                 if (tblClientes.getSelectionModel().getSelectedItem() != null) {
                     btnEditar.setText("Actualizar");
@@ -339,7 +342,8 @@ public class MenuClientesController implements Initializable {
                 break;
             case ACTUALIZAR:
                 /**
-                 * Si es ACTUALIZAR llama al metodo actualizar y restaura los botones y textField.
+                 * Si es ACTUALIZAR llama al metodo actualizar y restaura los
+                 * botones y textField.
                  */
                 actualizar();
                 btnEditar.setText("Editar");
@@ -357,7 +361,8 @@ public class MenuClientesController implements Initializable {
     }
 
     /**
-     * Este metodo actualiza la información en la base de datos con los nuevos valores ingresados en la interfaz.
+     * Este metodo actualiza la información en la base de datos con los nuevos
+     * valores ingresados en la interfaz.
      */
     public void actualizar() {
         try {
@@ -369,7 +374,7 @@ public class MenuClientesController implements Initializable {
 
             /**
              * Actualizar los datos del cliente con los valores ingresados.
-            */
+             */
             registro.setNombresCliente(txtNombreCliente.getText());
             registro.setApellidosCliente(txtApellidoCliente.getText());
             registro.setNITClientes(txtNitCliente.getText());
@@ -377,7 +382,8 @@ public class MenuClientesController implements Initializable {
             registro.setTelefonoCliente(txtTelefonoCliente.getText());
             registro.setCorreoCliente(txtCorreoCliente.getText());
             /**
-             * Establece los parámetros del procedimiento con los nuevos valores.
+             * Establece los parámetros del procedimiento con los nuevos
+             * valores.
              */
             procedimiento.setInt(1, registro.getClienteID());
             procedimiento.setString(2, registro.getNombresCliente());
@@ -391,9 +397,10 @@ public class MenuClientesController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     /**
-     * Este metodo realiza la funcion de restaurar los botones a su estado original.
+     * Este metodo realiza la funcion de restaurar los botones a su estado
+     * original.
      */
     public void reportes() {
         switch (tipoDeOperaciones) {
@@ -451,12 +458,30 @@ public class MenuClientesController implements Initializable {
         txtCorreoCliente.clear();
     }
 
+    public void buscarClienteNombre(KeyEvent event) {
+        String filtroNombre = txtBuscar.getText();
+        if (filtroNombre.isEmpty()) {
+            tblClientes.setItems(listarClientes);
+        } else {
+            buscarCliente.clear();
+            for (Clientes c : listarClientes) {
+                if (String.valueOf(c.getClienteID()).equals(filtroNombre) || c.getNombresCliente().toLowerCase().contains(filtroNombre.toLowerCase()) || c.getApellidosCliente().toLowerCase().contains(filtroNombre.toLowerCase())) {
+                    buscarCliente.add(c);
+                }
+            }
+
+            tblClientes.setItems(buscarCliente);
+        }
+
+    }
+
     /**
      * Este metodo realiza la función para cada boton.
-     * @param event recibe este parametro para realizar acción. 
+     *
+     * @param event recibe este parametro para realizar acción.
      */
     @FXML
-    public void handleButtonAction(ActionEvent event){
+    public void handleButtonAction(ActionEvent event) {
         /**
          * Si el evento es igual al boton regresar muestra el menu principal.
          */

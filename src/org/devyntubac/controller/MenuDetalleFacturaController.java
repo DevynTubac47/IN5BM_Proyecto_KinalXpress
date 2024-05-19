@@ -15,6 +15,7 @@ import java.sql.*;
 import javafx.collections.FXCollections;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import org.devyntubac.db.Conexion;
 
@@ -83,9 +84,13 @@ public class MenuDetalleFacturaController implements Initializable {
     private TextField txtPrecioUnitario;
 
     @FXML
+    private TextField txtBuscar;
+    
+    @FXML
     private TextField txtCantidad;
 
     public ObservableList<DetalleFactura> listarDetalleFactura;
+    public ObservableList<DetalleFactura> buscarDetalleFactura;
     public ObservableList<Factura> listarFacturas;
     public ObservableList<Productos> listarProductos;
 
@@ -446,11 +451,29 @@ public class MenuDetalleFacturaController implements Initializable {
         }
     }
 
+    public void buscarDetalleFactura(KeyEvent event){
+        String filtrarDetalleFactura = txtBuscar.getText();
+        if(filtrarDetalleFactura.isEmpty()){
+            tblDetalleFactura.setItems(listarFacturas);
+        }else{
+            buscarDetalleFactura.clear();
+            listarFacturas.clear();
+            for(DetalleFactura d : listarDetalleFactura){
+                if(String.valueOf(d.getCodigoDetalleFactura()).equals(filtrarDetalleFactura)){
+                    buscarDetalleFactura.add(d);
+                }
+            }
+            
+            tblDetalleFactura.setItems(buscarDetalleFactura);
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
         cmbNumeroFactura.setItems(getFacturas());
         cmbCodigoProducto.setItems(getProductos());
+        buscarDetalleFactura = FXCollections.observableArrayList();
     }
 
 }

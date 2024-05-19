@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import org.devyntubac.bean.CargoEmpleado;
 import org.devyntubac.bean.Empleados;
@@ -101,9 +102,13 @@ public class MenuEmpleadosController implements Initializable {
     private TextField txtTurnoE;
 
     @FXML
+    private TextField txtBuscar;
+
+    @FXML
     private ComboBox cbmCodCargoEmpleado;
 
     private ObservableList<Empleados> listarEmpleados;
+    private ObservableList<Empleados> buscarEmpleados;
     private ObservableList<CargoEmpleado> listarCargoEmpleado;
 
     /**
@@ -366,8 +371,8 @@ public class MenuEmpleadosController implements Initializable {
             e.printStackTrace();
         }
     }
-    
-        public void editar() {
+
+    public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
                 /**
@@ -409,7 +414,7 @@ public class MenuEmpleadosController implements Initializable {
         }
     }
 
-        public void reportes() {
+    public void reportes() {
         switch (tipoDeOperaciones) {
             case ACTUALIZAR:
                 desactivarControles();
@@ -423,8 +428,23 @@ public class MenuEmpleadosController implements Initializable {
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
-    }    
-        
+    }
+
+    public void buscarEmpleado(KeyEvent event) {
+        String filtroEmpleado = txtBuscar.getText();
+        if (filtroEmpleado.isEmpty()) {
+            tblEmpleados.setItems(listarEmpleados);
+        } else {
+            buscarEmpleados.clear();
+            for (Empleados e : listarEmpleados) {
+                if (String.valueOf(e.getCodigoEmpleado()).equals(filtroEmpleado) || e.getNombresEmpleado().toLowerCase().contains(filtroEmpleado) || e.getApellidosEmpleado().toLowerCase().contains(filtroEmpleado)) {
+                    buscarEmpleados.add(e);
+                }
+            }
+            tblEmpleados.setItems(buscarEmpleados);
+        }
+    }
+
     @FXML
     public void handleButtonAction(ActionEvent event) {
         /**
@@ -439,6 +459,7 @@ public class MenuEmpleadosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
         cbmCodCargoEmpleado.setItems(getCargoEmpleado());
+        buscarEmpleados = FXCollections.observableArrayList();
     }
 
 }
