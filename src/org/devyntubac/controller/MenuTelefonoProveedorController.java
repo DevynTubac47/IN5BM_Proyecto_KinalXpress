@@ -16,17 +16,22 @@ import java.sql.*;
 import javafx.collections.FXCollections;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import org.devyntubac.db.Conexion;
 
 /**
  * FXML Controller class
  *
- * @author devyn
+ * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
+ * de Creación: 10/04/2024 Fecha de Modificaciones: 19/05/2024
  */
 public class MenuTelefonoProveedorController implements Initializable {
 
     private Main escenarioPrincipal;
+    /**
+     * ID de los elementos utilizados en la interfaz.
+     */
     @FXML
     Button btnRegresar;
     @FXML
@@ -85,9 +90,15 @@ public class MenuTelefonoProveedorController implements Initializable {
 
     @FXML
     private TextField txtNumSecundario;
+    @FXML
+    private TextField txtBuscar;
 
+    /**
+     * ObservableList para enlistar los datos.
+     */
     private ObservableList<TelefonoProveedor> listarTelefonoProveedor;
     private ObservableList<Proveedores> listarProveedores;
+    private ObservableList<TelefonoProveedor> buscarTelefonoProveedor;
 
     /**
      * Enumeradores para las operaciones que se utilizaran en el programa.
@@ -100,6 +111,9 @@ public class MenuTelefonoProveedorController implements Initializable {
      */
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
 
+    /**
+     * Getter y Setter
+     */
     public Main getEscenarioPrincipal() {
         return escenarioPrincipal;
     }
@@ -108,6 +122,12 @@ public class MenuTelefonoProveedorController implements Initializable {
         this.escenarioPrincipal = escenarioPrincipal;
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Telefono Proveedor
+     */
     public ObservableList<TelefonoProveedor> getTelefonoProveedor() {
         ArrayList<TelefonoProveedor> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -127,6 +147,12 @@ public class MenuTelefonoProveedorController implements Initializable {
         return listarTelefonoProveedor = FXCollections.observableList(lista);
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Proveedores
+     */
     public ObservableList<Proveedores> getProveedores() {
         ArrayList<Proveedores> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -153,7 +179,15 @@ public class MenuTelefonoProveedorController implements Initializable {
         return listarProveedores = FXCollections.observableList(lista);
     }
 
+    /**
+     * Este metodo tiene la funcionalidad de guardar los datos, y a su vez
+     * prepara y ejecuta el procedimiento agregar de la base de datos.
+     */
     public void guardar() {
+        /**
+         * Crear un nuevo objeto y asigna los valores de los campos de entrada
+         * de texto.
+         */
         TelefonoProveedor registro = new TelefonoProveedor();
         registro.setCodigoTelefonoProveedor(Integer.parseInt(txtCodigoTelefono.getText()));
         registro.setNumeroPrincipal(txtNumPrincipal.getText());
@@ -162,6 +196,10 @@ public class MenuTelefonoProveedorController implements Initializable {
         registro.setCodigoProveedor(((Proveedores) cmbCodProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
         try {
             PreparedStatement p = Conexion.getInstance().getConexion().prepareCall("call sp_agregarTelefonoProveedor(?,?,?,?,?);");
+            /**
+             * Establece los parámetros del procedimiento con los valores del
+             * objeto Telefono Proveedor.
+             */
             p.setInt(1, registro.getCodigoTelefonoProveedor());
             p.setString(2, registro.getNumeroPrincipal());
             p.setString(3, registro.getNumeroSecundario());
@@ -174,6 +212,13 @@ public class MenuTelefonoProveedorController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo realiza la funcion para agregar los datos, Dependiendo del
+     * tipo de operación actual, activa o desactiva los controles
+     * correspondientes, actualiza el texto y la apariencia de los botones, y
+     * realiza acciones específicas para agregar o guardar datos.
+     *
+     */
     public void agregar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
@@ -206,17 +251,31 @@ public class MenuTelefonoProveedorController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo actualiza la información en la base de datos con los nuevos
+     * valores ingresados en la interfaz.
+     */
     public void actualizar() {
         try {
+            /**
+             * Prepara y ejecuta el procedimiento de la base de datos.
+             */
             PreparedStatement p = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarTelefonoProveedor(?,?,?,?,?);");
             TelefonoProveedor registro = (TelefonoProveedor) tblTelefonoProveedor.getSelectionModel().getSelectedItem();
 
+            /**
+             * Actualizar los datos del cliente con los valores ingresados.
+             */
             registro.setCodigoTelefonoProveedor(Integer.parseInt(txtCodigoTelefono.getText()));
             registro.setNumeroPrincipal(txtNumPrincipal.getText());
             registro.setNumeroSecundario(txtNumSecundario.getText());
             registro.setObservaciones(txtObservaciones.getText());
             registro.setCodigoProveedor(((Proveedores) cmbCodProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
 
+            /**
+             * Establece los parámetros del procedimiento con los nuevos
+             * valores.
+             */
             p.setInt(1, registro.getCodigoTelefonoProveedor());
             p.setString(2, registro.getNumeroPrincipal());
             p.setString(3, registro.getNumeroSecundario());
@@ -228,6 +287,10 @@ public class MenuTelefonoProveedorController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo realiza la funcion de actualzar algun registro, su vez
+     * restaura los controles y botones.
+     */
     public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
@@ -270,6 +333,10 @@ public class MenuTelefonoProveedorController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo realiza la funcion de restaurar los botones a su estado
+     * original.
+     */
     public void reportes() {
         switch (tipoDeOperaciones) {
             case ACTUALIZAR:
@@ -286,6 +353,9 @@ public class MenuTelefonoProveedorController implements Initializable {
         }
     }
 
+    /**
+     * Carga los datos en una tabla de Telefono Proveedor en la interfaz de usuario.
+     */
     public void cargarDatos() {
         tblTelefonoProveedor.setItems(getTelefonoProveedor());
         colTelefono.setCellValueFactory(new PropertyValueFactory<>("codigoTelefonoProveedor"));
@@ -295,6 +365,9 @@ public class MenuTelefonoProveedorController implements Initializable {
         colCodProveedor.setCellValueFactory(new PropertyValueFactory<>("codigoProveedor"));
     }
 
+    /**
+     * Este metodo activa los textField.
+     */
     public void activarControles() {
         txtCodigoTelefono.setEditable(true);
         txtNumPrincipal.setEditable(true);
@@ -303,6 +376,9 @@ public class MenuTelefonoProveedorController implements Initializable {
         cmbCodProveedor.setDisable(false);
     }
 
+    /**
+     * Este metodo desactiva los textField.
+     */
     public void desactivarControles() {
         txtCodigoTelefono.setEditable(false);
         txtNumPrincipal.setEditable(false);
@@ -311,6 +387,9 @@ public class MenuTelefonoProveedorController implements Initializable {
         cmbCodProveedor.setDisable(true);
     }
 
+    /**
+     * Este metodo limpia los textField.
+     */
     public void limpiarControles() {
         txtCodigoTelefono.clear();
         txtNumPrincipal.clear();
@@ -320,6 +399,10 @@ public class MenuTelefonoProveedorController implements Initializable {
         cmbCodProveedor.getSelectionModel().getSelectedItem();
     }
 
+    /**
+     * Este metodo sirve para que los datos de la tupla, se coloquen en los
+     * textField.
+     */
     public void seleccionarElementos() {
         txtCodigoTelefono.setText(String.valueOf(((TelefonoProveedor) tblTelefonoProveedor.getSelectionModel().getSelectedItem()).getCodigoTelefonoProveedor()));
         txtNumPrincipal.setText(((TelefonoProveedor) tblTelefonoProveedor.getSelectionModel().getSelectedItem()).getNumeroPrincipal());
@@ -328,6 +411,11 @@ public class MenuTelefonoProveedorController implements Initializable {
         cmbCodProveedor.getSelectionModel().select(buscarProveedores(((TelefonoProveedor) tblTelefonoProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
     }
 
+    /**
+     * Este metodo tiene la funcion de buscar un registro en la lista.
+     * @param codigoProveedor resive como parametro el id.
+     * @return resultado
+     */
     public Proveedores buscarProveedores(int codigoProveedor) {
         Proveedores resultado = null;
         try {
@@ -350,6 +438,11 @@ public class MenuTelefonoProveedorController implements Initializable {
         return resultado;
     }
 
+    /**
+     *
+     * Este metodo realiza la funcion de eliminar un registro, a su vez restaura
+     * los controles y botones.
+     */
     public void eliminar() {
         switch (tipoDeOperaciones) {
             /**
@@ -395,6 +488,27 @@ public class MenuTelefonoProveedorController implements Initializable {
         }
     }
 
+    public void buscarTelefonoProveedor(KeyEvent event) {
+        String filtroTelefono = txtBuscar.getText();
+        if (filtroTelefono.isEmpty()) {
+            tblTelefonoProveedor.setItems(listarTelefonoProveedor);
+        } else {
+            buscarTelefonoProveedor.clear();
+            listarProveedores.clear();
+            for (TelefonoProveedor tp : listarTelefonoProveedor) {
+                if (String.valueOf(tp.getCodigoTelefonoProveedor()).equals(filtroTelefono) || tp.getNumeroPrincipal().contains(filtroTelefono) || tp.getNumeroSecundario().contains(filtroTelefono) || String.valueOf(tp.getCodigoProveedor()).equals(filtroTelefono)) {
+                    buscarTelefonoProveedor.add(tp);
+                }
+            }
+            tblTelefonoProveedor.setItems(buscarTelefonoProveedor);
+        }
+    }
+
+    /**
+     * Este metodo realiza la función para cada boton.
+     *
+     * @param event recibe este parametro para realizar acción.
+     */
     @FXML
     public void handleButtonAction(ActionEvent event) {
         /**
@@ -406,12 +520,13 @@ public class MenuTelefonoProveedorController implements Initializable {
     }
 
     /**
-     * Initializes the controller class.
+     * Inizializa la clase controller, con el metodo cargarDatos.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
         cmbCodProveedor.setItems(getProveedores());
+        buscarTelefonoProveedor = FXCollections.observableArrayList();
     }
 
 }

@@ -2,19 +2,32 @@ package org.devyntubac.bean;
 
 /**
  *
- * @author devyn
+ * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
+ * de Creación: 10/04/2024 Fecha de Modificaciones: 19/05/2024
  */
 public class DetalleCompra {
-    
+
     private int codigoDetalleCompra;
     private Double costoUnitario;
     private int cantidad;
     private String codigoProducto;
     private int numeroDocumento;
 
+    /**
+     * Costructor vacio.
+     */
     public DetalleCompra() {
     }
 
+    /**
+     * Costructor Lleno
+     *
+     * @param codigoDetalleCompra
+     * @param costoUnitario
+     * @param cantidad
+     * @param codigoProducto
+     * @param numeroDocumento
+     */
     public DetalleCompra(int codigoDetalleCompra, Double costoUnitario, int cantidad, String codigoProducto, int numeroDocumento) {
         this.codigoDetalleCompra = codigoDetalleCompra;
         this.costoUnitario = costoUnitario;
@@ -23,6 +36,10 @@ public class DetalleCompra {
         this.numeroDocumento = numeroDocumento;
     }
 
+    /**
+     * Getters y Setters Retorna el atributo. Recibe como parametros los
+     * atributos.
+     */
     public int getCodigoDetalleCompra() {
         return codigoDetalleCompra;
     }

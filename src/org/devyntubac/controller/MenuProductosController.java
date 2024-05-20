@@ -1,9 +1,6 @@
 package org.devyntubac.controller;
 
-import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -32,11 +29,15 @@ import org.devyntubac.system.Main;
 /**
  * FXML Controller class
  *
- * @author devyn
+ * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
+ * de Creación: 10/04/2024 Fecha de Modificaciones: 19/05/2024
  */
 public class MenuProductosController implements Initializable {
 
     private Main escenarioPrincipal;
+    /**
+     * ID de los elementos utilizados en la interfaz.
+     */
     @FXML
     private Button btnRegresar;
     @FXML
@@ -116,13 +117,19 @@ public class MenuProductosController implements Initializable {
 
     @FXML
     private TextField txtBuscar;
-    
+
     @FXML
     private ComboBox cmbCodTipoProducto;
 
     @FXML
     private ComboBox cmbCodProveedor;
 
+    @FXML
+    private ImageView imgProducto;
+
+    /**
+     * ObservableList para enlistar los datos.
+     */
     private ObservableList<Productos> listarProductos;
     private ObservableList<Productos> buscarProductos;
     private ObservableList<TipoProducto> listarTipoProducto;
@@ -148,6 +155,12 @@ public class MenuProductosController implements Initializable {
         this.escenarioPrincipal = escenarioPrincipal;
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Telefono Productos
+     */
     public ObservableList<Productos> getProductos() {
         ArrayList<Productos> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -173,6 +186,12 @@ public class MenuProductosController implements Initializable {
 
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista Tipo Producto
+     */
     public ObservableList<TipoProducto> getTipoProducto() {
         ArrayList<TipoProducto> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -192,6 +211,12 @@ public class MenuProductosController implements Initializable {
         return listarTipoProducto = FXCollections.observableList(lista);
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Proveedores
+     */
     public ObservableList<Proveedores> getProveedores() {
         ArrayList<Proveedores> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -231,6 +256,13 @@ public class MenuProductosController implements Initializable {
         colCodProveedor.setCellValueFactory(new PropertyValueFactory<>("codigoProveedor"));
     }
 
+    /**
+     * Este metodo realiza la funcion para agregar los datos, Dependiendo del
+     * tipo de operación actual, activa o desactiva los controles
+     * correspondientes, actualiza el texto y la apariencia de los botones, y
+     * realiza acciones específicas para agregar o guardar datos.
+     *
+     */
     public void agregar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
@@ -263,19 +295,31 @@ public class MenuProductosController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo tiene la funcionalidad de guardar los datos, y a su vez
+     * prepara y ejecuta el procedimiento agregar de la base de datos.
+     */
     public void guardar() {
+        /**
+         * Crear un nuevo objeto y asigna los valores de los campos de entrada
+         * de texto.
+         */
         Productos registro = new Productos();
         registro.setCodigoProducto(txtCodigoProducto.getText());
         registro.setDescripcionProducto(txtDescripcion.getText());
         registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
         registro.setPrecioDocena(Double.parseDouble(txtPrecioDocena.getText()));
         registro.setPrecioMayor(Double.parseDouble(txtPrecioMayor.getText()));
-        registro.setImagenProducto(txtImagen.getText()); 
+        registro.setImagenProducto(txtImagen.getText());
         registro.setExistencia(Integer.parseInt(txtExistencia.getText()));
         registro.setCodigoTipoProducto(((TipoProducto) cmbCodTipoProducto.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
         registro.setCodigoProveedor(((Proveedores) cmbCodProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
         try {
             PreparedStatement procedimiento = Conexion.getInstance().getConexion().prepareCall("call sp_agregarProductos(?,?,?,?,?,?,?,?,?);");
+            /**
+             * Establece los parámetros del procedimiento con los valores del
+             * objeto Telefono Proveedor.
+             */
             procedimiento.setString(1, registro.getCodigoProducto());
             procedimiento.setString(2, registro.getDescripcionProducto());
             procedimiento.setDouble(3, registro.getPrecioUnitario());
@@ -292,6 +336,10 @@ public class MenuProductosController implements Initializable {
         }
     }
 
+     /**
+     * Este metodo sirve para que los datos de la tupla, se coloquen en los
+     * textField.
+     */
     public void seleccionarElementos() {
         txtCodigoProducto.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoProducto());
         txtDescripcion.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getDescripcionProducto());
@@ -304,6 +352,11 @@ public class MenuProductosController implements Initializable {
         cmbCodProveedor.getSelectionModel().select(buscarProveedores(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
     }
 
+    /**
+     * Este metodo tiene la funcion de buscar un registro en la lista.
+     * @param codigoTipoProducto resive como parametro el id.
+     * @return resultado
+     */
     public TipoProducto buscarTipoProducto(int codigoTipoProducto) {
         TipoProducto resultado = null;
         try {
@@ -320,6 +373,11 @@ public class MenuProductosController implements Initializable {
         return resultado;
     }
 
+    /**
+     * Este metodo tiene la funcion de buscar un registro en la lista.
+     * @param codigoProveedor resive como parametro el id.
+     * @return resultado
+     */
     public Proveedores buscarProveedores(int codigoProveedor) {
         Proveedores resultado = null;
         try {
@@ -342,6 +400,11 @@ public class MenuProductosController implements Initializable {
         return resultado;
     }
 
+    /**
+     *
+     * Este metodo realiza la funcion de eliminar un registro, a su vez restaura
+     * los controles y botones.
+     */
     public void eliminar() {
         switch (tipoDeOperaciones) {
             /**
@@ -387,11 +450,21 @@ public class MenuProductosController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo actualiza la información en la base de datos con los nuevos
+     * valores ingresados en la interfaz.
+     */
     public void actualizar() {
         try {
+            /**
+             * Prepara y ejecuta el procedimiento de la base de datos.
+             */
             PreparedStatement p = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarProductos(?,?,?,?,?,?,?,?,?);");
             Productos registro = (Productos) tblProductos.getSelectionModel().getSelectedItem();
 
+            /**
+             * Actualizar los datos del cliente con los valores ingresados.
+             */
             registro.setDescripcionProducto(txtDescripcion.getText());
             registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
             registro.setPrecioDocena(Double.parseDouble(txtPrecioDocena.getText()));
@@ -401,6 +474,10 @@ public class MenuProductosController implements Initializable {
             registro.setCodigoTipoProducto(((TipoProducto) cmbCodTipoProducto.getSelectionModel().getSelectedItem()).getCodigoTipoProducto());
             registro.setCodigoProveedor(((Proveedores) cmbCodProveedor.getSelectionModel().getSelectedItem()).getCodigoProveedor());
 
+            /**
+             * Establece los parámetros del procedimiento con los nuevos
+             * valores.
+             */
             p.setString(1, registro.getCodigoProducto());
             p.setString(2, registro.getDescripcionProducto());
             p.setDouble(3, registro.getPrecioUnitario());
@@ -416,6 +493,10 @@ public class MenuProductosController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo realiza la funcion de actualzar algun registro, su vez
+     * restaura los controles y botones.
+     */
     public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
@@ -518,21 +599,24 @@ public class MenuProductosController implements Initializable {
         cmbCodProveedor.getSelectionModel().getSelectedItem();
     }
 
-    public void buscarProducto(KeyEvent event){
+    public void buscarProducto(KeyEvent event) {
         String filtroProducto = txtBuscar.getText();
-        if(filtroProducto.isEmpty()){
+        if (filtroProducto.isEmpty()) {
             tblProductos.setItems(listarProductos);
-        }else{
+        } else {
             buscarProductos.clear();
-            for(Productos p : listarProductos){
-                if(p.getCodigoProducto().toLowerCase().contains(filtroProducto) || String.valueOf(p.getCodigoProveedor()).equals(filtroProducto)){
+            for (Productos p : listarProductos) {
+                if (p.getCodigoProducto().contains(filtroProducto) || String.valueOf(p.getCodigoProveedor()).equals(filtroProducto)) {
                     buscarProductos.add(p);
                 }
             }
             tblProductos.setItems(buscarProductos);
         }
     }
-    
+
+    /**
+     * Inizializa la clase controller, con el metodo cargarDatos.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();

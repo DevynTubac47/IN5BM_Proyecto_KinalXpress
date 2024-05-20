@@ -28,11 +28,15 @@ import org.devyntubac.system.Main;
 /**
  * FXML Controller class
  *
- * @author devyn
+ * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
+ * de Creación: 10/04/2024 Fecha de Modificaciones: 19/05/2024
  */
 public class MenuEmpleadosController implements Initializable {
 
     private Main escenarioPrincipal;
+    /**
+     * ID de los elementos utilizados en la interfaz.
+     */
     @FXML
     Button btnRegresar;
     @FXML
@@ -107,6 +111,9 @@ public class MenuEmpleadosController implements Initializable {
     @FXML
     private ComboBox cbmCodCargoEmpleado;
 
+    /**
+     * ObservableList para enlistar los datos.
+     */
     private ObservableList<Empleados> listarEmpleados;
     private ObservableList<Empleados> buscarEmpleados;
     private ObservableList<CargoEmpleado> listarCargoEmpleado;
@@ -122,6 +129,12 @@ public class MenuEmpleadosController implements Initializable {
      */
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Empleados
+     */
     public ObservableList<Empleados> getEmpleados() {
         ArrayList<Empleados> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -169,6 +182,9 @@ public class MenuEmpleadosController implements Initializable {
         return listarCargoEmpleado = FXCollections.observableList(lista);
     }
 
+     /**
+     * Carga los datos en una tabla de Empleados en la interfaz de usuario.
+     */
     public void cargarDatos() {
         tblEmpleados.setItems(getEmpleados());
         colCodigoE.setCellValueFactory(new PropertyValueFactory<>("codigoEmpleado"));
@@ -180,6 +196,13 @@ public class MenuEmpleadosController implements Initializable {
         colCodCargoE.setCellValueFactory(new PropertyValueFactory<>("codigoCargoEmpleado"));
     }
 
+    /**
+     * Este metodo realiza la funcion para agregar los datos, Dependiendo del
+     * tipo de operación actual, activa o desactiva los controles
+     * correspondientes, actualiza el texto y la apariencia de los botones, y
+     * realiza acciones específicas para agregar o guardar datos.
+     *
+     */
     public void agregar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
@@ -250,7 +273,15 @@ public class MenuEmpleadosController implements Initializable {
         cbmCodCargoEmpleado.getSelectionModel().getSelectedItem();
     }
 
+    /**
+     * Este metodo tiene la funcionalidad de guardar los datos, y a su vez
+     * prepara y ejecuta el procedimiento agregar de la base de datos.
+     */
     public void guardar() {
+        /**
+         * Crear un nuevo objeto y asigna los valores de los campos de entrada
+         * de texto.
+         */
         Empleados registro = new Empleados();
         registro.setCodigoEmpleado(Integer.parseInt(txtCodigoEmpleado.getText()));
         registro.setNombresEmpleado(txtNombresE.getText());
@@ -261,6 +292,10 @@ public class MenuEmpleadosController implements Initializable {
         registro.setCodigoCargoEmpleado(((CargoEmpleado) cbmCodCargoEmpleado.getSelectionModel().getSelectedItem()).getCodigoCargoEmpleado());
         try {
             PreparedStatement p = Conexion.getInstance().getConexion().prepareCall("call sp_agregarEmpleados(?,?,?,?,?,?,?);");
+            /**
+             * Establece los parámetros del procedimiento con los valores del
+             * objeto Telefono Proveedor.
+             */
             p.setInt(1, registro.getCodigoEmpleado());
             p.setString(2, registro.getNombresEmpleado());
             p.setString(3, registro.getApellidosEmpleado());
@@ -301,7 +336,12 @@ public class MenuEmpleadosController implements Initializable {
         }
         return resultado;
     }
-
+    
+    /**
+     *
+     * Este metodo realiza la funcion de eliminar un registro, a su vez restaura
+     * los controles y botones.
+     */
     public void eliminar() {
         switch (tipoDeOperaciones) {
             /**
@@ -347,11 +387,21 @@ public class MenuEmpleadosController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo actualiza la información en la base de datos con los nuevos
+     * valores ingresados en la interfaz.
+     */
     public void actualizar() {
         try {
+            /**
+             * Prepara y ejecuta el procedimiento de la base de datos.
+             */
             PreparedStatement p = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarEmpleados(?,?,?,?,?,?,?);");
             Empleados registro = (Empleados) tblEmpleados.getSelectionModel().getSelectedItem();
 
+            /**
+             * Actualizar los datos del cliente con los valores ingresados.
+             */
             registro.setNombresEmpleado(txtNombresE.getText());
             registro.setApellidosEmpleado(txtApellidosE.getText());
             registro.setSueldo(Double.parseDouble(txtSueldo.getText()));
@@ -359,6 +409,10 @@ public class MenuEmpleadosController implements Initializable {
             registro.setTurno(txtTurnoE.getText());
             registro.setCodigoCargoEmpleado(((CargoEmpleado) cbmCodCargoEmpleado.getSelectionModel().getSelectedItem()).getCodigoCargoEmpleado());
 
+            /**
+             * Establece los parámetros del procedimiento con los nuevos
+             * valores.
+             */
             p.setInt(1, registro.getCodigoEmpleado());
             p.setString(2, registro.getNombresEmpleado());
             p.setString(3, registro.getApellidosEmpleado());
@@ -372,6 +426,10 @@ public class MenuEmpleadosController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo realiza la funcion de actualzar algun registro, su vez
+     * restaura los controles y botones.
+     */
     public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
@@ -414,6 +472,10 @@ public class MenuEmpleadosController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo realiza la funcion de restaurar los botones a su estado
+     * original.
+     */
     public void reportes() {
         switch (tipoDeOperaciones) {
             case ACTUALIZAR:
@@ -455,6 +517,9 @@ public class MenuEmpleadosController implements Initializable {
         }
     }
 
+    /**
+     * Inizializa la clase controller, con el metodo cargarDatos.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();

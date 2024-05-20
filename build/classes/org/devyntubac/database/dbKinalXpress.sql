@@ -1,3 +1,8 @@
+-- Base de Datos - KinalXpress
+-- Devyn Orlando Tubac Gomez
+-- Carne: 2020247
+-- Codigo Tecnico: IN5BM
+
 drop database if exists dbKinalXpress;
 
 create database dbKinalXpress;
@@ -90,7 +95,7 @@ create table Productos(
     precioUnitario decimal(10,2) default 0.0,
     precioDocena decimal(10,2) default 0.0,
     precioMayor decimal(10,2) default 0.0,
-    imagenProducto varchar(2),
+    imagenProducto varchar(3),
     existencia int(11),
     codigoTipoProducto int,
     codigoProveedor int,
@@ -137,9 +142,9 @@ create table DetalleFactura(
     codigoProducto varchar(15),
     primary key PK_DetalleFactura(codigoDetalleFactura),
     constraint FK_DetalleFactura_Factura foreign key DetalleFactura(numeroFactura)
-		references Factura(numeroFactura),
+		references Factura(numeroFactura) on delete cascade,
 	constraint FK_DetalleFactura foreign key DetalleFactura(codigoProducto)
-		references Productos(codigoProducto)
+		references Productos(codigoProducto) on delete cascade
 );
 
 -- --------------------------- Cargo Empleado --------------------------- 
@@ -190,8 +195,6 @@ begin
 	delete from CargoEmpleado where CargoEmpleado.codigoCargoEmpleado = codigoCargoEmpleado;
 end $$
 delimiter ;
-
-call sp_eliminarCargoEmpleado(1);
 
 -- ---------------------------  Clientes --------------------------- 
  delimiter $$
@@ -513,7 +516,7 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarTelefonoProveedor(1,'12345678','87654321','502',1);
+call sp_agregarTelefonoProveedor(2,'12345678','87654321','502',1);
 
 delimiter $$
 create procedure sp_listarTelefonoProveedor()
@@ -554,10 +557,12 @@ begin
 end $$
 delimiter ;
 
+call sp_eliminarTelefonoProveedor(1);
+
 -- --------------------------- Productos --------------------------- 
 
 delimiter $$
-create procedure sp_agregarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(2), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
+create procedure sp_agregarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(3), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
 begin
 	insert into Productos(codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor)
     values (codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor);
@@ -583,7 +588,7 @@ end $$
 delimiter ;
 
 delimiter $$
-create procedure sp_actualizarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(2), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
+create procedure sp_actualizarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(3), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
 begin
 	update productos
     set
@@ -606,6 +611,8 @@ begin
 	delete from Productos where productos.codigoProducto = codigoProducto;
 end $$
 delimiter ;
+
+call sp_eliminarProductos(1);
 
 -- --------------------------- Detalle Compra --------------------------- 
 
@@ -780,12 +787,6 @@ begin
 end $$
 delimiter ;
 
-call sp_listarProductos;
-
-call sp_listarDetalleCompra;
-
-call sp_listarCompras();
-
 delimiter $$
 create trigger tr_TotalDocumento_After_Insert
 after insert on DetalleCompra
@@ -802,10 +803,8 @@ begin
 end $$
 delimiter ;
 
-select * from DetalleFactura;
-
 delimiter $$
-create trigger tr_PrecioUnitario_After_Insert
+create trigger tr_PrecioUnitario_After_Upd
 after insert on DetalleCompra
 for each row
 begin
@@ -815,14 +814,14 @@ begin
     set precioP = (select precioUnitario from Productos where codigoProducto = new.codigoProducto);
     
     update DetalleFactura
-    set precioUnitario = precioP
-    where codigoProducto = NEW.codigoProducto;
+    set DetalleFactura.precioUnitario = precioP
+    where DetalleFactura.codigoProducto = NEW.codigoProducto;
 end $$
 delimiter ;
 
 delimiter $$
-create trigger tr_TotalFactura_After_Insert
-after insert on DetalleFactura
+create trigger tr_TotalFactura_Aftr_U
+after update on DetalleFactura
 for each row
 begin
 	declare totalFactura decimal(10,2);
@@ -831,7 +830,7 @@ begin
     where numeroFactura = new.numeroFactura;
     
     update Factura
-		set totalFactura = totalFactura
-	where numeroFactura = new.numeroFactura;
+		set Factura.totalFactura = totalFactura
+	where Factura.numeroFactura = new.numeroFactura;
 end $$
 delimiter ;

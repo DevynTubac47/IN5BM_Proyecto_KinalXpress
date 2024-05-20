@@ -4,19 +4,35 @@ import java.sql.Date;
 
 /**
  *
- * @author devyn
+ * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
+ * de Creación: 10/04/2024 Fecha de Modificaciones: 24/04/2024
  */
 public class Factura {
-   private int numeroFactura;
-   private String estado;
-   private Double totalFactura;
-   private Date fechaFactura;
-   private int clienteID;
-   private int codigoEmpleado;
 
+    private int numeroFactura;
+    private String estado;
+    private Double totalFactura;
+    private Date fechaFactura;
+    private int clienteID;
+    private int codigoEmpleado;
+
+    /**
+     * Costructor vacio.
+     */
     public Factura() {
     }
 
+    /**
+     * Costructor lleno.
+     *
+     * @param clienteID
+     * @param nombresCliente
+     * @param apellidosCliente
+     * @param NITClientes
+     * @param direccionCliente
+     * @param telefonoCliente
+     * @param correoCliente
+     */
     public Factura(int numeroFactura, String estado, Double totalFactura, Date fechaFactura, int clienteID, int codigoEmpleado) {
         this.numeroFactura = numeroFactura;
         this.estado = estado;
@@ -26,6 +42,10 @@ public class Factura {
         this.codigoEmpleado = codigoEmpleado;
     }
 
+    /**
+     * Getters y Setters Retorna el atributo. Recibe como parametros los
+     * atributos.
+     */
     public int getNumeroFactura() {
         return numeroFactura;
     }
@@ -78,6 +98,5 @@ public class Factura {
     public String toString() {
         return "| " + getNumeroFactura() + " | " + getTotalFactura() + " | " + getFechaFactura() + " |";
     }
-    
 
 }

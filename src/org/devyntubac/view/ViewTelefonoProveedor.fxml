@@ -19,7 +19,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="697.0" prefWidth="1032.0" style="-fx-background-color: ffff51;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devyntubac.controller.MenuTelefonoProveedorController">
    <children>
-      <Text fill="#006414" layoutX="122.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono Proveedor" wrappingWidth="512.359375">
+      <Text fill="#006414" layoutX="122.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teléfono Proveedor" wrappingWidth="512.359375">
          <font>
             <Font name="Arial Black" size="44.0" />
          </font>
@@ -214,5 +214,11 @@
             <String fx:value="shadow-effect" />
          </styleClass>
       </Button>
+      <Label layoutX="219.0" layoutY="150.0" text="Buscar Teléfono Proveedor" textFill="#006414">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtBuscar" layoutX="412.0" layoutY="146.0" onKeyReleased="#buscarTelefonoProveedor" style="-fx-background-color: #39A84F;" />
    </children>
 </AnchorPane>

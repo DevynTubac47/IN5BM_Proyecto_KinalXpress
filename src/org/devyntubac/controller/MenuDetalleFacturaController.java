@@ -22,11 +22,15 @@ import org.devyntubac.db.Conexion;
 /**
  * FXML Controller class
  *
- * @author devyn
+ * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
+ * de Creación: 10/04/2024 Fecha de Modificaciones: 19/05/2024
  */
 public class MenuDetalleFacturaController implements Initializable {
 
     private Main escenarioPrincipal;
+    /**
+     * ID de los elementos utilizados en la interfaz.
+     */
     @FXML
     Button btnRegresar;
     @FXML
@@ -85,10 +89,13 @@ public class MenuDetalleFacturaController implements Initializable {
 
     @FXML
     private TextField txtBuscar;
-    
+
     @FXML
     private TextField txtCantidad;
 
+    /**
+     * ObservableList para enlistar los datos.
+     */
     public ObservableList<DetalleFactura> listarDetalleFactura;
     public ObservableList<DetalleFactura> buscarDetalleFactura;
     public ObservableList<Factura> listarFacturas;
@@ -105,6 +112,9 @@ public class MenuDetalleFacturaController implements Initializable {
      */
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
 
+    /**
+     * Getter y Setter
+     */
     public Main getEscenarioPrincipal() {
         return escenarioPrincipal;
     }
@@ -113,6 +123,12 @@ public class MenuDetalleFacturaController implements Initializable {
         this.escenarioPrincipal = escenarioPrincipal;
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Detalle Factura.
+     */
     public ObservableList<DetalleFactura> getDetalleFactura() {
         ArrayList<DetalleFactura> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -132,6 +148,12 @@ public class MenuDetalleFacturaController implements Initializable {
         return listarDetalleFactura = FXCollections.observableList(lista);
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Productos
+     */
     public ObservableList<Productos> getProductos() {
         ArrayList<Productos> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -157,6 +179,12 @@ public class MenuDetalleFacturaController implements Initializable {
 
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Facturas
+     */
     public ObservableList<Factura> getFacturas() {
         ArrayList<Factura> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -177,6 +205,9 @@ public class MenuDetalleFacturaController implements Initializable {
         return listarFacturas = FXCollections.observableList(lista);
     }
 
+    /**
+     * Carga los datos en una tabla de clientes en la interfaz de usuario.
+     */
     public void cargarDatos() {
         tblDetalleFactura.setItems(getDetalleFactura());
         colCodDetalleFactura.setCellValueFactory(new PropertyValueFactory<>("codigoDetalleFactura"));
@@ -187,8 +218,20 @@ public class MenuDetalleFacturaController implements Initializable {
 
     }
 
+    /**
+     * Este metodo tiene la funcionalidad de guardar los datos, y a su vez
+     * prepara y ejecuta el procedimiento agregar de la base de datos.
+     */
     public void guardar() {
+        /**
+         * Crear un nuevo objeto y asigna los valores de los campos de entrada
+         * de texto.
+         */
         DetalleFactura registro = new DetalleFactura();
+        /**
+         * Establece los parámetros del procedimiento con los valores del objeto
+         * Telefono Proveedor.
+         */
         registro.setCodigoDetalleFactura(Integer.parseInt(txtCodDetalleFactura.getText()));
         registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
         registro.setCantidad(Integer.parseInt(txtCantidad.getText()));
@@ -208,6 +251,13 @@ public class MenuDetalleFacturaController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo realiza la funcion para agregar los datos, Dependiendo del
+     * tipo de operación actual, activa o desactiva los controles
+     * correspondientes, actualiza el texto y la apariencia de los botones, y
+     * realiza acciones específicas para agregar o guardar datos.
+     *
+     */
     public void agregar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
@@ -240,6 +290,12 @@ public class MenuDetalleFacturaController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo tiene la funcion de buscar un registro en la lista.
+     *
+     * @param numeroFactura
+     * @return resultado
+     */
     public Factura buscarFactura(int numeroFactura) {
         Factura resultado = null;
         try {
@@ -260,6 +316,12 @@ public class MenuDetalleFacturaController implements Initializable {
         return resultado;
     }
 
+    /**
+     * Este metodo tiene la funcion de buscar un registro en la lista.
+     *
+     * @param codigoProducto
+     * @return resultado
+     */
     public Productos buscarProducto(String codigoProducto) {
         Productos resultado = null;
         try {
@@ -283,6 +345,11 @@ public class MenuDetalleFacturaController implements Initializable {
         return resultado;
     }
 
+    /**
+     *
+     * Este metodo realiza la funcion de eliminar un registro, a su vez restaura
+     * los controles y botones.
+     */
     public void eliminar() {
         switch (tipoDeOperaciones) {
             /**
@@ -328,17 +395,31 @@ public class MenuDetalleFacturaController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo actualiza la información en la base de datos con los nuevos
+     * valores ingresados en la interfaz.
+     */
     public void actualizar() {
         try {
+            /**
+             * Prepara y ejecuta el procedimiento de la base de datos.
+             */
             PreparedStatement p = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarDetalleFactura(?,?,?,?,?);");
             DetalleFactura registro = (DetalleFactura) tblDetalleFactura.getSelectionModel().getSelectedItem();
 
+            /**
+             * Actualizar los datos del cliente con los valores ingresados.
+             */
             registro.setCodigoDetalleFactura(Integer.parseInt(txtCodDetalleFactura.getText()));
             registro.setPrecioUnitario(Double.parseDouble(txtPrecioUnitario.getText()));
             registro.setCantidad(Integer.parseInt(txtCantidad.getText()));
             registro.setNumeroFactura(((Factura) cmbNumeroFactura.getSelectionModel().getSelectedItem()).getNumeroFactura());
             registro.setCodigoProducto(((Productos) cmbCodigoProducto.getSelectionModel().getSelectedItem()).getCodigoProducto());
 
+            /**
+             * Establece los parámetros del procedimiento con los nuevos
+             * valores.
+             */
             p.setInt(1, registro.getCodigoDetalleFactura());
             p.setDouble(2, registro.getPrecioUnitario());
             p.setInt(3, registro.getCantidad());
@@ -350,6 +431,10 @@ public class MenuDetalleFacturaController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo realiza la funcion de actualzar algun registro, su vez
+     * restaura los controles y botones.
+     */
     public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
@@ -392,6 +477,10 @@ public class MenuDetalleFacturaController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo realiza la funcion de restaurar los botones a su estado
+     * original.
+     */
     public void reportes() {
         switch (tipoDeOperaciones) {
             case ACTUALIZAR:
@@ -407,7 +496,11 @@ public class MenuDetalleFacturaController implements Initializable {
                 break;
         }
     }
-    
+
+    /**
+     * Este metodo sirve para que los datos de la tupla, se coloquen en los
+     * textField.
+     */
     public void seleccionarElementos() {
         txtCodDetalleFactura.setText(String.valueOf(((DetalleFactura) tblDetalleFactura.getSelectionModel().getSelectedItem()).getCodigoDetalleFactura()));
         txtPrecioUnitario.setText(String.valueOf(((DetalleFactura) tblDetalleFactura.getSelectionModel().getSelectedItem()).getPrecioUnitario()));
@@ -416,6 +509,9 @@ public class MenuDetalleFacturaController implements Initializable {
         cmbCodigoProducto.getSelectionModel().select(buscarProducto(((DetalleFactura) tblDetalleFactura.getSelectionModel().getSelectedItem()).getCodigoProducto()));
     }
 
+    /**
+     * Este metodo activa los textField.
+     */
     public void activarControles() {
         txtCodDetalleFactura.setEditable(true);
         txtPrecioUnitario.setEditable(true);
@@ -424,6 +520,9 @@ public class MenuDetalleFacturaController implements Initializable {
         cmbCodigoProducto.setDisable(false);
     }
 
+    /**
+     * Este metodo desactiva los textField.
+     */
     public void desactivarControles() {
         txtCodDetalleFactura.setEditable(false);
         txtPrecioUnitario.setEditable(false);
@@ -432,6 +531,9 @@ public class MenuDetalleFacturaController implements Initializable {
         cmbCodigoProducto.setDisable(true);
     }
 
+    /**
+     * Este metodo limpia los textField.
+     */
     public void limpiarControles() {
         txtCodDetalleFactura.clear();
         txtPrecioUnitario.clear();
@@ -441,6 +543,11 @@ public class MenuDetalleFacturaController implements Initializable {
         cmbCodigoProducto.getSelectionModel().getSelectedItem();
     }
 
+    /**
+     * Este metodo realiza la función para cada boton.
+     *
+     * @param event recibe este parametro para realizar acción.
+     */
     @FXML
     public void handleButtonAction(ActionEvent event) {
         /**
@@ -450,24 +557,27 @@ public class MenuDetalleFacturaController implements Initializable {
             escenarioPrincipal.menuFactura();
         }
     }
-
-    public void buscarDetalleFactura(KeyEvent event){
+    
+    public void buscarDetalleFactura(KeyEvent event) {
         String filtrarDetalleFactura = txtBuscar.getText();
-        if(filtrarDetalleFactura.isEmpty()){
+        if (filtrarDetalleFactura.isEmpty()) {
             tblDetalleFactura.setItems(listarFacturas);
-        }else{
+        } else {
             buscarDetalleFactura.clear();
             listarFacturas.clear();
-            for(DetalleFactura d : listarDetalleFactura){
-                if(String.valueOf(d.getCodigoDetalleFactura()).equals(filtrarDetalleFactura)){
+            for (DetalleFactura d : listarDetalleFactura) {
+                if (String.valueOf(d.getCodigoDetalleFactura()).equals(filtrarDetalleFactura)) {
                     buscarDetalleFactura.add(d);
                 }
             }
-            
+
             tblDetalleFactura.setItems(buscarDetalleFactura);
         }
     }
-    
+
+    /**
+     * Inizializa la clase controller, con el metodo cargarDatos.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();

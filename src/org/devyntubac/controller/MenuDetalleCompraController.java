@@ -29,11 +29,15 @@ import org.devyntubac.system.Main;
 /**
  * FXML Controller class
  *
- * @author devyn
+ * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
+ * de Creación: 10/04/2024 Fecha de Modificaciones: 19/05/2024
  */
 public class MenuDetalleCompraController implements Initializable {
 
     private Main escenarioPrincipal;
+    /**
+     * ID de los elementos utilizados en la interfaz.
+     */
     @FXML
     Button btnRegresar;
     @FXML
@@ -89,13 +93,16 @@ public class MenuDetalleCompraController implements Initializable {
 
     @FXML
     private TextField txtBuscar;
-    
+
     @FXML
     private TextField txtCostoUnitario;
 
     @FXML
     private TextField txtCantidadDetalleC;
 
+    /**
+     * ObservableList para enlistar los datos.
+     */
     private ObservableList<DetalleCompra> listarDetalleCompra;
     private ObservableList<Productos> listarProductos;
     private ObservableList<Compras> listarCompras;
@@ -112,6 +119,9 @@ public class MenuDetalleCompraController implements Initializable {
      */
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
 
+    /**
+     * Getter y Setter
+     */
     public Main getEscenarioPrincipal() {
         return escenarioPrincipal;
     }
@@ -120,6 +130,12 @@ public class MenuDetalleCompraController implements Initializable {
         this.escenarioPrincipal = escenarioPrincipal;
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Detalle Compra
+     */
     public ObservableList<DetalleCompra> getDetalleCompra() {
         ArrayList<DetalleCompra> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -167,6 +183,12 @@ public class MenuDetalleCompraController implements Initializable {
         return listarCompras = FXCollections.observableList(lista);
     }
 
+    /**
+     * Este metodo tiene la función de listar los datos, y a su vez prepara y
+     * ejecuta el procedimiento de listar de la base de datos.
+     *
+     * @return La lista de Productos
+     */
     public ObservableList<Productos> getProductos() {
         ArrayList<Productos> lista = new ArrayList<>();
         ResultSet resultado = null;
@@ -258,7 +280,15 @@ public class MenuDetalleCompraController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo tiene la funcionalidad de guardar los datos, y a su vez
+     * prepara y ejecuta el procedimiento agregar de la base de datos.
+     */
     public void guardar() {
+        /**
+         * Crear un nuevo objeto y asigna los valores de los campos de entrada
+         * de texto.
+         */
         DetalleCompra registro = new DetalleCompra();
         registro.setCodigoDetalleCompra(Integer.parseInt(txtCodDetalleC.getText()));
         registro.setCostoUnitario(Double.parseDouble(txtCostoUnitario.getText()));
@@ -267,6 +297,10 @@ public class MenuDetalleCompraController implements Initializable {
         registro.setNumeroDocumento(((Compras) cmbNumeroDocumento.getSelectionModel().getSelectedItem()).getNumeroDocumento());
         try {
             PreparedStatement p = Conexion.getInstance().getConexion().prepareCall("call sp_agregarDetalleCompra(?,?,?,?,?);");
+            /**
+             * Establece los parámetros del procedimiento con los valores del
+             * objeto Compra Controller.
+             */
             p.setInt(1, registro.getCodigoDetalleCompra());
             p.setDouble(2, registro.getCostoUnitario());
             p.setInt(3, registro.getCantidad());
@@ -287,6 +321,12 @@ public class MenuDetalleCompraController implements Initializable {
         cmbNumeroDocumento.getSelectionModel().select(buscarCompra(((DetalleCompra) tblDetalleCompra.getSelectionModel().getSelectedItem()).getNumeroDocumento()));
     }
 
+    /**
+     * Este metodo tiene la funcion de buscar un registro en la lista.
+     *
+     * @param codigoProducto resive como parametro el id.
+     * @return resultado
+     */
     public Productos buscarProducto(String codigoProducto) {
         Productos resultado = null;
         try {
@@ -310,6 +350,12 @@ public class MenuDetalleCompraController implements Initializable {
         return resultado;
     }
 
+    /**
+     * Este metodo tiene la funcion de buscar un registro en la lista.
+     *
+     * @param numeroDocumento resive como parametro el id.
+     * @return resultado
+     */
     public Compras buscarCompra(int numeroDocumento) {
         Compras resultado = null;
         try {
@@ -328,6 +374,11 @@ public class MenuDetalleCompraController implements Initializable {
         return resultado;
     }
 
+    /**
+     *
+     * Este metodo realiza la funcion de eliminar un registro, a su vez restaura
+     * los controles y botones.
+     */
     public void eliminar() {
         switch (tipoDeOperaciones) {
             /**
@@ -373,16 +424,30 @@ public class MenuDetalleCompraController implements Initializable {
         }
     }
 
+    /**
+     * Este metodo actualiza la información en la base de datos con los nuevos
+     * valores ingresados en la interfaz.
+     */
     public void actualizar() {
         try {
+            /**
+             * Prepara y ejecuta el procedimiento de la base de datos.
+             */
             PreparedStatement p = Conexion.getInstance().getConexion().prepareCall("call sp_actualizarDetalleCompra(?,?,?,?,?);");
             DetalleCompra registro = (DetalleCompra) tblDetalleCompra.getSelectionModel().getSelectedItem();
+            /**
+             * Actualizar los datos del cliente con los valores ingresados.
+             */
             registro.setCodigoDetalleCompra(Integer.parseInt(txtCodDetalleC.getText()));
             registro.setCostoUnitario(Double.parseDouble(txtCostoUnitario.getText()));
             registro.setCantidad(Integer.parseInt(txtCantidadDetalleC.getText()));
             registro.setCodigoProducto(((Productos) cmbCodigoProducto.getSelectionModel().getSelectedItem()).getCodigoProducto());
             registro.setNumeroDocumento(((Compras) cmbNumeroDocumento.getSelectionModel().getSelectedItem()).getNumeroDocumento());
 
+            /**
+             * Establece los parámetros del procedimiento con los nuevos
+             * valores.
+             */
             p.setInt(1, registro.getCodigoDetalleCompra());
             p.setDouble(2, registro.getCostoUnitario());
             p.setInt(3, registro.getCantidad());
@@ -394,7 +459,11 @@ public class MenuDetalleCompraController implements Initializable {
         }
     }
 
-        public void editar() {
+    /**
+     * Este metodo realiza la funcion de actualzar algun registro, su vez
+     * restaura los controles y botones.
+     */
+    public void editar() {
         switch (tipoDeOperaciones) {
             case NINGUNO:
                 /**
@@ -435,7 +504,11 @@ public class MenuDetalleCompraController implements Initializable {
                 break;
         }
     }
-    
+
+    /**
+     * Este metodo realiza la funcion de restaurar los botones a su estado
+     * original.
+     */
     public void reportes() {
         switch (tipoDeOperaciones) {
             case ACTUALIZAR:
@@ -450,23 +523,28 @@ public class MenuDetalleCompraController implements Initializable {
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
-    }    
-    
-    public void buscarDetalleCompra(KeyEvent event){
+    }
+
+    public void buscarDetalleCompra(KeyEvent event) {
         String filtrarDetalleCompra = txtBuscar.getText();
-        if(filtrarDetalleCompra.isEmpty()){
+        if (filtrarDetalleCompra.isEmpty()) {
             tblDetalleCompra.setItems(listarDetalleCompra);
-        }else{
+        } else {
             buscarDetalleCompra.clear();
-            for(DetalleCompra c : listarDetalleCompra){
-                if(String.valueOf(c.getCodigoDetalleCompra()).equals(filtrarDetalleCompra)){
+            for (DetalleCompra c : listarDetalleCompra) {
+                if (String.valueOf(c.getCodigoDetalleCompra()).equals(filtrarDetalleCompra)) {
                     buscarDetalleCompra.add(c);
                 }
             }
             tblDetalleCompra.setItems(buscarDetalleCompra);
         }
     }
-    
+
+    /**
+     * Este metodo realiza la función para cada boton.
+     *
+     * @param event recibe este parametro para realizar acción.
+     */
     @FXML
     public void handleButtonAction(ActionEvent event) {
         /**

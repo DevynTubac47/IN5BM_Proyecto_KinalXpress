@@ -2,7 +2,8 @@ package org.devyntubac.bean;
 
 /**
  *
- * @author devyn
+ * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
+ * de Creación: 10/04/2024 Fecha de Modificaciones: 19/05/2024
  */
 public class Empleados {
     private int CodigoEmpleado;
@@ -13,9 +14,22 @@ public class Empleados {
     private String turno;
     private int codigoCargoEmpleado;
 
+    /**
+     * Costructor vacio.
+     */
     public Empleados() {
     }
 
+    /**
+     * Costructor Lleno
+     * @param CodigoEmpleado
+     * @param nombresEmpleado
+     * @param apellidosEmpleado
+     * @param sueldo
+     * @param direccion
+     * @param turno
+     * @param codigoCargoEmpleado 
+     */
     public Empleados(int CodigoEmpleado, String nombresEmpleado, String apellidosEmpleado, Double sueldo, String direccion, String turno, int codigoCargoEmpleado) {
         this.CodigoEmpleado = CodigoEmpleado;
         this.nombresEmpleado = nombresEmpleado;
@@ -26,6 +40,11 @@ public class Empleados {
         this.codigoCargoEmpleado = codigoCargoEmpleado;
     }
 
+    /**
+     * Getters y Setters
+     * Retorna el atributo.
+     * Recibe como parametros los atributos.
+     */
     public int getCodigoEmpleado() {
         return CodigoEmpleado;
     }

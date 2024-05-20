@@ -42,6 +42,8 @@ public class MenuTipoProductoController implements Initializable {
     @FXML
     private TextField txtDescripcionTipoP;
     @FXML
+    private TextField txtBuscar;
+    @FXML
     private TableView tblTipoProducto;
     @FXML
     private TableColumn colCodigoTipoP;
@@ -67,6 +69,7 @@ public class MenuTipoProductoController implements Initializable {
      * ObservableList para enlistar los datos.
      */
     private ObservableList<TipoProducto> listarTipoProducto;
+    private ObservableList<TipoProducto> buscarTipoProducto;
 
     /**
      * Enumeradores para las operaciones que se utilizaran en el programa.
@@ -370,6 +373,21 @@ public class MenuTipoProductoController implements Initializable {
 
     }
 
+    public void buscarTipoProducto(){
+        String filtroTipoProducto = txtBuscar.getText();
+        if(filtroTipoProducto.isEmpty()){
+            tblTipoProducto.setItems(listarTipoProducto);
+        }else{
+            buscarTipoProducto.clear();
+            for(TipoProducto t : listarTipoProducto){
+                if(String.valueOf(t.getCodigoTipoProducto()).equals(filtroTipoProducto) || t.getDescripcion().toLowerCase().toUpperCase().contains(filtroTipoProducto.toLowerCase().toUpperCase())){
+                    buscarTipoProducto.add(t);
+                }
+            }
+            tblTipoProducto.setItems(buscarTipoProducto);
+        }
+    }
+    
     /**
      * Este metodo realiza la función para cada boton.
      *
@@ -391,6 +409,7 @@ public class MenuTipoProductoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
+        buscarTipoProducto = FXCollections.observableArrayList();
     }
 
 }

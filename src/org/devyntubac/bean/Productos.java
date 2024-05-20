@@ -1,6 +1,7 @@
 package org.devyntubac.bean;
 
 import java.sql.Blob;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -17,7 +18,8 @@ public class Productos {
     private int existencia;
     private int codigoTipoProducto;
     private int codigoProveedor;
-
+    private Image imgProducto;
+    
     /**
      * Costructor Vacio.
      */
@@ -49,6 +51,11 @@ public class Productos {
         this.codigoProveedor = codigoProveedor;
     }
 
+    /**
+     * Getters y Setters
+     * Retorna el atributo.
+     * Recibe como parametros los atributos.
+     */
     public String getCodigoProducto() {
         return codigoProducto;
     }
@@ -121,8 +128,14 @@ public class Productos {
         this.codigoProveedor = codigoProveedor;
     }
 
-    
-    
+    public Image getImgProducto() {
+        return imgProducto;
+    }
+
+    public void setImgProducto(Image imgProducto) {
+        this.imgProducto = imgProducto;
+    }
+
     @Override
     public String toString() {
         return "| " + getCodigoProducto() + " | " + getPrecioUnitario() + " | " + getImagenProducto() + " | " + getExistencia() + "|";

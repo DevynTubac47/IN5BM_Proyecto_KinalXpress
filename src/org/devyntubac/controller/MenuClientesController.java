@@ -457,7 +457,12 @@ public class MenuClientesController implements Initializable {
         txtDireccionCliente.clear();
         txtCorreoCliente.clear();
     }
-
+    
+    /*
+    En el metodo buscarCliente recibe como parametro KeyEvent para recibir una entrada de texto en el text fiel
+    Si el textFiel esta vacio, muestra la lista pero si no buscar por medio del for each, y al final en la tabla 
+    muestra al cliente relacionado con la busqueda.
+    */
     public void buscarClienteNombre(KeyEvent event) {
         String filtroNombre = txtBuscar.getText();
         if (filtroNombre.isEmpty()) {

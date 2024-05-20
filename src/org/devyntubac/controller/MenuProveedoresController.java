@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 import org.devyntubac.bean.Proveedores;
 import org.devyntubac.db.Conexion;
@@ -62,6 +63,8 @@ public class MenuProveedoresController implements Initializable {
     @FXML
     private TextField txtCodigoP;
     @FXML
+    private TextField txtBuscar;
+    @FXML
     private TextField txtNitP;
     @FXML
     private TextField txtNombreP;
@@ -95,7 +98,7 @@ public class MenuProveedoresController implements Initializable {
      * ObservableList para enlistar los datos.
      */
     private ObservableList<Proveedores> listarProveedores;
-
+    private ObservableList<Proveedores> buscarProveedores;    
     /**
      * Enumeradores para las operaciones que se utilizaran en el programa.
      */
@@ -124,6 +127,7 @@ public class MenuProveedoresController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarDatos();
+        buscarProveedores = FXCollections.observableArrayList();
     }
 
     /**
@@ -464,6 +468,21 @@ public class MenuProveedoresController implements Initializable {
 
     }
 
+    public void buscarProveedor(KeyEvent event){
+        String filtroProveedor = txtBuscar.getText();
+        if(filtroProveedor.isEmpty()){
+            tblProveedores.setItems(listarProveedores);
+        }else{
+            buscarProveedores.clear();
+            for(Proveedores p :listarProveedores){
+                if(String.valueOf(p.getCodigoProveedor()).equals(filtroProveedor) || p.getNITProvedor().contains(filtroProveedor) || p.getNombresProveedor().toLowerCase().contains(filtroProveedor.toLowerCase()) || p.getApellidosProveedor().toLowerCase().contains(filtroProveedor.toLowerCase()) || p.getRazonSocial().toLowerCase().contains(filtroProveedor.toLowerCase())){
+                    buscarProveedores.add(p);
+                }
+            }
+            tblProveedores.setItems(buscarProveedores);
+        }
+    }
+    
     /**
      * Este metodo realiza la función para cada boton.
      * @param event recibe este parametro para realizar acción. 

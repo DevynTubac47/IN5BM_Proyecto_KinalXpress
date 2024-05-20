@@ -2,7 +2,8 @@ package org.devyntubac.bean;
 
 /**
  *
- * @author devyn
+ * @author Devyn Orlando Tubac Gomez Carne: 2020247 Codigo Tecnico: IN5BM Fecha
+ * de Creación: 10/04/2024 Fecha de Modificaciones: 19/05/2024
  */
 public class EmailProveedor {
     private int codigoEmailProveedor;
@@ -10,9 +11,19 @@ public class EmailProveedor {
     private String descripcion;
     private int codigoProveedor;
 
+    /**
+     * Costructor vacio.
+     */
     public EmailProveedor() {
     }
 
+    /**
+     * Costructor Lleno.
+     * @param codigoEmailProveedor
+     * @param emailProveedor
+     * @param descripcion
+     * @param codigoProveedor 
+     */
     public EmailProveedor(int codigoEmailProveedor, String emailProveedor, String descripcion, int codigoProveedor) {
         this.codigoEmailProveedor = codigoEmailProveedor;
         this.emailProveedor = emailProveedor;
@@ -20,6 +31,11 @@ public class EmailProveedor {
         this.codigoProveedor = codigoProveedor;
     }
 
+    /**
+     * Getters y Setters
+     * Retorna el atributo.
+     * Recibe como parametros los atributos.
+     */
     public int getCodigoEmailProveedor() {
         return codigoEmailProveedor;
     }
