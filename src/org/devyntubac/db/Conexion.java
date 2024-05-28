@@ -12,8 +12,8 @@ import java.sql.SQLException;
 public class Conexion {
     private Connection conexion;
     private static Conexion instancia;
-    private String user = "root";
-    private String pass = "Tottus47d";
+    private String user = "2020247_IN5BM";
+    private String pass = "abc123**";
     
     /**
      * Constructor de la clase, establece una conexión a la base de datos MySQL.
@@ -21,7 +21,7 @@ public class Conexion {
     public Conexion(){
         try{
            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-           conexion = DriverManager.getConnection("jdbc:mysql://localhost/dbKinalXpress?SSL=false",user,pass);
+           conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1/dbKinalXpress?SSL=false",user,pass);
         }catch(ClassNotFoundException  e){
             e.printStackTrace();
         }catch(InstantiationException a){
