@@ -11,6 +11,14 @@ use dbKinalXpress;
 
 set global time_zone = '-6:00';
 
+create table Usuario(
+	idUsuario int not null,
+	email varchar(100),
+    contrasenia varchar(100),
+    nombreUsuario varchar(50),
+    primary key PK_Usuario(idUsuario)
+);
+
 create table CargoEmpleado(
 	codigoCargoEmpleado int not null,
     nombreCargo varchar(45),
@@ -146,6 +154,14 @@ create table DetalleFactura(
 	constraint FK_DetalleFactura foreign key DetalleFactura(codigoProducto)
 		references Productos(codigoProducto) on delete cascade
 );
+
+-- --------------------------- Usuario ---------------------------------
+insert into Usuario(idUsuario,email,contrasenia,nombreUsuario) 
+values (1,'devynGomez@gmail.com','abc123**','Devyn Gomez');
+insert into Usuario(idUsuario,email,contrasenia,nombreUsuario) 
+values (2,'pvillela@kinal.edu.gt','1234','Villela');
+
+select * from Usuario where email = email and contrasenia = contrasenia;
 
 -- --------------------------- Cargo Empleado --------------------------- 
 delimiter $$

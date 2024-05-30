@@ -12,20 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.devyntubac.controller.MenuCargoEmpleadoController;
-import org.devyntubac.controller.MenuClientesController;
-import org.devyntubac.controller.MenuComprasController;
-import org.devyntubac.controller.MenuDetalleCompraController;
-import org.devyntubac.controller.MenuDetalleFacturaController;
-import org.devyntubac.controller.MenuEmailProveedorController;
-import org.devyntubac.controller.MenuEmpleadosController;
-import org.devyntubac.controller.MenuFacturaController;
-import org.devyntubac.controller.MenuPrincipalController;
-import org.devyntubac.controller.MenuProductosController;
-import org.devyntubac.controller.MenuProgramadorController;
-import org.devyntubac.controller.MenuProveedoresController;
-import org.devyntubac.controller.MenuTelefonoProveedorController;
-import org.devyntubac.controller.MenuTipoProductoController;
+import org.devyntubac.controller.*;
 
 /**
  *
@@ -51,7 +38,7 @@ public class Main extends Application {
         this.escenarioPrincipal = escenarioPrincipal;
         this.escenarioPrincipal.setTitle("KinalXpress");
         escenarioPrincipal.getIcons().add(new Image("/org/devyntubac/images/logoXpress.png"));
-        menuPrincipalView();
+        inicioSesion();
         //Parent root = FXMLLoader.load(getClass().getResource("/org/devyntubac/view/MenuPrincipalView.fxml"));
         //Scene escena = new Scene(root);
         //escenarioPrincipal.setScene(escena);
@@ -86,6 +73,15 @@ public class Main extends Application {
         return resultado;
     }
 
+    public void inicioSesion(){
+        try{
+            MenuLoginController login = (MenuLoginController) cambiarEscena("ViewLogin.fxml",500,555);
+            login.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * Este metodo carga la interfaz del menu principal.
      */
@@ -238,6 +234,24 @@ public class Main extends Application {
         try {
             MenuEmailProveedorController menuDetalleEmail = (MenuEmailProveedorController) cambiarEscena("ViewEmailProveedor.fxml", 1032, 697);
             menuDetalleEmail.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void menuUbicaciones() {
+        try {
+            ViewUbicacionesController menuUbi = (ViewUbicacionesController) cambiarEscena("ViewUbicaciones.fxml", 941, 619);
+            menuUbi.setEscenarioPrincipal(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void menuCrearCuenta() {
+        try {
+            MenuCrearCuentaController menuCrear = (MenuCrearCuentaController) cambiarEscena("ViewCrearCuenta.fxml", 575, 600);
+            menuCrear.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();
         }

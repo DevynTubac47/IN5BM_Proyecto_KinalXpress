@@ -5,9 +5,15 @@ import org.devyntubac.system.Main;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
@@ -41,7 +47,11 @@ public class MenuPrincipalController implements Initializable {
     MenuItem btnDetalleFactura;
     @FXML
     MenuItem btnFactura;
-    
+    @FXML
+    Button btnUbicaciones;
+    @FXML
+    Button btnHorario;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -115,6 +125,25 @@ public class MenuPrincipalController implements Initializable {
         }
         if (event.getSource() == btnFactura) {
             escenarioPrincipal.menuFactura();
+        }
+        if (event.getSource() == btnUbicaciones) {
+            escenarioPrincipal.menuUbicaciones();
+        }
+        if (event.getSource() == btnHorario) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/devyntubac/view/ViewHorarios.fxml"));
+                Parent root = loader.load();
+                MenuHorariosController controlador = loader.getController();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("KinalXpress");
+                stage.getIcons().add(new Image("/org/devyntubac/images/logoXpress.png"));
+                stage.setScene(scene);
+                stage.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

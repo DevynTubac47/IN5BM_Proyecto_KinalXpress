@@ -165,7 +165,7 @@
                   <String fx:value="pulse-effect" />
                </styleClass>
             </Button>
-            <Button fx:id="btnReporte" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33cc33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Reportes" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="3">
+            <Button fx:id="btnReporte" mnemonicParsing="false" onAction="#reportes" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #33cc33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Reportes" textAlignment="JUSTIFY" textFill="#006414" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>
@@ -224,11 +224,6 @@
             <TextField fx:id="txtImagen" style="-fx-background-color: #39A84F;" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <ImageView fitHeight="192.0" fitWidth="198.0" layoutX="-3.0" layoutY="526.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" rotate="78.7">
-         <image>
-            <Image url="@../images/decoPro.png" />
-         </image>
-      </ImageView>
       <Button fx:id="btnRegresar" layoutX="880.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #33cc33; -fx-background-radius: 10;" stylesheets="@../resourse/KinalXpressCSS.css" text="Regresar" textFill="#006414">
          <font>
             <Font name="Arial Black" size="12.0" />
@@ -248,6 +243,11 @@
             <String fx:value="shadow-effect" />
          </styleClass>
       </Button>
+      <ImageView fitHeight="192.0" fitWidth="198.0" layoutX="-3.0" layoutY="526.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" rotate="78.7">
+         <image>
+            <Image url="@../images/decoPro.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="192.0" fitWidth="198.0" layoutX="1016.0" layoutY="522.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/decoPro.png" />
