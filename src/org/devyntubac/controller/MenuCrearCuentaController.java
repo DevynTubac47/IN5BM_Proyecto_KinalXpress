@@ -121,9 +121,13 @@ public class MenuCrearCuentaController implements Initializable {
             lbCorreo.setText("Correo Invalido!");
         } else if (contrasena.equals(repetirContrasena)) {
             crearUsuario(nombre, apellido, email, contrasena, telefono, nombreUsuario);
+            File archivo = new File("C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\images\\audioLogin.mp3");
+            Media audio = new Media(archivo.toURI().toString());
+            MediaPlayer reproductor = new MediaPlayer(audio);
+            reproductor.play();
             escenarioPrincipal.menuPrincipalView();
         } else {
-            lbRepetir.setText("Las contraseñas no coinciden.\nPor favor, inténtelo de nuevo.");
+            lbRepetir.setText("Las contraseñas no coinciden. Por favor, inténtelo de nuevo.");
         }
     }
 
@@ -153,11 +157,12 @@ public class MenuCrearCuentaController implements Initializable {
     }
 
     @FXML
-    public void regresar(ActionEvent event){
+    public void regresar(ActionEvent event) {
         if (event.getSource() == btnRegresar) {
             escenarioPrincipal.inicioSesion();
         }
     }
+
     /**
      * Initializes the controller class.
      */

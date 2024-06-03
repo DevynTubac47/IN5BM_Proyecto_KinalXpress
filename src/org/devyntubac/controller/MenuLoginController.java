@@ -5,9 +5,6 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -62,12 +59,7 @@ public class MenuLoginController implements Initializable {
             }
         }
     }
-
-    @FXML
-    private void eventAction(ActionEvent event) {
-
-    }
-
+    
     @FXML
     public void login() {
         String email = txtEmail.getText();
@@ -81,15 +73,18 @@ public class MenuLoginController implements Initializable {
             s.setString(2, contrasena);
             ResultSet r = s.executeQuery();
             if (r.next()) {
+                SesionIniciada.establecerSesion(true);
                 try {
+                    String nombreUsuario = r.getString("nombreUsuario");
+                    SesionIniciada.obtenerUsuario(nombreUsuario);
                     File archivo = new File("C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\images\\audioLogin.mp3");
                     Media audio = new Media(archivo.toURI().toString());
                     MediaPlayer reproductor = new MediaPlayer(audio);
                     reproductor.play();
-                    escenarioPrincipal.menuPrincipalView();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                escenarioPrincipal.menuPrincipalView();
             } else {
                 lbIncorrecto.setText("Correo y/o Contraseña Incorrecta");
             }

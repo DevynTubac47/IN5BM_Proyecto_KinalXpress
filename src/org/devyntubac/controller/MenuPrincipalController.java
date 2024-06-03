@@ -14,6 +14,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,6 +52,8 @@ public class MenuPrincipalController implements Initializable {
     Button btnUbicaciones;
     @FXML
     Button btnHorario;
+    @FXML
+    MenuItem btnCerrarSesion;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -145,6 +148,22 @@ public class MenuPrincipalController implements Initializable {
                 e.printStackTrace();
             }
         }
+        if (event.getSource() == btnCerrarSesion) {
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/devyntubac/view/ViewCerrarSesion.fxml"));
+                Parent root = loader.load();
+                MenuCerrarSesionController controlador = loader.getController();
+                controlador.setEscenarioPrincipal(escenarioPrincipal);
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Cerrar Sesion");
+                stage.getIcons().add(new Image("/org/devyntubac/images/logoXpress.png"));
+                stage.setScene(scene);
+                stage.showAndWait();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
-
 }

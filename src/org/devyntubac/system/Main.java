@@ -38,13 +38,20 @@ public class Main extends Application {
         this.escenarioPrincipal = escenarioPrincipal;
         this.escenarioPrincipal.setTitle("KinalXpress");
         escenarioPrincipal.getIcons().add(new Image("/org/devyntubac/images/logoXpress.png"));
-        inicioSesion();
-        //Parent root = FXMLLoader.load(getClass().getResource("/org/devyntubac/view/MenuPrincipalView.fxml"));
-        //Scene escena = new Scene(root);
-        //escenarioPrincipal.setScene(escena);
+        SesionIniciada.cargarEstado();
+        if(SesionIniciada.sesionInciada()){
+            menuPrincipalView();
+        }else{
+            inicioSesion();
+        }
+        
         escenarioPrincipal.show();
     }
 
+    @Override
+    public void stop(){
+        SesionIniciada.guardarEstado();
+    }
     /**
      * Este metodo es el encargado de cambiar las escenas en la ejecucion del
      * programa.
@@ -75,8 +82,9 @@ public class Main extends Application {
 
     public void inicioSesion(){
         try{
-            MenuLoginController login = (MenuLoginController) cambiarEscena("ViewLogin.fxml",500,555);
+            MenuLoginController login = (MenuLoginController) cambiarEscena("ViewLogin.fxml",418,567);
             login.setEscenarioPrincipal(this);
+            SesionIniciada.guardarEstado();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -250,18 +258,16 @@ public class Main extends Application {
     
     public void menuCrearCuenta() {
         try {
-            MenuCrearCuentaController menuCrear = (MenuCrearCuentaController) cambiarEscena("ViewCrearCuenta.fxml", 575, 600);
+            MenuCrearCuentaController menuCrear = (MenuCrearCuentaController) cambiarEscena("ViewCrearCuenta.fxml", 490, 600);
             menuCrear.setEscenarioPrincipal(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
 
 }
+ 

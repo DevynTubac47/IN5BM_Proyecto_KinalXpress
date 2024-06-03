@@ -12,9 +12,12 @@ use dbKinalXpress;
 set global time_zone = '-6:00';
 
 create table Usuario(
-	idUsuario int not null,
+	idUsuario int not null auto_increment,
 	email varchar(100),
     contrasenia varchar(100),
+    nombreU varchar(100),
+    apellidoU varchar(100),
+    telefono varchar(8),
     nombreUsuario varchar(50),
     primary key PK_Usuario(idUsuario)
 );
@@ -156,12 +159,13 @@ create table DetalleFactura(
 );
 
 -- --------------------------- Usuario ---------------------------------
-insert into Usuario(idUsuario,email,contrasenia,nombreUsuario) 
-values (1,'devynGomez@gmail.com','abc123**','Devyn Gomez');
-insert into Usuario(idUsuario,email,contrasenia,nombreUsuario) 
-values (2,'pvillela@kinal.edu.gt','1234','Villela');
+insert into Usuario(email,contrasenia,nombreU,apellidoU,telefono,nombreUsuario) 
+values ('devynGomez@gmail.com','abc123**','Devyn','Gomez','12345678','Devyn Gomez');
 
 select * from Usuario where email = email and contrasenia = contrasenia;
+select * from Usuario;
+select count(*) from Usuario where email = email;
+select count(*) from Usuario where nombreUsuario = nombreUsuario;
 
 -- --------------------------- Cargo Empleado --------------------------- 
 delimiter $$
