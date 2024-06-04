@@ -1,34 +1,3 @@
-.menubar{
-    -fx-background-color: transparent;
-    -fxopacy: 0.5;
-    -fx-border-width: 2.0; 
-}
-
-.table-view.column-header,
-.table-view.column-background.filler{
-    -fx-cell-size: 20;
-    -fx-background-color: #FCB508;
-}
-
-.button:hover{
-    -fx-background-color: #FCB508;
-    -fx-font-size: 15px;
-    -fx-effect: dropshadow( one-pass-box, black, 5, 0, 0, 0);
-}
-
-.shadow-effect:hover {
-  -fx-background-color: #FFFFFF; 
-  -fx-effect: dropshadow( one-pass-box, black, 5, 0, 0, 0);
-}
-
-.table-view:hover {
-    -fx-background-color: coral;
-}
-
-.table-view:nth-child(even) {
-    -fx-background-color: #f2f2f2;
-}
-
-.table-row-cell:selected {
-  -fx-background-color: #006414;
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:dd35bf1f293cd7a3c6b53059ed1dc7c5fd7525692af4267bb68c2e940f25fda6
+size 705
