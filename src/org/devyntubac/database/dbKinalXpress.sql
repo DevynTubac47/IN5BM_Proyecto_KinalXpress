@@ -11,6 +11,8 @@ use dbKinalXpress;
 
 set global time_zone = '-6:00';
 
+alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'Tottus47d';
+
 create table Usuario(
 	idUsuario int not null auto_increment,
 	email varchar(100),
@@ -853,3 +855,20 @@ begin
 	where Factura.numeroFactura = new.numeroFactura;
 end $$
 delimiter ;
+
+create view vw_Productos as
+select Productos.codigoProducto, Productos.precioUnitario, Productos.precioDocena, Productos.precioMayor, Productos.existencia, TipoProducto.Descripcion, Proveedores.nombresProveedor
+from Productos
+inner join TipoProducto on Productos.codigoTipoProducto = TipoProducto.codigoTipoProducto
+inner join Proveedores on Productos.codigoProveedor = Proveedores.codigoProveedor;
+
+select * from vw_Productos;
+
+create view vw_Proveedores as
+select Proveedores.codigoProveedor, Proveedores.NITProvedor, Proveedores.direccionProveedor, Proveedores.razonSocial, Proveedores.contactoPrincipal, TelefonoProveedor.numeroPrincipal, EmailProveedor.emailProveedor
+from Proveedores
+inner join TelefonoProveedor on Proveedores.codigoProveedor = TelefonoProveedor.codigoProveedor
+inner join EmailProveedor on Proveedores.codigoProveedor = EmailProveedor.codigoProveedor;
+
+select * from vw_Proveedores;
+
