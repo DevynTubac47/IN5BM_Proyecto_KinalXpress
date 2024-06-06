@@ -783,7 +783,6 @@ begin
 end $$
 delimiter ;
 
-
 delimiter $$
 create trigger tr_PrecioProductos_After_Insert
 after insert on DetalleCompra
