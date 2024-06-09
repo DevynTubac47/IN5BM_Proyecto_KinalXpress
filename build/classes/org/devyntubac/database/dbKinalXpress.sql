@@ -11,6 +11,8 @@ use dbKinalXpress;
 
 set global time_zone = '-6:00';
 
+alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'Tottus47d';
+
 create table Usuario(
 	idUsuario int not null auto_increment,
 	email varchar(100),
@@ -157,6 +159,84 @@ create table DetalleFactura(
 	constraint FK_DetalleFactura foreign key DetalleFactura(codigoProducto)
 		references Productos(codigoProducto) on delete cascade
 );
+
+create table Inventario(
+    codigoProducto varchar(15),
+    cantidad int,
+    numeroDocumento int,
+    primary key PK_Inventario(codigoProducto),
+    constraint FK_Inventario_Producto foreign key Inventario(codigoProducto)
+		references Productos(codigoProducto) on delete cascade,
+	constraint FK_Inventario_Compras foreign key Inventario(numeroDocumento)
+		references Compras(numeroDocumento) on delete cascade
+);
+
+insert into inventario(codigoProducto,cantidad,numeroDocumento)
+values ('PRD001',0,2,0);
+
+
+delimiter $$
+create trigger tr_ActualizarInventario_After_Insert
+after insert on DetalleCompra
+for each row
+begin
+	declare cantidadComprada int;
+    declare codigoProducto varchar(15);
+    
+    set cantidadComprada = new.cantidad;
+    set codigoProducto = new.codigoProducto;
+    
+    update Inventario
+		set cantidad = cantidad + cantidadComprada
+    where Inventario.codigoProducto = codigoProducto;
+end $$
+delimiter ;
+
+delimiter $$
+create trigger tr_AgregarProducto_Inventario_After_Insert
+after insert on DetalleCompra
+for each row
+begin
+    declare productoExistente int;
+
+    select count(*) into productoExistente
+    from Inventario
+    where codigoProducto = new.codigoProducto;
+
+    if productoExistente = 0 then
+        insert into Inventario(codigoProducto, cantidad, numeroDocumento)
+        values (new.codigoProducto, new.cantidad, new.numeroDocumento);
+    end if;
+end $$
+delimiter ;
+
+delimiter $$
+create function fn_totalInventario()
+returns decimal(10,2)
+reads sql data
+begin
+	declare total decimal(10,2);
+    select sum(totalDocumento) into total
+    from Compras
+    where numeroDocumento in (select numeroDocumento from Inventario);
+    
+    return total;
+end $$
+delimiter ;
+
+select fn_totalInventario();
+
+create view vw_Inventario as
+select Productos.codigoProducto, Productos.descripcionProducto, inventario.cantidad, Productos.precioUnitario,Productos.existencia,Proveedores.razonSocial,TipoProducto.descripcion,Compras.totalDocumento
+from Inventario
+inner join Productos on Inventario.codigoProducto = Productos.codigoProducto
+inner join Proveedores on Proveedores.codigoProveedor = Productos.codigoProveedor
+inner join TipoProducto on TipoProducto.codigoTipoProducto = Productos.codigoTipoProducto
+inner join Compras on Inventario.numeroDocumento = Compras.numeroDocumento;
+
+select * from Inventario;
+select * from vw_inventario;
+
 
 -- --------------------------- Usuario ---------------------------------
 insert into Usuario(email,contrasenia,nombreU,apellidoU,telefono,nombreUsuario) 
@@ -853,3 +933,19 @@ begin
 	where Factura.numeroFactura = new.numeroFactura;
 end $$
 delimiter ;
+
+create view vw_Productos as
+select Productos.codigoProducto, Productos.precioUnitario, Productos.precioDocena, Productos.precioMayor, Productos.existencia, TipoProducto.Descripcion, Proveedores.nombresProveedor
+from Productos
+inner join TipoProducto on Productos.codigoTipoProducto = TipoProducto.codigoTipoProducto
+inner join Proveedores on Productos.codigoProveedor = Proveedores.codigoProveedor;
+
+select * from vw_Productos;
+
+create view vw_Proveedores as
+select Proveedores.codigoProveedor, Proveedores.NITProvedor, Proveedores.direccionProveedor, Proveedores.razonSocial, Proveedores.contactoPrincipal, TelefonoProveedor.numeroPrincipal, EmailProveedor.emailProveedor
+from Proveedores
+inner join TelefonoProveedor on Proveedores.codigoProveedor = TelefonoProveedor.codigoProveedor
+inner join EmailProveedor on Proveedores.codigoProveedor = EmailProveedor.codigoProveedor;
+
+select * from vw_Proveedores;

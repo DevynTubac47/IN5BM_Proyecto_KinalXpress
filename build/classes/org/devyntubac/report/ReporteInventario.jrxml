@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteInventario" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c625c0aa-b80c-4eb8-9673-c3e95a55091e">
+	<property name="ireport.zoom" value="1.0000000000000016"/>
+	<property name="ireport.x" value="128"/>
+	<property name="ireport.y" value="591"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from vw_inventario]]>
+	</queryString>
+	<field name="codigoProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcionProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioUnitario" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="existencia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="totalDocumento" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="802" height="555" forecolor="#F3EEEE" backcolor="#F3EEEE" uuid="19f476ba-787f-44f7-81a4-a702f89e0484"/>
+				<imageExpression><![CDATA["C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\images\\reporteInventario.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="39" y="97" width="722" height="53" forecolor="#F3EEEE" backcolor="#F3EEEE" uuid="cdd4bec2-611a-4976-bd2e-1f87f052a55f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="565" y="449" width="177" height="53" forecolor="#F3EEEE" backcolor="#F3EEEE" uuid="18779db7-818a-42df-bb82-fb4d6bf317d6"/>
+			</rectangle>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="571" y="64" width="128" height="20" forecolor="#006600" uuid="63ed20e6-115c-4fb9-8ae3-effb7f0e396a"/>
+				<textElement textAlignment="Right">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="53" y="0" width="74" height="20" forecolor="#006600" backcolor="#FF9900" uuid="76335a77-b1e9-427c-a7c2-70ac71d55288"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod. Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="127" y="0" width="100" height="20" forecolor="#006600" backcolor="#FF9900" uuid="f085369c-8c06-470d-a440-919bfddf3b99"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="227" y="0" width="55" height="20" forecolor="#006600" backcolor="#FF9900" uuid="81e9b342-9dc7-4f79-9737-a27a7aaf7d1a"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="282" y="0" width="83" height="20" forecolor="#006600" backcolor="#FF9900" uuid="e8bf3715-5181-423b-ab0b-b518ac0e629a"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio Unitario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="365" y="0" width="60" height="20" forecolor="#006600" backcolor="#FF9900" uuid="d961276d-16cc-479f-80d9-5361a12a8359"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Existencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="425" y="0" width="146" height="20" forecolor="#006600" backcolor="#FF9900" uuid="81541406-5aab-44c5-ab1d-7717913e8a28"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="571" y="0" width="100" height="20" forecolor="#006600" backcolor="#FF9900" uuid="e8abb9a6-41ad-41dc-ad8a-471cd3704628"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="671" y="0" width="71" height="20" forecolor="#006600" backcolor="#FF9900" uuid="ff748602-a771-4344-89b1-4c8871df5aab"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="53" y="0" width="74" height="20" uuid="37375b8d-a8da-4085-84c3-bf9b5acaf7aa"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{codigoProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="0" width="98" height="20" uuid="a1016c29-7be1-49a9-86af-31fd0b5749df"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{descripcionProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="0" width="55" height="20" uuid="7e9819b4-1ce4-4476-90d1-3a3ad0cdf2a6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="0" width="83" height="20" uuid="9794e274-6669-47c3-8983-e21ee8eda750"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{precioUnitario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="365" y="0" width="60" height="20" uuid="00aa0765-cbaa-492a-b4ed-570b1e4a0c4a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{existencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="0" width="146" height="20" uuid="308162f0-6e7f-456b-9c69-33b01160f167"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="571" y="0" width="100" height="20" uuid="29706a29-08be-410b-bec1-d7adc914a01d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="671" y="0" width="71" height="20" uuid="46bd1acf-63f8-445e-b23e-482b69b49a9b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{totalDocumento}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="53" y="20" width="689" height="1" forecolor="#FF9900" uuid="608577f6-e47f-47fc-ac26-1b5a41665045"/>
+			</line>
+			<line>
+				<reportElement x="365" y="0" width="1" height="20" forecolor="#FF9900" backcolor="#FF9900" uuid="9fa1f9e1-2151-4f9d-86d6-49785d991d87"/>
+			</line>
+			<line>
+				<reportElement x="424" y="0" width="1" height="20" forecolor="#FF9900" backcolor="#FF9900" uuid="940e2785-10ed-4629-8bc2-f82d9781481f"/>
+			</line>
+			<line>
+				<reportElement x="570" y="0" width="1" height="20" forecolor="#FF9900" backcolor="#FF9900" uuid="780bffe4-fa72-405d-ba19-80c6350191b3"/>
+			</line>
+			<line>
+				<reportElement x="670" y="0" width="1" height="20" forecolor="#FF9900" backcolor="#FF9900" uuid="01db5299-4f0a-4e1b-83c1-6e95a298eaa9"/>
+			</line>
+			<line>
+				<reportElement x="741" y="1" width="1" height="20" forecolor="#FF9900" backcolor="#FF9900" uuid="2b90411b-3ae7-4d36-98f4-90342e422c6c"/>
+			</line>
+			<line>
+				<reportElement x="281" y="0" width="1" height="20" forecolor="#FF9900" backcolor="#FF9900" uuid="da8619fd-d814-4b88-ad6e-d0025e84a017"/>
+			</line>
+			<line>
+				<reportElement x="226" y="0" width="1" height="20" forecolor="#FF9900" backcolor="#FF9900" uuid="1ec576ae-f7ca-4456-b252-98e9fbd9fc15"/>
+			</line>
+			<line>
+				<reportElement x="127" y="0" width="1" height="20" forecolor="#FF9900" backcolor="#FF9900" uuid="a3efc122-177b-4328-b7ce-c28dc491f6fd"/>
+			</line>
+			<line>
+				<reportElement x="53" y="0" width="1" height="20" forecolor="#FF9900" backcolor="#FF9900" uuid="9ee2c4e6-3e04-48c2-a7af-2c4559cd2117"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
