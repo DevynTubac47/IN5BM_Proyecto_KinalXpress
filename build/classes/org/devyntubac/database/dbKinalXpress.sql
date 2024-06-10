@@ -108,14 +108,13 @@ create table Productos(
     precioUnitario decimal(10,2) default 0.0,
     precioDocena decimal(10,2) default 0.0,
     precioMayor decimal(10,2) default 0.0,
-    imagenProducto varchar(3),
     existencia int(11),
     codigoTipoProducto int,
     codigoProveedor int,
-    primary key PK_Productos(codigoProducto),
-    constraint FK_Productos_TipoProducto foreign key Productos(codigoTipoProducto)
+    primary key PK_Producto(codigoProducto),
+    constraint FK_Producto_TipoProducto foreign key Productos(codigoTipoProducto)
 		references TipoProducto (codigoTipoProducto) on delete cascade,
-	constraint FK_Productos_Proveedor foreign key Productos(codigoProveedor)
+	constraint FK_Producto_Proveedor foreign key Productos(codigoProveedor)
 		references Proveedores(codigoProveedor) on delete cascade
 );
 
@@ -171,10 +170,6 @@ create table Inventario(
 		references Compras(numeroDocumento) on delete cascade
 );
 
-insert into inventario(codigoProducto,cantidad,numeroDocumento)
-values ('PRD001',0,2,0);
-
-
 delimiter $$
 create trigger tr_ActualizarInventario_After_Insert
 after insert on DetalleCompra
@@ -224,7 +219,7 @@ begin
 end $$
 delimiter ;
 
-select fn_totalInventario();
+select fn_totalInventario() as resultado;
 
 create view vw_Inventario as
 select Productos.codigoProducto, Productos.descripcionProducto, inventario.cantidad, Productos.precioUnitario,Productos.existencia,Proveedores.razonSocial,TipoProducto.descripcion,Compras.totalDocumento
@@ -662,14 +657,14 @@ call sp_eliminarTelefonoProveedor(1);
 -- --------------------------- Productos --------------------------- 
 
 delimiter $$
-create procedure sp_agregarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(3), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
+create procedure sp_agregarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
 begin
-	insert into Productos(codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor)
-    values (codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,imagenProducto,existencia,codigoTipoProducto,codigoProveedor);
+	insert into Productos(codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,existencia,codigoTipoProducto,codigoProveedor)
+    values (codigoProducto,descripcionProducto,precioUnitario,precioDocena,precioMayor,existencia,codigoTipoProducto,codigoProveedor);
 end $$
 delimiter ;
 
-call sp_agregarProductos('PE5DM','Coca Cola',0.00,0.00,0.00,'pn',11,1,1);
+call sp_agregarProductos('PE5DM','Coca Cola',0.00,0.00,0.00,11,1,1);
 
 delimiter $$
 create procedure sp_listarProductos()
@@ -688,7 +683,7 @@ end $$
 delimiter ;
 
 delimiter $$
-create procedure sp_actualizarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in imagenProducto varchar(3), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
+create procedure sp_actualizarProductos(in codigoProducto varchar(15),in descripcionProducto varchar(45), in precioUnitario decimal(10,2), in precioDocena decimal(10,2), in precioMayor decimal(10,2), in existencia int(11), in codigoTipoProducto int(11), in codigoProveedor int)
 begin
 	update productos
     set
@@ -696,7 +691,6 @@ begin
 		productos.precioUnitario = precioUnitario,
         productos.precioDocena = precioDocena,
         productos.precioMayor = precioMayor,
-        productos.imagenProducto = imagenProducto,
         productos.existencia = existencia,
         productos.codigoTipoProducto = codigoTipoProducto,
         productos.codigoProveedor = codigoProveedor
@@ -949,3 +943,13 @@ inner join TelefonoProveedor on Proveedores.codigoProveedor = TelefonoProveedor.
 inner join EmailProveedor on Proveedores.codigoProveedor = EmailProveedor.codigoProveedor;
 
 select * from vw_Proveedores;
+select * from productos;
+
+create view vw_vistaProductos as
+select Productos.codigoProducto,Productos.descripcionProducto, Productos.precioUnitario, Productos.existencia,TipoProducto.Descripcion
+from Productos
+inner join TipoProducto on Productos.codigoTipoProducto = TipoProducto.codigoTipoProducto;
+
+select * from vw_vistaProductos where vw_vistaProductos.descripcionProducto like 't%';
+
+select codigoProducto, Sum(cantidad) from DetalleCompra group by codigoProducto;
