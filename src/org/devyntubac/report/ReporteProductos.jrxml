@@ -2,10 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProductos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c2b08fe7-06f9-4a53-a7ee-f7ff3cc6238e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="111"/>
+	<property name="ireport.y" value="708"/>
 	<queryString>
-		<![CDATA[select * from vw_Productos
-]]>
+		<![CDATA[select * from vw_Productos]]>
 	</queryString>
 	<field name="codigoProducto" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -32,7 +31,7 @@
 		<band height="802" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="555" height="802" uuid="ad647150-2a97-4bcc-bc26-4ea05e56db60"/>
-				<imageExpression><![CDATA["C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\images\\imgProducto.png"]]></imageExpression>
+				<imageExpression><![CDATA["org\\devyntubac\\report\\imgProducto.png"]]></imageExpression>
 			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="418" y="236" width="100" height="20" uuid="382587bd-6675-4b1c-a8eb-3feae10cb0e6"/>

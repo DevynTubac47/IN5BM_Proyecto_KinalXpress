@@ -11,7 +11,7 @@ use dbKinalXpress;
 
 set global time_zone = '-6:00';
 
-alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'Tottus47d';
+alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'admin';
 
 create table Usuario(
 	idUsuario int not null auto_increment,

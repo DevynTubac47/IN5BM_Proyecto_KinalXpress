@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProveedor" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f595d679-3e2e-4f8b-aff9-c5ad00da4c59">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="147"/>
+	<property name="ireport.y" value="938"/>
 	<queryString>
 		<![CDATA[select * from vw_Proveedores]]>
 	</queryString>
@@ -29,10 +29,6 @@
 	</field>
 	<background>
 		<band height="802" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="555" height="802" uuid="3f103c14-83fa-4bb2-815b-68c1a9165837"/>
-				<imageExpression><![CDATA["C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\images\\imgProveedor.png"]]></imageExpression>
-			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="417" y="233" width="100" height="20" uuid="e9662028-157e-46b6-a095-c5a77abf8528"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
@@ -41,6 +37,10 @@
 				<reportElement x="417" y="220" width="100" height="13" uuid="f6de3d32-b7d3-4d5d-ae8b-cf00844efebe"/>
 				<textFieldExpression><![CDATA["KXS"+$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="0" y="0" width="555" height="802" uuid="bc2ed86a-7757-48ee-83c0-82c7799fa74e"/>
+				<imageExpression><![CDATA["org\\devyntubac\\report\\imgProveedor.png"]]></imageExpression>
+			</image>
 		</band>
 	</background>
 	<title>
