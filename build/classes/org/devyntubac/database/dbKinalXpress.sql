@@ -929,7 +929,7 @@ end $$
 delimiter ;
 
 create view vw_Productos as
-select Productos.codigoProducto, Productos.precioUnitario, Productos.precioDocena, Productos.precioMayor, Productos.existencia, TipoProducto.Descripcion, Proveedores.nombresProveedor
+select Productos.codigoProducto, Productos.precioUnitario, Productos.precioDocena, Productos.precioMayor, Productos.existencia, TipoProducto.Descripcion, Proveedores.razonSocial
 from Productos
 inner join TipoProducto on Productos.codigoTipoProducto = TipoProducto.codigoTipoProducto
 inner join Proveedores on Productos.codigoProveedor = Proveedores.codigoProveedor;
@@ -952,4 +952,6 @@ inner join TipoProducto on Productos.codigoTipoProducto = TipoProducto.codigoTip
 
 select * from vw_vistaProductos where vw_vistaProductos.descripcionProducto like 't%';
 
-select codigoProducto, Sum(cantidad) from DetalleCompra group by codigoProducto;
+select codigoProducto, sum(cantidad) as totalCompra from DetalleCompra group by codigoProducto;
+
+select fechaDocumento, sum(totalDocumento) as totalCompra from Compras group by fechaDocumento;
