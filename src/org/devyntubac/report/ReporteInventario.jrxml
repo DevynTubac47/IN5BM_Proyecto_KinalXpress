@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteInventario" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c625c0aa-b80c-4eb8-9673-c3e95a55091e">
 	<property name="ireport.zoom" value="1.0000000000000016"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="246"/>
+	<property name="ireport.x" value="146"/>
+	<property name="ireport.y" value="645"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\report\\"]]></defaultValueExpression>
 	</parameter>
@@ -36,8 +36,8 @@
 	<background>
 		<band height="555" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="802" height="555" uuid="5e2dbbd0-b2a0-4332-b6f5-e4495d41a6d4"/>
-				<imageExpression><![CDATA["org\\devyntubac\\report\\reporteInventario.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="802" height="555" uuid="aa3d13cf-cb70-4795-b86b-2109399c5de4"/>
+				<imageExpression><![CDATA["C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\report\\reporteInventario.png"]]></imageExpression>
 			</image>
 			<rectangle>
 				<reportElement x="39" y="97" width="722" height="53" forecolor="#F3EEEE" backcolor="#F3EEEE" uuid="cdd4bec2-611a-4976-bd2e-1f87f052a55f"/>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteClientes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c8bd0937-55d3-4896-afb3-f88922e1dbf3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="221"/>
+	<queryString>
+		<![CDATA[select * from clientes]]>
+	</queryString>
+	<field name="clienteID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombresCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidosCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NITClientes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefonoCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="correoCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="802" uuid="2369341a-60bf-40c7-9e31-16cfb1a83de4"/>
+				<imageExpression><![CDATA["C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\report\\imgCliente.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="420" y="233" width="100" height="20" uuid="4a1d3c53-9e59-4a73-9011-95f8797a39ae"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="220" width="100" height="13" uuid="df40eb3d-1355-4f10-9dc9-a4d62a1968c0"/>
+				<textFieldExpression><![CDATA["KXS"+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="192" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="51" y="29" width="29" height="20" forecolor="#006600" uuid="5d1f3643-4f4f-4c84-a762-4548714f3030"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="29" width="81" height="20" forecolor="#006600" uuid="32480026-f4df-4294-8283-529cb21f112c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="29" width="100" height="20" forecolor="#006600" uuid="d7512b48-be51-4a1a-948e-14b501c32e69"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="29" width="81" height="20" forecolor="#006600" uuid="fa3e976c-a683-4670-a437-e1681330d62c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="29" width="86" height="20" forecolor="#006600" uuid="b8d901ed-e9fd-42cc-9608-020fc9e2ac20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="328" y="29" width="83" height="20" forecolor="#006600" uuid="749ca188-0d4f-4196-a257-9c1ff3eb9b73"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="161" y="10" width="81" height="20" uuid="c6c13ab1-6a77-430b-b71a-7fae134469e3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{apellidosCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="10" width="83" height="20" uuid="6334da0f-9a30-44fa-a9c0-d80c5194a1cf"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{direccionCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="10" width="86" height="20" uuid="7b756211-89a2-4ac4-a01e-aacb2ecf6c65"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NITClientes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="10" width="29" height="20" uuid="265d7918-3981-4150-aa44-d0ed161eda18"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{clienteID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="10" width="81" height="20" uuid="93586218-e5fc-4a0c-9f0a-bbe03bf9034f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombresCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="10" width="90" height="20" uuid="88a93d1e-ee43-4871-b765-2039335453be"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{correoCliente}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="51" y="33" width="460" height="1" forecolor="#FF9900" uuid="988a3f4b-802b-4961-a133-6e367c15b34c"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

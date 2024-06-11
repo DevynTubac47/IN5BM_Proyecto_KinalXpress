@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteFactura" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="54f66b99-f922-4720-8e37-794bddd7ab1c">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="741"/>
+	<property name="ireport.y" value="840"/>
 	<parameter name="numeroFactura" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -88,8 +88,8 @@
 	<background>
 		<band height="752">
 			<image>
-				<reportElement x="0" y="0" width="572" height="752" uuid="e150dca9-7e2b-455f-8cd1-e232d94165b6"/>
-				<imageExpression><![CDATA["org\\devyntubac\\report\\imgFactura.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="572" height="752" uuid="9171f967-01fd-41bd-89c5-877356c0d037"/>
+				<imageExpression><![CDATA["C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\report\\imgFactura.png"]]></imageExpression>
 			</image>
 		</band>
 	</background>
