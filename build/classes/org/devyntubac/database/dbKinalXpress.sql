@@ -955,3 +955,15 @@ select * from vw_vistaProductos where vw_vistaProductos.descripcionProducto like
 select codigoProducto, sum(cantidad) as totalCompra from DetalleCompra group by codigoProducto;
 
 select fechaDocumento, sum(totalDocumento) as totalCompra from Compras group by fechaDocumento;
+
+create view vw_listaProductos as
+select Productos.codigoProducto, Productos.descripcionProducto, Productos.precioUnitario
+from Productos;
+
+select * from vw_listaProductos;
+
+select * from DetalleFactura
+	inner join Factura on DetalleFactura.numeroFactura = Factura.numeroFactura
+    inner join Clientes on Factura.clienteID = Clientes.clienteID
+    inner join Productos on DetalleFactura.codigoProducto = Productos.codigoProducto
+    where Factura.numeroFactura = 1;

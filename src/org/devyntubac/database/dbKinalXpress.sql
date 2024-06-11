@@ -11,7 +11,7 @@ use dbKinalXpress;
 
 set global time_zone = '-6:00';
 
-alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'Tottus47d';
+alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'admin';
 
 create table Usuario(
 	idUsuario int not null auto_increment,
@@ -961,3 +961,9 @@ select Productos.codigoProducto, Productos.descripcionProducto, Productos.precio
 from Productos;
 
 select * from vw_listaProductos;
+
+select * from DetalleFactura
+	inner join Factura on DetalleFactura.numeroFactura = Factura.numeroFactura
+    inner join Clientes on Factura.clienteID = Clientes.clienteID
+    inner join Productos on DetalleFactura.codigoProducto = Productos.codigoProducto
+    where Factura.numeroFactura = 1;

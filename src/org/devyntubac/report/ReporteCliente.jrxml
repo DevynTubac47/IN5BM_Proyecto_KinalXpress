@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9aaba59a-ed13-43a4-be3b-edf1ef7a510a">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="195"/>
+	<property name="ireport.y" value="469"/>
 	<queryString>
 		<![CDATA[select * from clientes]]>
 	</queryString>
@@ -30,8 +30,8 @@
 	<background>
 		<band height="802" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="555" height="802" uuid="df0c82ed-1ac4-4df7-a0a2-9e8853711431"/>
-				<imageExpression><![CDATA["C:\\Users\\devyn\\OneDrive\\Desktop\\Repositorio_Casa\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\images\\imgCliente.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="555" height="802" uuid="502dc4ac-de0f-4c9e-99d0-f2a7455fb559"/>
+				<imageExpression><![CDATA["C:\\Users\\informatica\\Desktop\\KinalXpress_IN5MB_2020247\\IN5BM_Proyecto_KinalXpress\\src\\org\\devyntubac\\images\\imgCliente.png"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="418" y="222" width="100" height="24" uuid="edf6c6f3-0d7c-4a92-8ed5-66c3191c4f1c"/>
