@@ -251,8 +251,13 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarCargoEmpleado(1,'Vendedor','Vender');
-call sp_agregarCargoEmpleado(2,'Cajero','Cobrar');
+call sp_agregarCargoEmpleado(1,'Gerente de Tienda','Responsable de la gestión operativa');
+call sp_agregarCargoEmpleado(2,'Cajero','Registra las Compras');
+call sp_agregarCargoEmpleado(3,'Reponedor de Almacén','Responsable de mantener los estantes');
+call sp_agregarCargoEmpleado(4,'Encargado de Frutas y Verduras','Encargado de la selección y exhibición');
+call sp_agregarCargoEmpleado(5,'Jefe de Seguridad','Responsable de la seguridad de la tienda');
+call sp_agregarCargoEmpleado(6,'Atención al Cliente','Encargado de brindar asistencia');
+
 
 delimiter $$
 create procedure sp_listarCargoEmpleado()
@@ -300,8 +305,12 @@ delimiter ;
  end $$
  delimiter ;
  
- call sp_agregarClientes(1,'Devyn Orlando','Tubac Gomez','1234567890','12 Calle y 6 Avenida','12345678','dgomez@gmail.com');
- call sp_agregarClientes(2,'Jose David','Gutierrez Lopez','9823751474','28 Calle y 7 Avenida','98541864','jdlopez1@gmail.com');
+call sp_agregarClientes(1,'Devyn Orlando','Tubac Gomez','1234567890','12 Calle y 6 Avenida','12345678','dgomez@gmail.com');
+call sp_agregarClientes(2,'Jose David','Gutierrez Lopez','9823751474','28 Calle y 7 Avenida','98541864','jdlopez1@gmail.com');
+call sp_agregarClientes(3,'Carmen Maria','Morales Perez','12345678','5 Calle y 10 Av, zona 10 CG','98541864','maria.lopez@example.com');
+call sp_agregarClientes(4,'Christopher Miguel','Hermandez Cap','123456789','3a Avenida, Zona 4, Quetzaltenango','55555678','juan.perez@example.com');
+call sp_agregarClientes(5,'Carlos Moises','Rodirguez Carrillo','543216789','7a Avenida, Zona 15, Mixco','66443322','carlos.rodriguez@example.com');
+call sp_agregarClientes(6,'Ana Lucia','Campos Herrera','89076243','10a Calle, Zona 1, Escuintla','09812345','anaCH@example.com');
  
 delimiter $$
  create procedure sp_listarClientes()
@@ -354,7 +363,13 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarCompras(1,'2020-09-09','Visa',10.00);
+call sp_agregarCompras(1,'2020-09-09','Visa',0.0);
+call sp_agregarCompras(2,'2024-06-12','Pan integral, 500 gramos',0.0);
+call sp_agregarCompras(3,'2024-06-16','Arroz blanco, 1 kilogramo',0.0);
+call sp_agregarCompras(4,'2024-06-16','Manzanas, 1 kilogramo',0.0);
+call sp_agregarCompras(5,'2024-06-19','Pollo fresco, 500 gramos',0.0);
+call sp_agregarCompras(6,'2024-06-22','Yogur natural, pack de 4 unidades',0.0);
+call sp_agregarCompras(7,'2024-06-22','Jugo Tradicional, pack de 5 unidades',0.0);
 
 delimiter $$
 create procedure sp_listarCompras()
@@ -385,8 +400,6 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarCompras(2,'2020-05-05','Hi',23.00);
-
 delimiter $$
 create procedure sp_eliminarCompras(in numeroDocumento int)
 begin
@@ -405,6 +418,11 @@ end $$
 delimiter ;
 
 call sp_agregarProveedores(1,'1234567890','Devyn','Gomez','11 Calle y 5 Avenida','Suministros Comerciales del Sur S.A. de C.V.','1234567','www.ComercioSur');
+call sp_agregarProveedores(2,'789013321','Juan Carlos','Garcia Perez','25 Calle, Zona 6, Ciudad de Guatemala','Distribuidora del Valle S.A.','Alfonso Herrera','www.distribuidoradelvalle.com.gt');
+call sp_agregarProveedores(3,'6543210987','Maria Elena','Lopez Martinez','8 Avenida, Zona 4, Quetzaltenango','Suministros Industriales S.A.','María Elena López Martínez','www.suministrosindustriales.com.gt');
+call sp_agregarProveedores(4,'3210987654','Carlos Alberto','Rodriguez Gomez','12 Calle, Zona 1, Escuintla','Comercializadora Maya S.A.','Carlos Alberto','Carlos Alberto Rodríguez Gómez');
+call sp_agregarProveedores(5,'431726321','Laura Sofia','Gonzales Hernandez','30 Avenida, Zona 15, Mixco','Importadora Castillo S.A.','Laura Sofía González Hernández','www.importadoracastillo.com.gt');
+call sp_agregarProveedores(6,'678901','Pedro Jose','Perez Diaz','5a Calle, Zona 20, San Marcos','Exportaciones del Sur S.A.','Diego Morales','www.exportacionesdelsur.com.gt');
 
 delimiter $$
 create procedure sp_listarProveedores()
@@ -458,7 +476,13 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarTipoProducto(1,'Gaseosas');
+call sp_agregarTipoProducto(1,'Alimentos no perecederos');
+call sp_agregarTipoProducto(2,'Productos lácteos');
+call sp_agregarTipoProducto(3,'Artículos de limpieza');
+call sp_agregarTipoProducto(4,'Cuidado Personal');
+call sp_agregarTipoProducto(5,'Congelados');
+call sp_agregarTipoProducto(6,'Productos de Panadería');
+
 delimiter $$
 create procedure sp_listarTipoProducto()
 begin 
@@ -505,8 +529,12 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarEmpleados(1,'Pedro','Gomez','10.0','10 Calle y 10 Avenida','M',2);
-
+call sp_agregarEmpleados(1,'Josue Miguel','Velazquez Ochoa',6500.0,'10 Calle y 10 Avenida','Mañana',2);
+call sp_agregarEmpleados(2,'Juan Pablo', 'Gomez Perez', 5000.0, '11 Calle y 9 Avenida Ciudad de Guatemala', 'Mañana',1);
+call sp_agregarEmpleados(3,'Maria Elena', 'Hernandez Gonzalez', 6000, 'Zona 10, Guatemala', 'Tarde',4);
+call sp_agregarEmpleados(4,'Pedro Antonio', 'Lopez Rodriguez', 5500, 'Mixco, Guatemala', 'Noche',6);
+call sp_agregarEmpleados(5,'Ana Sofia', 'Martinez Ramirez', 5200, 'Villa Nueva, Guatemala', 'Mañana',3);
+call sp_agregarEmpleados(6,'Luis Alejandro', 'Rodriguez Garcia', 4800, 'Zona 4, Guatemala', 'Tarde',5);
 
 delimiter $$
 create procedure sp_listarEmpleados()
@@ -542,8 +570,6 @@ begin
 end $$
 delimiter ;
 
-call sp_actualizarEmpleados(1,'David','G',23.0,'29 calle','M',2);
-
 delimiter $$
 create procedure sp_eliminarEmpleados(in codigoEmpleado int)
 begin 
@@ -561,7 +587,13 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarEmailProveedor(1,'dtubac@kinal','Guatemala',1);
+call sp_agregarEmailProveedor(1,'info@meatmaster.com','Proveedor de carne fresca',2);
+call sp_agregarEmailProveedor(2,'sales@bestautoparts.com','Consultas y Pedidos',1);
+call sp_agregarEmailProveedor(3,'orders@dairydelight.com','Proveedor de productos lácteos',3);
+call sp_agregarEmailProveedor(4,'sales@snackmasterinc.com','Proveedor de bocadillos y alimentos envasados',6);
+call sp_agregarEmailProveedor(5,'info@beverageblast.com','Proveedor de bebidas',4);
+call sp_agregarEmailProveedor(6,'orders@frozenfoodsexpress.com','Proveedor de alimentos congelados',5);
+
 
 delimiter $$
 create procedure sp_listarEmailProveedor()
@@ -611,7 +643,12 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarTelefonoProveedor(2,'12345678','87654321','502',1);
+call sp_agregarTelefonoProveedor(1,'12345678','87654321','Oficinas Centrales',1);
+call sp_agregarTelefonoProveedor(2,'04341431','11111222','Horario de 5Am a 3pm',2);
+call sp_agregarTelefonoProveedor(3,'54435345','98766543','Ventas',3);
+call sp_agregarTelefonoProveedor(4,'65264363','65252657','Atencion al Cliente',4);
+call sp_agregarTelefonoProveedor(5,'87423763','12343245','Reclamos y consultas',5);
+call sp_agregarTelefonoProveedor(6,'54542252','65442432','Horario de 8am a 2pm',6);
 
 delimiter $$
 create procedure sp_listarTelefonoProveedor()
@@ -652,8 +689,6 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarTelefonoProveedor(1);
-
 -- --------------------------- Productos --------------------------- 
 
 delimiter $$
@@ -664,7 +699,12 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarProductos('PE5DM','Coca Cola',0.00,0.00,0.00,11,1,1);
+call sp_agregarProductos('PD001','Leche entera Lala 1L',0.00,0.00,0.00,50,1,6);
+call sp_agregarProductos('PD002','Arroz blanco grano largo 1kg',0.00,0.00,0.00,134,5,2);
+call sp_agregarProductos('PD003','Pasta de tomate Del Monte 400g',0.00,0.00,0.00,150,3,4);
+call sp_agregarProductos('PD004','Aceite de oliva virgen extra Borges 500ml',0.00,0.00,0.00,200,3,4);
+call sp_agregarProductos('PD005','Huevos orgánicos Huerta Real, docena',0.00,0.00,0.00,75,5,2);
+call sp_agregarProductos('PD006','Atún en lata Calvo al natural 200g',0.00,0.00,0.00,90,1,6);
 
 delimiter $$
 create procedure sp_listarProductos()
@@ -706,8 +746,6 @@ begin
 end $$
 delimiter ;
 
-call sp_eliminarProductos(1);
-
 -- --------------------------- Detalle Compra --------------------------- 
 
 delimiter $$
@@ -718,7 +756,12 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarDetalleCompra(2,2.0,5,'PE5DM',1);
+call sp_agregarDetalleCompra(1,14.0,3,'PD001',3);
+call sp_agregarDetalleCompra(2,24.0,7,'PD002',5);
+call sp_agregarDetalleCompra(3,3.5,10,'PD003',2);
+call sp_agregarDetalleCompra(4,8.66,15,'PD004',4);
+call sp_agregarDetalleCompra(5,10.0,2,'PD005',6);
+call sp_agregarDetalleCompra(6,20.0,54,'PD006',1);
 
 delimiter $$
 create procedure sp_listarDetalleCompra()
@@ -767,7 +810,12 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarFactura(1,'Positivo',34.0,'2022-06-06',2,1);
+call sp_agregarFactura(1,'Pagada',0.0,'2024-05-10',6,1);
+call sp_agregarFactura(2,'Pagada',0.0,'2024-05-10',2,5);
+call sp_agregarFactura(3,'Pagada',0.0,'2024-06-02',4,3);
+call sp_agregarFactura(4,'Pagada',0.0,'2024-04-15',4,3);
+call sp_agregarFactura(5,'Pagada',0.0,'2024-06-07',2,5);
+call sp_agregarFactura(6,'Pagada',0.0,'2024-05-02',6,1);
 
 delimiter $$
 create procedure sp_listarFactura()
@@ -817,8 +865,14 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarDetalleFactura(1,0.00,3,1,'PE5DM');
-call sp_agregarDetalleFactura(2,2.00,3,1,'PE5DM');
+call sp_agregarDetalleFactura(1,0.00,6,3,'PD004');
+call sp_agregarDetalleFactura(2,0.00,4,5,'PD002');
+call sp_agregarDetalleFactura(3,0.00,1,2,'PD005');
+call sp_agregarDetalleFactura(4,0.00,2,4,'PD002');
+call sp_agregarDetalleFactura(5,0.00,5,1,'PD003');
+call sp_agregarDetalleFactura(6,0.00,3,6,'PD006');
+call sp_agregarDetalleFactura(7,0.00,3,6,'PD001');
+call sp_agregarDetalleFactura(8,0.00,5,6,'PD004');
 
 delimiter $$
 create procedure sp_listarDetallesFacturas()
@@ -967,3 +1021,4 @@ select * from DetalleFactura
     inner join Clientes on Factura.clienteID = Clientes.clienteID
     inner join Productos on DetalleFactura.codigoProducto = Productos.codigoProducto
     where Factura.numeroFactura = 1;
+    
