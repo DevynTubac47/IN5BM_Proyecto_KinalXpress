@@ -11,7 +11,7 @@ use dbKinalXpress;
 
 set global time_zone = '-6:00';
 
-alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'admin';
+alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'Tottus47d';
 
 create table Usuario(
 	idUsuario int not null auto_increment,
@@ -363,13 +363,21 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarCompras(1,'2020-09-09','Visa',0.0);
-call sp_agregarCompras(2,'2024-06-12','Pan integral, 500 gramos',0.0);
-call sp_agregarCompras(3,'2024-06-16','Arroz blanco, 1 kilogramo',0.0);
-call sp_agregarCompras(4,'2024-06-16','Manzanas, 1 kilogramo',0.0);
-call sp_agregarCompras(5,'2024-06-19','Pollo fresco, 500 gramos',0.0);
-call sp_agregarCompras(6,'2024-06-22','Yogur natural, pack de 4 unidades',0.0);
-call sp_agregarCompras(7,'2024-06-22','Jugo Tradicional, pack de 5 unidades',0.0);
+call sp_agregarCompras(1,'2024-09-09','Leche Kellogg',0.0);
+call sp_agregarCompras(2,'2024-06-12','Yogur Danone',0.0);
+call sp_agregarCompras(3,'2024-06-16','Jabón Dove',0.0);
+call sp_agregarCompras(4,'2024-06-16','Crema Nivea',0.0);
+call sp_agregarCompras(5,'2024-06-19','Pizza congelada California',0.0);
+call sp_agregarCompras(6,'2024-06-22','Pan integral Bimbo',0.0);
+call sp_agregarCompras(7,'2024-06-22','Pollo fresco Tyson',0.0);
+call sp_agregarCompras(8,'2024-06-22','Manzanas Granny Smith',0.0);
+call sp_agregarCompras(9,'2024-06-22','Agua Purificada Dasani ',0.0);
+call sp_agregarCompras(10,'2024-06-25','Papas fritas Lays',0.0);
+call sp_agregarCompras(11,'2024-06-28','Alimento para perros Royal Canin',0.0);
+call sp_agregarCompras(12,'2024-06-28','Avena Quaker Oats',0.0);
+call sp_agregarCompras(13,'2024-06-30','Lechugas frescas',0.0);
+call sp_agregarCompras(14,'2024-06-29','Shampoo Head & Shoulders',0.0);
+call sp_agregarCompras(15,'2024-06-01','Jugo de naranja Tropicana',0.0);
 
 delimiter $$
 create procedure sp_listarCompras()
@@ -476,12 +484,18 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarTipoProducto(1,'Alimentos no perecederos');
+call sp_agregarTipoProducto(1,'Cereales');
 call sp_agregarTipoProducto(2,'Productos lácteos');
 call sp_agregarTipoProducto(3,'Artículos de limpieza');
 call sp_agregarTipoProducto(4,'Cuidado Personal');
 call sp_agregarTipoProducto(5,'Congelados');
 call sp_agregarTipoProducto(6,'Productos de Panadería');
+call sp_agregarTipoProducto(7,'Frutas y Verduras');
+call sp_agregarTipoProducto(8,'Carnes');
+call sp_agregarTipoProducto(9,'Bebidas');
+call sp_agregarTipoProducto(10,'Snaks');
+call sp_agregarTipoProducto(11,'Mascotas');
+call sp_agregarTipoProducto(12,'Enlatados');
 
 delimiter $$
 create procedure sp_listarTipoProducto()
@@ -518,6 +532,7 @@ begin
 	delete from TipoProducto where TipoProducto.codigoTipoProducto = codigoTipoProducto;
 end $$
 delimiter ;
+
 
 -- ---------------------------  Empleados --------------------------- 
 
@@ -699,12 +714,24 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarProductos('PD001','Leche entera Lala 1L',0.00,0.00,0.00,50,1,6);
-call sp_agregarProductos('PD002','Arroz blanco grano largo 1kg',0.00,0.00,0.00,134,5,2);
-call sp_agregarProductos('PD003','Pasta de tomate Del Monte 400g',0.00,0.00,0.00,150,3,4);
-call sp_agregarProductos('PD004','Aceite de oliva virgen extra Borges 500ml',0.00,0.00,0.00,200,3,4);
-call sp_agregarProductos('PD005','Huevos orgánicos Huerta Real, docena',0.00,0.00,0.00,75,5,2);
-call sp_agregarProductos('PD006','Atún en lata Calvo al natural 200g',0.00,0.00,0.00,90,1,6);
+call sp_agregarProductos('PD001','Leche entera Lala 1L',0.00,0.00,0.00,50,2,6);
+call sp_agregarProductos('PD002','Arroz blanco grano largo 1kg',0.00,0.00,0.00,134,1,2);
+call sp_agregarProductos('PD003','Atún en lata Calvo al natural 200g',0.00,0.00,0.00,90,12,3);
+call sp_agregarProductos('PD004','Kelloggs',0.00,0.00,0.00,90,1,4);
+call sp_agregarProductos('PD005','Yogur Danone ',0.00,0.00,0.00,50,1,6);
+call sp_agregarProductos('PD006','Jabón Dove',0.00,0.00,0.00,100,3,5);
+call sp_agregarProductos('PD007','Crema Nivea',0.00,0.00,0.00,50,4,1);
+call sp_agregarProductos('PD008','Pizza congelada California',0.00,0.00,0.00,24,5,2);
+call sp_agregarProductos('PD009','Pan integral Bimbo',0.00,0.00,0.00,63,6,1);
+call sp_agregarProductos('PD0010','Manzanas Granny Smith',0.00,0.00,0.00,200,7,4);
+call sp_agregarProductos('PD0011','Pollo fresco Tyson',0.00,0.00,0.00,14,8,5);
+call sp_agregarProductos('PD0012','Agua Purificada Dasani',0.00,0.00,0.00,43,9,6);
+call sp_agregarProductos('PD0013','Papas fritas Lays',0.00,0.00,0.00,50,10,3);
+call sp_agregarProductos('PD0014','Alimento para perros Royal Canin',0.00,0.00,0.00,32,11,2);
+call sp_agregarProductos('PD0015','Avena Quaker Oats',0.00,0.00,0.00,78,1,5);
+call sp_agregarProductos('PD0016','Lechugas frescas',0.00,0.00,0.00,80,7,3);
+call sp_agregarProductos('PD0017','Shampoo Head & Shoulders',0.00,0.00,0.00,52,4,4);
+call sp_agregarProductos('PD0018','Jugo de naranja Tropicana',0.00,0.00,0.00,22,9,2);
 
 delimiter $$
 create procedure sp_listarProductos()
@@ -762,6 +789,16 @@ call sp_agregarDetalleCompra(3,3.5,10,'PD003',2);
 call sp_agregarDetalleCompra(4,8.66,15,'PD004',4);
 call sp_agregarDetalleCompra(5,10.0,2,'PD005',6);
 call sp_agregarDetalleCompra(6,20.0,54,'PD006',1);
+call sp_agregarDetalleCompra(7,22.0,3,'PD007',7);
+call sp_agregarDetalleCompra(8,13.0,5,'PD008',8);
+call sp_agregarDetalleCompra(9,54.5,13,'PD009',8);
+call sp_agregarDetalleCompra(10,16.0,4,'PD0010',9);
+call sp_agregarDetalleCompra(11,22.0,8,'PD0011',10);
+call sp_agregarDetalleCompra(12,26.0,7,'PD0012',11);
+call sp_agregarDetalleCompra(13,12.0,6,'PD0013',12);
+call sp_agregarDetalleCompra(14,25.0,5,'PD0014',13);
+call sp_agregarDetalleCompra(15,43.0,10,'PD0015',14);
+
 
 delimiter $$
 create procedure sp_listarDetalleCompra()
@@ -868,9 +905,11 @@ delimiter ;
 call sp_agregarDetalleFactura(1,0.00,6,3,'PD004');
 call sp_agregarDetalleFactura(2,0.00,4,5,'PD002');
 call sp_agregarDetalleFactura(3,0.00,1,2,'PD005');
-call sp_agregarDetalleFactura(4,0.00,2,4,'PD001');
+call sp_agregarDetalleFactura(4,0.00,2,4,'PD002');
 call sp_agregarDetalleFactura(5,0.00,5,1,'PD003');
 call sp_agregarDetalleFactura(6,0.00,3,6,'PD006');
+call sp_agregarDetalleFactura(7,0.00,3,6,'PD001');
+call sp_agregarDetalleFactura(8,0.00,5,6,'PD004');
 
 delimiter $$
 create procedure sp_listarDetallesFacturas()
