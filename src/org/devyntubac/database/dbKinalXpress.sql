@@ -1138,3 +1138,10 @@ begin
 
 end $$
 delimiter ;
+
+create view vw_ofertaProductos as
+select Productos.codigoProducto, Productos.descripcionProducto, Productos.precioUnitario, ofertaProductos.precioDescuento
+from ofertaProductos
+inner join Productos on ofertaProductos.codigoProducto = Productos.codigoProducto;
+
+select * from vw_ofertaProductos;
