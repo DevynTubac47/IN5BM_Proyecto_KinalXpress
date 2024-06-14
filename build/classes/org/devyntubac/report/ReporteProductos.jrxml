@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProductos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c2b08fe7-06f9-4a53-a7ee-f7ff3cc6238e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="931"/>
+	<property name="ireport.y" value="291"/>
 	<queryString>
 		<![CDATA[select * from vw_Productos]]>
 	</queryString>
@@ -50,7 +50,7 @@
 		<band height="173" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="69" splitType="Stretch">
+		<band height="70" splitType="Stretch">
 			<staticText>
 				<reportElement x="53" y="49" width="35" height="20" forecolor="#006600" uuid="61f9d6a6-6840-4365-a31c-36ebc26ff24b"/>
 				<textElement textAlignment="Center">
@@ -103,7 +103,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="31" splitType="Stretch">
+		<band height="33" splitType="Stretch">
 			<textField>
 				<reportElement x="46" y="10" width="35" height="20" uuid="7d26a754-bc66-4ce9-8745-74b08891a7ea"/>
 				<textElement textAlignment="Center">
@@ -175,7 +175,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band splitType="Stretch"/>
+		<band height="184" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band splitType="Stretch"/>

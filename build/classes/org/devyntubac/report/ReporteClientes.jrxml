@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteClientes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c8bd0937-55d3-4896-afb3-f88922e1dbf3">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="221"/>
+	<property name="ireport.y" value="238"/>
 	<queryString>
 		<![CDATA[select * from clientes]]>
 	</queryString>
@@ -103,12 +103,12 @@
 				<textFieldExpression><![CDATA[$F{apellidosCliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="328" y="10" width="83" height="20" uuid="6334da0f-9a30-44fa-a9c0-d80c5194a1cf"/>
+				<reportElement x="318" y="10" width="93" height="20" uuid="6334da0f-9a30-44fa-a9c0-d80c5194a1cf"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{direccionCliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="242" y="10" width="86" height="20" uuid="7b756211-89a2-4ac4-a01e-aacb2ecf6c65"/>
+				<reportElement x="242" y="10" width="76" height="20" uuid="7b756211-89a2-4ac4-a01e-aacb2ecf6c65"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{NITClientes}]]></textFieldExpression>
 			</textField>
@@ -123,8 +123,10 @@
 				<textFieldExpression><![CDATA[$F{nombresCliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="421" y="10" width="90" height="20" uuid="88a93d1e-ee43-4871-b765-2039335453be"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="411" y="10" width="109" height="20" uuid="88a93d1e-ee43-4871-b765-2039335453be"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{correoCliente}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -133,7 +135,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band splitType="Stretch"/>
+		<band height="168" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band splitType="Stretch"/>

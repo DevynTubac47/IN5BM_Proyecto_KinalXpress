@@ -311,7 +311,16 @@ call sp_agregarClientes(3,'Carmen Maria','Morales Perez','12345678','5 Calle y 1
 call sp_agregarClientes(4,'Christopher Miguel','Hermandez Cap','123456789','3a Avenida, Zona 4, Quetzaltenango','55555678','juan.perez@example.com');
 call sp_agregarClientes(5,'Carlos Moises','Rodirguez Carrillo','543216789','7a Avenida, Zona 15, Mixco','66443322','carlos.rodriguez@example.com');
 call sp_agregarClientes(6,'Ana Lucia','Campos Herrera','89076243','10a Calle, Zona 1, Escuintla','09812345','anaCH@example.com');
- 
+call sp_agregarClientes(7,'Diego Alfonso','Perez Bercian','12132344','5a Avenida, Zona 1, Ciudad de Guatemala','09871234','diego.gonzalez@example.com');
+call sp_agregarClientes(8,'Andrea Alejandra','Lopez Ortiz','15443434','10a Calle, Zona 4, Quetzaltenango','54543132','andrea.martinez@example.com');
+call sp_agregarClientes(9,'Pedro Josue','Garcia Galvez','0987654321','3a Calle, Zona 2, Mixco','00886655','pedro.ramirez@example.com');
+call sp_agregarClientes(10,'Laura Lisbet','Rodriguez Ordoñez','34567891','15a Avenida, Zona 9, Escuintla','11553467','laura0854H@gmail.com');
+call sp_agregarClientes(11,'José Pablo','Martinez Aceituno','9876543210','7a Calle, Zona 5, Chimaltenango','54542132','aceitunoJP@gmailcom');
+call sp_agregarClientes(12,'Ramiro Donovan','Morales Lopez','3450987621','12a Avenida, Zona 3, Huehuetenango','43242343','ramiromlopez@gmail.com');
+call sp_agregarClientes(13,'Nadia Lisbet','Natareno Cortez','6677889905','8a Calle, Zona 6, Cobán','99887766','naternoCortez@gmail,com');
+call sp_agregarClientes(14,'Oneisy','Funes Hernandez','443322113','20a Avenida, Zona 7, San Marcos','54531232','funesleit@gmail.com');
+call sp_agregarClientes(15,'Jose Pablo','Cipriano Aceytuno','545431314','9a Calle, Zona 8, Retalhuleu','43214321','joseaceytuno@gmail.com');
+
 delimiter $$
  create procedure sp_listarClientes()
  begin
@@ -425,12 +434,16 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarProveedores(1,'1234567890','Devyn','Gomez','11 Calle y 5 Avenida','Suministros Comerciales del Sur S.A. de C.V.','1234567','www.ComercioSur');
-call sp_agregarProveedores(2,'789013321','Juan Carlos','Garcia Perez','25 Calle, Zona 6, Ciudad de Guatemala','Distribuidora del Valle S.A.','Alfonso Herrera','www.distribuidoradelvalle.com.gt');
-call sp_agregarProveedores(3,'6543210987','Maria Elena','Lopez Martinez','8 Avenida, Zona 4, Quetzaltenango','Suministros Industriales S.A.','María Elena López Martínez','www.suministrosindustriales.com.gt');
+call sp_agregarProveedores(1,'1234567890','Devyn','Gomez','11 Calle y 5 Avenida','Lácteos del Sur','1234567','www.lacteossur.com.gt');
+call sp_agregarProveedores(2,'789013321','Juan Carlos','Garcia Perez','25 Calle, Zona 6, Ciudad de Guatemala','Productos de Limpieza y Cuidado S.A.','Alfonso Herrera',' www.cleanpro.com.gt');
+call sp_agregarProveedores(3,'6543210987','Maria Elena','Lopez Martinez','8 Avenida, Zona 4, Quetzaltenango','Alimentos Congelados del Norte','María Elena López Martínez','www.congeladosexpress.com.gt');
 call sp_agregarProveedores(4,'3210987654','Carlos Alberto','Rodriguez Gomez','12 Calle, Zona 1, Escuintla','Comercializadora Maya S.A.','Carlos Alberto','Carlos Alberto Rodríguez Gómez');
-call sp_agregarProveedores(5,'431726321','Laura Sofia','Gonzales Hernandez','30 Avenida, Zona 15, Mixco','Importadora Castillo S.A.','Laura Sofía González Hernández','www.importadoracastillo.com.gt');
-call sp_agregarProveedores(6,'678901','Pedro Jose','Perez Diaz','5a Calle, Zona 20, San Marcos','Exportaciones del Sur S.A.','Diego Morales','www.exportacionesdelsur.com.gt');
+call sp_agregarProveedores(5,'431726321','Laura Sofia','Gonzales Hernandez','30 Avenida, Zona 15, Mixco','Distribuidora de Carnes Frescas S.A.','Laura Sofía González Hernández','www.carnespremium.com.gt');
+call sp_agregarProveedores(6,'678901','Pedro Jose','Perez Diaz','5a Calle, Zona 20, San Marcos','Frutas del Valle','Diego Morales','www.frutasdelvalle.gt');
+call sp_agregarProveedores(7,'1234567890','Luis','Gomez','Calle Cosmética, Zona de Belleza',' Distribuidora de Productos de Cuidado Personal S.A.','Ana Rodriguez','www.bellezaycuidado.com.gt');
+call sp_agregarProveedores(8,'1234567890','Anahi','Puenta','11 Calle y 5 Avenida','Suministros Comerciales del Sur S.A. de C.V.','1234567','www.ComercioSur');
+call sp_agregarProveedores(9,'789013321','Dulce Maria','Gonzales','25 Calle, Zona 6, Ciudad de Guatemala','Mascotas Emi S.A.','Lucas Fuentes','www.dogemi.com.gt');
+call sp_agregarProveedores(10,'431726321','Samantha','Morales','30 Avenida, Zona 15, Mixco','Importadora Castillo S.A.','Yulissa Gutierrez','www.importadoracastillo.com.gt');
 
 delimiter $$
 create procedure sp_listarProveedores()
@@ -714,24 +727,26 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarProductos('PD001','Leche entera Lala 1L',0.00,0.00,0.00,50,2,6);
-call sp_agregarProductos('PD002','Arroz blanco grano largo 1kg',0.00,0.00,0.00,134,1,2);
-call sp_agregarProductos('PD003','Atún en lata Calvo al natural 200g',0.00,0.00,0.00,90,12,3);
+call sp_agregarProductos('PD001','Leche entera Lala 1L',0.00,0.00,0.00,50,2,1);
+call sp_agregarProductos('PD002','Arroz blanco grano largo 1kg',0.00,0.00,0.00,134,1,10);
+call sp_agregarProductos('PD003','Atún en lata Calvo al natural 200g',0.00,0.00,0.00,90,12,8);
 call sp_agregarProductos('PD004','Kelloggs',0.00,0.00,0.00,90,1,4);
-call sp_agregarProductos('PD005','Yogur Danone ',0.00,0.00,0.00,50,1,6);
-call sp_agregarProductos('PD006','Jabón Dove',0.00,0.00,0.00,100,3,5);
-call sp_agregarProductos('PD007','Crema Nivea',0.00,0.00,0.00,50,4,1);
-call sp_agregarProductos('PD008','Pizza congelada California',0.00,0.00,0.00,24,5,2);
-call sp_agregarProductos('PD009','Pan integral Bimbo',0.00,0.00,0.00,63,6,1);
-call sp_agregarProductos('PD0010','Manzanas Granny Smith',0.00,0.00,0.00,200,7,4);
-call sp_agregarProductos('PD0011','Pollo fresco Tyson',0.00,0.00,0.00,14,8,5);
-call sp_agregarProductos('PD0012','Agua Purificada Dasani',0.00,0.00,0.00,43,9,6);
-call sp_agregarProductos('PD0013','Papas fritas Lays',0.00,0.00,0.00,50,10,3);
-call sp_agregarProductos('PD0014','Alimento para perros Royal Canin',0.00,0.00,0.00,32,11,2);
-call sp_agregarProductos('PD0015','Avena Quaker Oats',0.00,0.00,0.00,78,1,5);
-call sp_agregarProductos('PD0016','Lechugas frescas',0.00,0.00,0.00,80,7,3);
-call sp_agregarProductos('PD0017','Shampoo Head & Shoulders',0.00,0.00,0.00,52,4,4);
-call sp_agregarProductos('PD0018','Jugo de naranja Tropicana',0.00,0.00,0.00,22,9,2);
+call sp_agregarProductos('PD005','Yogur Danone ',0.00,0.00,0.00,50,1,1);
+call sp_agregarProductos('PD006','Jabón Dove',0.00,0.00,0.00,100,3,7);
+call sp_agregarProductos('PD007','Crema Nivea',0.00,0.00,0.00,50,4,7);
+call sp_agregarProductos('PD008','Pizza congelada California',0.00,0.00,0.00,24,5,3);
+call sp_agregarProductos('PD009','Pan integral Bimbo',0.00,0.00,0.00,63,6,4);
+call sp_agregarProductos('PD010','Manzanas Granny Smith',0.00,0.00,0.00,200,7,6);
+call sp_agregarProductos('PD011','Pollo fresco Tyson',0.00,0.00,0.00,14,8,5);
+call sp_agregarProductos('PD012','Agua Purificada Dasani',0.00,0.00,0.00,43,9,10);
+call sp_agregarProductos('PD013','Papas fritas Lays',0.00,0.00,0.00,50,10,4);
+call sp_agregarProductos('PD014','Alimento para perros Royal Canin',0.00,0.00,0.00,32,11,9);
+call sp_agregarProductos('PD015','Avena Quaker Oats',0.00,0.00,0.00,78,1,10);
+call sp_agregarProductos('PD016','Lechugas frescas',0.00,0.00,0.00,80,7,6);
+call sp_agregarProductos('PD017','Shampoo Head & Shoulders',0.00,0.00,0.00,52,4,3);
+call sp_agregarProductos('PD018','Jugo de naranja Tropicana',0.00,0.00,0.00,22,9,4);
+call sp_agregarProductos('PD019','Detegente Ultra Kinal',0.00,0.00,0.00,32,3,2);
+call sp_agregarProductos('PD020','Jabon en Polvo',0.00,0.00,0.00,32,3,2);
 
 delimiter $$
 create procedure sp_listarProductos()
@@ -773,70 +788,6 @@ begin
 end $$
 delimiter ;
 
--- --------------------------- Detalle Compra --------------------------- 
-
-delimiter $$
-create procedure sp_agregarDetalleCompra(in codigoDetalleCompra int, in costoUnitario decimal(10,2), in cantidad int, in codigoProducto varchar(15), in numeroDocumento int)
-begin
-	insert into DetalleCompra(codigoDetalleCompra, costoUnitario, cantidad, codigoProducto,numeroDocumento)
-    values (codigoDetalleCompra, costoUnitario, cantidad, codigoProducto, numeroDocumento);
-end $$
-delimiter ;
-
-call sp_agregarDetalleCompra(1,14.0,3,'PD001',3);
-call sp_agregarDetalleCompra(2,24.0,7,'PD002',5);
-call sp_agregarDetalleCompra(3,3.5,10,'PD003',2);
-call sp_agregarDetalleCompra(4,8.66,15,'PD004',4);
-call sp_agregarDetalleCompra(5,10.0,2,'PD005',6);
-call sp_agregarDetalleCompra(6,20.0,54,'PD006',1);
-call sp_agregarDetalleCompra(7,22.0,3,'PD007',7);
-call sp_agregarDetalleCompra(8,13.0,5,'PD008',8);
-call sp_agregarDetalleCompra(9,54.5,13,'PD009',8);
-call sp_agregarDetalleCompra(10,16.0,4,'PD0010',9);
-call sp_agregarDetalleCompra(11,22.0,8,'PD0011',10);
-call sp_agregarDetalleCompra(12,26.0,7,'PD0012',11);
-call sp_agregarDetalleCompra(13,12.0,6,'PD0013',12);
-call sp_agregarDetalleCompra(14,25.0,5,'PD0014',13);
-call sp_agregarDetalleCompra(15,43.0,10,'PD0015',14);
-
-
-delimiter $$
-create procedure sp_listarDetalleCompra()
-begin
-	select * from DetalleCompra;
-end $$
-delimiter ;
-
-call sp_listarDetalleCompra();
-
-delimiter $$
-create procedure sp_buscarDetalleCompra(in codigoDetalleCompra int)
-begin
-	select * from DetalleCompra where DetalleCompra.codigoDetalleCompra = codigoDetalleCompra;
-end $$
-delimiter ;
-
-delimiter $$
-create procedure sp_actualizarDetalleCompra(in codigoDetalleCompra int, in costoUnitario decimal(10,2), in cantidad int, in codigoProducto varchar(15), in numeroDocumento int)
-begin
-	update DetalleCompra
-    set
-		DetalleCompra.costoUnitario = costoUnitario,
-        DetalleCompra.cantidad = cantidad,
-        DetalleCompra.codigoProducto = codigoProducto,
-        DetalleCompra.numeroDocumento = numeroDocumento
-	where
-		DetalleCompra.codigoDetalleCompra = codigoDetalleCompra;
-end $$
-delimiter ;
-
-delimiter $$
-create procedure sp_eliminarDetalleCompra(in codigoDetalleCompra int)
-begin
-	delete from DetalleCompra where DetalleCompra.codigoDetalleCompra = codigoDetalleCompra;
-end $$
-delimiter ;
-
 -- ---------------------------  Factura --------------------------- 
 
 delimiter $$
@@ -847,12 +798,16 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarFactura(1,'Pagada',0.0,'2024-05-10',6,1);
+call sp_agregarFactura(1,'Pagada',0.0,'2024-05-10',1,1);
 call sp_agregarFactura(2,'Pagada',0.0,'2024-05-10',2,5);
-call sp_agregarFactura(3,'Pagada',0.0,'2024-06-02',4,3);
+call sp_agregarFactura(3,'Pagada',0.0,'2024-06-02',3,3);
 call sp_agregarFactura(4,'Pagada',0.0,'2024-04-15',4,3);
-call sp_agregarFactura(5,'Pagada',0.0,'2024-06-07',2,5);
+call sp_agregarFactura(5,'Pagada',0.0,'2024-06-07',5,5);
 call sp_agregarFactura(6,'Pagada',0.0,'2024-05-02',6,1);
+call sp_agregarFactura(7,'Pagada',0.0,'2024-05-10',7,4);
+call sp_agregarFactura(8,'Pagada',0.0,'2024-05-13',8,3);
+call sp_agregarFactura(9,'Pagada',0.0,'2024-05-12',9,2);
+call sp_agregarFactura(10,'Pagada',0.0,'2024-05-17',10,5);
 
 delimiter $$
 create procedure sp_listarFactura()
@@ -902,14 +857,16 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarDetalleFactura(1,0.00,6,3,'PD004');
+call sp_agregarDetalleFactura(1,0.00,6,3,'PD005');
 call sp_agregarDetalleFactura(2,0.00,4,5,'PD002');
 call sp_agregarDetalleFactura(3,0.00,1,2,'PD005');
 call sp_agregarDetalleFactura(4,0.00,2,4,'PD002');
 call sp_agregarDetalleFactura(5,0.00,5,1,'PD003');
 call sp_agregarDetalleFactura(6,0.00,3,6,'PD006');
 call sp_agregarDetalleFactura(7,0.00,3,6,'PD001');
-call sp_agregarDetalleFactura(8,0.00,5,6,'PD004');
+call sp_agregarDetalleFactura(8,0.00,5,6,'PD007');
+call sp_agregarDetalleFactura(9,0.00,8,6,'PD009');
+call sp_agregarDetalleFactura(10,0.00,9,6,'PD010');
 
 delimiter $$
 create procedure sp_listarDetallesFacturas()
@@ -945,6 +902,70 @@ delimiter $$
 create procedure sp_eliminarDetalleFactura(in codigoDetalleFactura int)
 begin
 	delete from DetalleFactura where DetalleFactura.codigoDetalleFactura = codigoDetalleFactura;
+end $$
+delimiter ;
+
+-- --------------------------- Detalle Compra --------------------------- 
+
+delimiter $$
+create procedure sp_agregarDetalleCompra(in codigoDetalleCompra int, in costoUnitario decimal(10,2), in cantidad int, in codigoProducto varchar(15), in numeroDocumento int)
+begin
+	insert into DetalleCompra(codigoDetalleCompra, costoUnitario, cantidad, codigoProducto,numeroDocumento)
+    values (codigoDetalleCompra, costoUnitario, cantidad, codigoProducto, numeroDocumento);
+end $$
+delimiter ;
+
+call sp_agregarDetalleCompra(1,14.0,3,'PD001',3);
+call sp_agregarDetalleCompra(2,24.0,7,'PD002',5);
+call sp_agregarDetalleCompra(3,3.5,10,'PD003',2);
+call sp_agregarDetalleCompra(4,8.66,15,'PD004',4);
+call sp_agregarDetalleCompra(5,10.0,2,'PD005',6);
+call sp_agregarDetalleCompra(6,20.0,54,'PD006',1);
+call sp_agregarDetalleCompra(7,22.0,3,'PD007',7);
+call sp_agregarDetalleCompra(8,13.0,5,'PD008',8);
+call sp_agregarDetalleCompra(9,54.5,13,'PD009',9);
+call sp_agregarDetalleCompra(10,16.0,4,'PD010',10);
+call sp_agregarDetalleCompra(11,22.0,8,'PD011',11);
+call sp_agregarDetalleCompra(12,26.0,7,'PD012',12);
+call sp_agregarDetalleCompra(13,12.0,6,'PD013',13);
+call sp_agregarDetalleCompra(14,25.0,5,'PD014',14);
+call sp_agregarDetalleCompra(15,43.0,10,'PD015',15);
+
+
+delimiter $$
+create procedure sp_listarDetalleCompra()
+begin
+	select * from DetalleCompra;
+end $$
+delimiter ;
+
+call sp_listarDetalleCompra();
+
+delimiter $$
+create procedure sp_buscarDetalleCompra(in codigoDetalleCompra int)
+begin
+	select * from DetalleCompra where DetalleCompra.codigoDetalleCompra = codigoDetalleCompra;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_actualizarDetalleCompra(in codigoDetalleCompra int, in costoUnitario decimal(10,2), in cantidad int, in codigoProducto varchar(15), in numeroDocumento int)
+begin
+	update DetalleCompra
+    set
+		DetalleCompra.costoUnitario = costoUnitario,
+        DetalleCompra.cantidad = cantidad,
+        DetalleCompra.codigoProducto = codigoProducto,
+        DetalleCompra.numeroDocumento = numeroDocumento
+	where
+		DetalleCompra.codigoDetalleCompra = codigoDetalleCompra;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_eliminarDetalleCompra(in codigoDetalleCompra int)
+begin
+	delete from DetalleCompra where DetalleCompra.codigoDetalleCompra = codigoDetalleCompra;
 end $$
 delimiter ;
 
@@ -1059,3 +1080,61 @@ select * from DetalleFactura
     inner join Productos on DetalleFactura.codigoProducto = Productos.codigoProducto
     where Factura.numeroFactura = 1;
     
+
+select Productos.codigoProducto, Productos.descripcionProducto, Productos.precioUnitario
+from Productos
+inner join tipoProducto on TipoProducto.codigoTipoProducto = Productos.codigoTipoProducto
+where TipoProducto.descripcion = 'Bebidas';
+
+select * from productos;
+select * from tipoproducto;
+
+create table ofertaProductos(
+	idOferta int primary key,
+    precioDescuento decimal(10,2),
+	codigoProducto varchar(12),
+    foreign key (codigoProducto) references productos(codigoProducto)
+);
+
+delimiter $$
+create procedure sp_agregarOferta(in idOferta int, in precioDescuento decimal(10,2), in codigoProducto varchar(12))
+begin
+	insert into ofertaProductos(idOferta, precioDescuento, codigoProducto)
+    values(idOferta, precioDescuento, codigoProducto);
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_listarOferta()
+begin
+	select * from ofertaProductos;
+end $$
+delimiter ;
+call sp_listarOferta();
+
+delimiter $$
+create procedure sp_eliminarOferta(in idOferta int)
+begin
+	delete from OfertaProductos where OfertaProductos.idOferta = idOferta;
+end $$
+delimiter ;
+
+call sp_eliminarOferta(1);
+
+select * from productos;
+
+delimiter $$
+create trigger tr_ofertaProductos_After_Insert
+after insert on OfertaProductos
+for each row 
+begin
+    declare oferta decimal(10,2);
+    
+    set oferta = (select precioUnitario - new.precioDescuento from Productos where codigoProducto = new.codigoProducto);
+
+	update Productos
+        set Productos.precioUnitario = oferta
+	where Productos.codigoProducto = new.codigoProducto;
+
+end $$
+delimiter ;
