@@ -372,7 +372,7 @@ begin
 end $$
 delimiter ;
 
-call sp_agregarCompras(1,'2024-09-09','Leche Kellogg',0.0);
+call sp_agregarCompras(1,'2024-09-09','Leche Lala',0.0);
 call sp_agregarCompras(2,'2024-06-12','Yogur Danone',0.0);
 call sp_agregarCompras(3,'2024-06-16','Jabón Dove',0.0);
 call sp_agregarCompras(4,'2024-06-16','Crema Nivea',0.0);
@@ -386,7 +386,13 @@ call sp_agregarCompras(11,'2024-06-28','Alimento para perros Royal Canin',0.0);
 call sp_agregarCompras(12,'2024-06-28','Avena Quaker Oats',0.0);
 call sp_agregarCompras(13,'2024-06-30','Lechugas frescas',0.0);
 call sp_agregarCompras(14,'2024-06-29','Shampoo Head & Shoulders',0.0);
-call sp_agregarCompras(15,'2024-06-01','Jugo de naranja Tropicana',0.0);
+call sp_agregarCompras(15,'2024-06-21','Jugo de naranja Tropicana',0.0);
+call sp_agregarCompras(16,'2024-06-20','Detergente Ultra Kinal',0.0);
+call sp_agregarCompras(17,'2024-06-15','Jabón en Polvo',0.0);
+call sp_agregarCompras(18,'2024-06-15','Cereal Kelloggs',0.0);
+call sp_agregarCompras(19,'2024-06-15','Arroz Blanco grano largo',0.0);
+call sp_agregarCompras(20,'2024-06-15','Atún en Lata',0.0);
+
 
 delimiter $$
 create procedure sp_listarCompras()
@@ -730,8 +736,8 @@ delimiter ;
 call sp_agregarProductos('PD001','Leche entera Lala 1L',0.00,0.00,0.00,50,2,1);
 call sp_agregarProductos('PD002','Arroz blanco grano largo 1kg',0.00,0.00,0.00,134,1,10);
 call sp_agregarProductos('PD003','Atún en lata Calvo al natural 200g',0.00,0.00,0.00,90,12,8);
-call sp_agregarProductos('PD004','Kelloggs',0.00,0.00,0.00,90,1,4);
-call sp_agregarProductos('PD005','Yogur Danone ',0.00,0.00,0.00,50,1,1);
+call sp_agregarProductos('PD004','Cereal de Chocolate Kelloggs',0.00,0.00,0.00,90,1,4);
+call sp_agregarProductos('PD005','Yogur Danone ',0.00,0.00,0.00,50,2,1);
 call sp_agregarProductos('PD006','Jabón Dove',0.00,0.00,0.00,100,3,7);
 call sp_agregarProductos('PD007','Crema Nivea',0.00,0.00,0.00,50,4,7);
 call sp_agregarProductos('PD008','Pizza congelada California',0.00,0.00,0.00,24,5,3);
@@ -747,6 +753,17 @@ call sp_agregarProductos('PD017','Shampoo Head & Shoulders',0.00,0.00,0.00,52,4,
 call sp_agregarProductos('PD018','Jugo de naranja Tropicana',0.00,0.00,0.00,22,9,4);
 call sp_agregarProductos('PD019','Detegente Ultra Kinal',0.00,0.00,0.00,32,3,2);
 call sp_agregarProductos('PD020','Jabon en Polvo',0.00,0.00,0.00,32,3,2);
+call sp_agregarProductos('PD021','Comida para gatos Whiskas en lata (85g)',0.00,0.00,0.00,4,11,9);
+call sp_agregarProductos('PD022','Muesli con frutos secos',0.00,0.00,0.00,6,1,10);
+call sp_agregarProductos('PD023','Limpiador multiusos Mr. Proper (1 litro)',0.00,0.00,0.00,8,3,2);
+call sp_agregarProductos('PD024','Pasta dental Colgate Total 12 (100ml)',0.00,0.00,0.00,10,4,3);
+call sp_agregarProductos('PD025','Queso Gouda joven en lonchas (250g)',0.00,0.00,0.00,22,2,1);
+call sp_agregarProductos('PD026','Plátanos de Canarias (1 kg)',0.00,0.00,0.00,16,7,6);
+call sp_agregarProductos('PD027','Filete de ternera Angus (300g)',0.00,0.00,0.00,5,8,5);
+call sp_agregarProductos('PD028','Maíz dulce en conserva Bonduelle (300g)',0.00,0.00,0.00,7,12,8);
+call sp_agregarProductos('PD029','Barritas de cereal Nature Valley (6 unidades)',0.00,0.00,0.00,14,10,4);
+call sp_agregarProductos('PD030','Comida para perros Purina Pro Sensitive (3kg)',0.00,0.00,0.00,21,11,9);
+
 
 delimiter $$
 create procedure sp_listarProductos()
@@ -916,21 +933,25 @@ end $$
 delimiter ;
 
 call sp_agregarDetalleCompra(1,14.0,3,'PD001',3);
-call sp_agregarDetalleCompra(2,24.0,7,'PD002',5);
+call sp_agregarDetalleCompra(2,3.3,7,'PD002',5);
 call sp_agregarDetalleCompra(3,3.5,10,'PD003',2);
-call sp_agregarDetalleCompra(4,8.66,15,'PD004',4);
+call sp_agregarDetalleCompra(4,15.18,15,'PD004',4);
 call sp_agregarDetalleCompra(5,10.0,2,'PD005',6);
-call sp_agregarDetalleCompra(6,20.0,54,'PD006',1);
+call sp_agregarDetalleCompra(6,4.6,54,'PD006',1);
 call sp_agregarDetalleCompra(7,22.0,3,'PD007',7);
-call sp_agregarDetalleCompra(8,13.0,5,'PD008',8);
-call sp_agregarDetalleCompra(9,54.5,13,'PD009',9);
+call sp_agregarDetalleCompra(8,28.0,5,'PD008',8);
+call sp_agregarDetalleCompra(9,8.24,13,'PD009',9);
 call sp_agregarDetalleCompra(10,16.0,4,'PD010',10);
 call sp_agregarDetalleCompra(11,22.0,8,'PD011',11);
-call sp_agregarDetalleCompra(12,26.0,7,'PD012',12);
-call sp_agregarDetalleCompra(13,12.0,6,'PD013',13);
+call sp_agregarDetalleCompra(12,1.28,7,'PD012',12);
+call sp_agregarDetalleCompra(13,2.0,6,'PD013',13);
 call sp_agregarDetalleCompra(14,25.0,5,'PD014',14);
-call sp_agregarDetalleCompra(15,43.0,10,'PD015',15);
-
+call sp_agregarDetalleCompra(15,11.0,10,'PD015',15);
+call sp_agregarDetalleCompra(16,3.2,8,'PD016',16);
+call sp_agregarDetalleCompra(17,9.9,32,'PD017',17);
+call sp_agregarDetalleCompra(18,10.0,11,'PD018',18);
+call sp_agregarDetalleCompra(19,42.1,16,'PD019',19);
+call sp_agregarDetalleCompra(20,19.2,21,'PD020',20);
 
 delimiter $$
 create procedure sp_listarDetalleCompra()
@@ -976,11 +997,14 @@ for each row
 begin
 	declare total decimal(10,2);
     declare cantidad int;
+    declare precioU decimal(10,2);
     
     set total = new.costoUnitario * new.cantidad;
-
+	select (DetalleCompra.costoUnitario) into precioU from DetalleCompra 
+    where numeroDocumento = NEW.numeroDocumento;
+    
 	update Productos
-	set precioUnitario = total * 0.40,
+	set precioUnitario = precioU * 1.5,
 		precioDocena  = total * 0.35 * 12,
         precioMayor = total * 0.25
     where Productos.codigoProducto = new.codigoProducto;
@@ -1023,6 +1047,7 @@ begin
     where DetalleFactura.codigoProducto = NEW.codigoProducto;
 end $$
 delimiter ;
+
 
 delimiter $$
 create trigger tr_TotalFactura_Aftr_U
@@ -1104,6 +1129,9 @@ begin
 end $$
 delimiter ;
 
+call sp_agregarOferta(1,'4.5','PD001');
+call sp_agregarOferta(2,'6','PD004');
+
 delimiter $$
 create procedure sp_listarOferta()
 begin
@@ -1118,8 +1146,6 @@ begin
 	delete from OfertaProductos where OfertaProductos.idOferta = idOferta;
 end $$
 delimiter ;
-
-call sp_eliminarOferta(1);
 
 select * from productos;
 
@@ -1136,6 +1162,23 @@ begin
         set Productos.precioUnitario = oferta
 	where Productos.codigoProducto = new.codigoProducto;
 
+end $$
+delimiter ;
+
+delimiter $$
+create trigger tr_ofertaProductos_After_Delete
+after delete on OfertaProductos
+for each row 
+begin
+    declare precioOriginal decimal(10,2);
+    
+    select precioUnitario + old.precioDescuento into precioOriginal
+    from productos
+    where codigoProducto = old.codigoProducto;
+    
+    update Productos
+    set precioUnitario = precioOriginal
+    where codigoProducto = old.codigoProducto;
 end $$
 delimiter ;
 
