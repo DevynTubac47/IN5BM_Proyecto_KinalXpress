@@ -162,6 +162,7 @@ create table DetalleFactura(
 create table Inventario(
     codigoProducto varchar(15),
     cantidad int,
+    existencia int,
     numeroDocumento int,
     primary key PK_Inventario(codigoProducto),
     constraint FK_Inventario_Producto foreign key Inventario(codigoProducto)
@@ -740,29 +741,29 @@ call sp_agregarProductos('PD004','Cereal de Chocolate Kelloggs',0.00,0.00,0.00,9
 call sp_agregarProductos('PD005','Yogur Danone ',0.00,0.00,0.00,50,2,1);
 call sp_agregarProductos('PD006','Jabón Dove',0.00,0.00,0.00,100,3,7);
 call sp_agregarProductos('PD007','Crema Nivea',0.00,0.00,0.00,50,4,7);
-call sp_agregarProductos('PD008','Pizza congelada California',0.00,0.00,0.00,24,5,3);
-call sp_agregarProductos('PD009','Pan integral Bimbo',0.00,0.00,0.00,63,6,4);
+call sp_agregarProductos('PD008','Pizza congelada California',0.00,0.00,0.00,100,5,3);
+call sp_agregarProductos('PD009','Pan integral Bimbo',0.00,0.00,0.00,100,6,4);
 call sp_agregarProductos('PD010','Manzanas Granny Smith',0.00,0.00,0.00,200,7,6);
-call sp_agregarProductos('PD011','Pollo fresco Tyson',0.00,0.00,0.00,14,8,5);
-call sp_agregarProductos('PD012','Agua Purificada Dasani',0.00,0.00,0.00,43,9,10);
-call sp_agregarProductos('PD013','Papas fritas Lays',0.00,0.00,0.00,50,10,4);
-call sp_agregarProductos('PD014','Alimento para perros Royal Canin',0.00,0.00,0.00,32,11,9);
+call sp_agregarProductos('PD011','Pollo fresco Tyson',0.00,0.00,0.00,140,8,5);
+call sp_agregarProductos('PD012','Agua Purificada Dasani',0.00,0.00,0.00,430,9,10);
+call sp_agregarProductos('PD013','Papas fritas Lays',0.00,0.00,0.00,100,10,4);
+call sp_agregarProductos('PD014','Alimento para perros Royal Canin',0.00,0.00,0.00,400,11,9);
 call sp_agregarProductos('PD015','Avena Quaker Oats',0.00,0.00,0.00,78,1,10);
 call sp_agregarProductos('PD016','Lechugas frescas',0.00,0.00,0.00,80,7,6);
-call sp_agregarProductos('PD017','Shampoo Head & Shoulders',0.00,0.00,0.00,52,4,3);
-call sp_agregarProductos('PD018','Jugo de naranja Tropicana',0.00,0.00,0.00,22,9,4);
-call sp_agregarProductos('PD019','Detegente Ultra Kinal',0.00,0.00,0.00,32,3,2);
-call sp_agregarProductos('PD020','Jabon en Polvo',0.00,0.00,0.00,32,3,2);
-call sp_agregarProductos('PD021','Comida para gatos Whiskas en lata (85g)',0.00,0.00,0.00,4,11,9);
-call sp_agregarProductos('PD022','Muesli con frutos secos',0.00,0.00,0.00,6,1,10);
-call sp_agregarProductos('PD023','Limpiador multiusos Mr. Proper (1 litro)',0.00,0.00,0.00,8,3,2);
-call sp_agregarProductos('PD024','Pasta dental Colgate Total 12 (100ml)',0.00,0.00,0.00,10,4,3);
-call sp_agregarProductos('PD025','Queso Gouda joven en lonchas (250g)',0.00,0.00,0.00,22,2,1);
-call sp_agregarProductos('PD026','Plátanos de Canarias (1 kg)',0.00,0.00,0.00,16,7,6);
-call sp_agregarProductos('PD027','Filete de ternera Angus (300g)',0.00,0.00,0.00,5,8,5);
-call sp_agregarProductos('PD028','Maíz dulce en conserva Bonduelle (300g)',0.00,0.00,0.00,7,12,8);
-call sp_agregarProductos('PD029','Barritas de cereal Nature Valley (6 unidades)',0.00,0.00,0.00,14,10,4);
-call sp_agregarProductos('PD030','Comida para perros Purina Pro Sensitive (3kg)',0.00,0.00,0.00,21,11,9);
+call sp_agregarProductos('PD017','Shampoo Head & Shoulders',0.00,0.00,0.00,100,4,3);
+call sp_agregarProductos('PD018','Jugo de naranja Tropicana',0.00,0.00,0.00,100,9,4);
+call sp_agregarProductos('PD019','Detegente Ultra Kinal',0.00,0.00,0.00,100,3,2);
+call sp_agregarProductos('PD020','Jabon en Polvo',0.00,0.00,0.00,100,3,2);
+call sp_agregarProductos('PD021','Comida para gatos Whiskas en lata (85g)',0.00,0.00,0.00,400,11,9);
+call sp_agregarProductos('PD022','Muesli con frutos secos',0.00,0.00,0.00,600,1,10);
+call sp_agregarProductos('PD023','Limpiador multiusos Mr. Proper (1 litro)',0.00,0.00,0.00,800,3,2);
+call sp_agregarProductos('PD024','Pasta dental Colgate Total 12 (100ml)',0.00,0.00,0.00,100,4,3);
+call sp_agregarProductos('PD025','Queso Gouda joven en lonchas (250g)',0.00,0.00,0.00,220,2,1);
+call sp_agregarProductos('PD026','Plátanos de Canarias (1 kg)',0.00,0.00,0.00,160,7,6);
+call sp_agregarProductos('PD027','Filete de ternera Angus (300g)',0.00,0.00,0.00,50,8,5);
+call sp_agregarProductos('PD028','Maíz dulce en conserva Bonduelle (300g)',0.00,0.00,0.00,70,12,8);
+call sp_agregarProductos('PD029','Barritas de cereal Nature Valley (6 unidades)',0.00,0.00,0.00,140,10,4);
+call sp_agregarProductos('PD030','Comida para perros Purina Pro Sensitive (3kg)',0.00,0.00,0.00,210,11,9);
 
 
 delimiter $$
@@ -952,6 +953,7 @@ call sp_agregarDetalleCompra(17,9.9,32,'PD017',17);
 call sp_agregarDetalleCompra(18,10.0,11,'PD018',18);
 call sp_agregarDetalleCompra(19,42.1,16,'PD019',19);
 call sp_agregarDetalleCompra(20,19.2,21,'PD020',20);
+call sp_agregarDetalleCompra(21,19.2,21,'PD020',20);
 
 delimiter $$
 create procedure sp_listarDetalleCompra()
@@ -1001,16 +1003,17 @@ begin
     
     set total = new.costoUnitario * new.cantidad;
 	select (DetalleCompra.costoUnitario) into precioU from DetalleCompra 
-    where numeroDocumento = NEW.numeroDocumento;
-    
-	update Productos
+    where numeroDocumento = NEW.numeroDocumento
+    limit 1;
+	
+    update Productos
 	set precioUnitario = precioU * 1.5,
 		precioDocena  = total * 0.35 * 12,
         precioMayor = total * 0.25
     where Productos.codigoProducto = new.codigoProducto;
     
 	update Productos
-        set Productos.existencia = Productos.existencia - new.cantidad
+        set Productos.existencia = Productos.existencia + new.cantidad
 	where Productos.codigoProducto = new.codigoProducto;
 
 end $$
